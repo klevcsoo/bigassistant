@@ -11,6 +11,7 @@ import HomePage from './components/pages/main/HomePage/HomePage';
 import AboutPage from './components/pages/AboutPage/AboutPage';
 import ClassPage from './components/pages/main/ClassPage/ClassPage';
 import NotFoundPage from './components/pages/NotFoundPage';
+import HomeworkPage from './components/pages/main/HomeworkPage/HomeworkPage';
 
 export class App extends Component {
   render() {
@@ -29,7 +30,7 @@ export class App extends Component {
             {/* <Route path={Routes.CLASS_JOIN} component={} /> */}
             {/* <Route path={Routes.CLASS_SETTINGS} component={} /> */}
 
-            {/* <Route exact path={Routes.HOMEWORK} component={} /> */}
+            <Route exact path={Routes.HOMEWORK} component={HomeworkPage} />
             {/* <Route path={Routes.HOMEWORK_ADD} component={} /> */}
 
             {/* <Route exact path={Routes.EXAMS} component={} /> */}
