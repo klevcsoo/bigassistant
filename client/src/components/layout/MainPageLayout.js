@@ -16,7 +16,6 @@ export class MainPageLayout extends Component {
       <React.Fragment>
         <PageTitle title={this.props.pageTitle} history={this.props.history} />
         <PageNavbar active={this.props.pageActive} history={this.props.history} />
-        <div style={{ height: 80 }}></div>
         {this.props.children}
         <div style={{ height: 80 }}></div>
       </React.Fragment>
