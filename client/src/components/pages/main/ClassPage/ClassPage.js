@@ -11,6 +11,7 @@ import PageNavbar from '../../../layout/PageNavbar/PageNavbar';
 import AppDivider from '../../../AppDivider';
 import AppButton from '../../../AppButton/AppButton';
 import AppUserButton from '../../../AppButton/AppUserButton';
+import MainPageLayout from '../../../layout/MainPageLayout';
 
 export class ClassPage extends Component {
   state = {
@@ -52,10 +53,8 @@ export class ClassPage extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <MainPageLayout pageTitle="Osztály" pageActive="class" history={this.props.history}>
         {this.state.popupVisible ? <AppPopup message={this.state.popupMessage} onClose={this.hidePopup} /> : null }
-        <PageTitle title="Osztály" history={this.props.history} />
-        <PageNavbar active="class" history={this.props.history} />
 
         {!this.state.clientInfo || this.state.classmates.length === 0 ? <LoadingSpinner/> : (
           <div>
@@ -76,9 +75,7 @@ export class ClassPage extends Component {
             </div>
           </div>
         )}
-
-        <div style={{ height: 80 }}></div>
-      </React.Fragment>
+      </MainPageLayout>
     )
   }
 }

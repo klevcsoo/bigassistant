@@ -4,6 +4,7 @@ import AppPopup from '../../../AppPopup/AppPopup'
 import PageTitle from '../../../layout/PageTitle/PageTitle'
 import LoadingSpinner from '../../../LoadingSpinner'
 import AppSubtitle from '../../../AppSubtitle'
+import MainPageLayout from '../../../layout/MainPageLayout'
 
 export class HomePage extends Component {
   state = {
@@ -13,15 +14,11 @@ export class HomePage extends Component {
 
   render() {
     return (
-      <div>
+      <MainPageLayout pageTitle="Áttekintés" pageActive="home" history={this.props.history}>
         {this.state.popupVisible ? <AppPopup message={this.state.popupMessage} onClose={this.hidePopup} /> : null }
-        <PageTitle title="Áttekintés" history={this.props.history} noBackButton />
-        <PageNavbar active="home" history={this.props.history} />
         <LoadingSpinner />
         <AppSubtitle text="Nem tolt semmit csak forog" />
-
-        <div style={{ height: '80px' }}></div>
-      </div>
+      </MainPageLayout>
     )
   }
 }

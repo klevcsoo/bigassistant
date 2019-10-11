@@ -15,6 +15,7 @@ import PageTitle from '../../../layout/PageTitle/PageTitle'
 import PageNavbar from '../../../layout/PageNavbar/PageNavbar'
 import AppMenuButton from '../../../AppButton/AppMenuButton'
 import AppCardUserClass from '../../../AppCard/AppCardUserClass'
+import MainPageLayout from '../../../layout/MainPageLayout'
 
 export class UserPage extends Component {
   state = {
@@ -40,10 +41,8 @@ export class UserPage extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <MainPageLayout pageTitle="Profil" pageActive="user" history={this.props.history}>
         {this.state.popupVisible ? <AppPopup message={this.state.popupMessage} onClose={this.hidePopup} /> : null }
-        <PageTitle title="Profil" history={this.props.history} />
-        <PageNavbar active="user" history={this.props.history} />
         
         {!this.state.clientInfo ? <LoadingSpinner/> : (
           <div>
@@ -62,10 +61,9 @@ export class UserPage extends Component {
                 <Router><Link onClick={this.openAboutPage}><h1>Információ</h1></Link></Router>
               </div>
             </Router>
-            <div style={{ height: '80px' }}></div>
           </div>
         )}
-      </React.Fragment>
+      </MainPageLayout>
     )
   }
 }
