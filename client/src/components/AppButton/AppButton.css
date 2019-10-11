@@ -1,0 +1,101 @@
+.app-button {
+  width: 290px; height: min-content;
+  min-height: 40px;
+
+  display: block;
+  margin: 5px auto 5px auto; padding: 0 15px 0 15px;
+
+  color: #000000;
+  background: var(--colour-app-light);
+  border: none;
+  border-radius: 20px;
+
+  cursor: pointer;
+}
+.app-button:hover {
+  color: #ffffff;
+}
+.app-button:active {
+  background: var(--colour-app-dark);
+  color: #ffffff;
+}
+.app-button:disabled {
+  opacity: 70%;
+  cursor: not-allowed;
+}
+.app-button h2 {
+  margin: 0; padding: 0;
+  line-height: 40px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
+  font-size: 20px;
+}
+.app-button > span {
+  display: none;
+}
+
+.app-button-warning {
+  background: #ffffff !important;
+  border: 1px solid var(--colour-warning-light) !important;
+}
+.app-button-warning:hover {
+  background: var(--colour-app-light);
+}
+.app-button-warning:active {
+  color: #ffffff;
+  background: var(--colour-warning-light);
+}
+
+.app-button-highlight {
+  background: var(--colour-app-main) !important;
+}
+
+.app-button-exam {
+  background: var(--colour-app-exam) !important;
+}
+
+.app-button-homework {
+  background: var(--colour-app-homework) !important;
+}
+
+.app-button-classmate {
+  padding: 0 !important;
+}
+.app-button-classmate > div {
+  width: 100%; height: 100%;
+  display: grid;
+  grid-template-columns: min-content auto;
+}
+.app-button-classmate > div > span {
+  width: 0; height: 0;
+  opacity: 0;
+}
+.app-button-classmate > div > img {
+  width: auto; height: 40px;
+  border-radius: 20px;
+}
+
+.app-button-facebook {
+  background-color: var(--colour-facebook);
+  color: #ffffff;
+}
+.app-button-facebook:active {
+  background-color: var(--colour-facebook-dark);
+}
+
+.app-button-classmate {
+  padding: 0 !important;
+}
+.app-button-classmate > div {
+  width: 100%; height: 100%;
+  display: grid;
+  grid-template-columns: min-content auto;
+}
+.app-button-classmate > div > span {
+  width: 0; height: 0;
+  opacity: 0;
+}
+.app-button-classmate > div > img {
+  width: auto; height: 40px;
+  border-radius: 20px;
+}

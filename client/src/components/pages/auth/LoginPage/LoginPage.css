@@ -1,0 +1,50 @@
+.login-main-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  overflow: hidden;
+
+  animation: flow 10s ease-in-out infinite;
+  background: var(--colour-app-main);
+  background-size: 300%; 
+}
+
+.login-background-mask {
+  width: 200vw;
+  height: 40vh;
+  min-height: 250px;
+
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) rotate(15deg);
+
+  background: #ffffff;
+}
+
+.login-methods-container {
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-information-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.login-information-container a, .login-information-container a:visited {
+  color: #000000;
+  text-decoration: none;
+}
+.login-information-container h1 {
+  margin: 20px;
+  text-align: center;
+  font-family: "Rubik", sans-serif;
+  font-size: 25px;
+  font-weight: 400;
+}

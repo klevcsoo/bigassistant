@@ -1,0 +1,14 @@
+{
+  "name": "webclient",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd .\\client && npm run build",
+    "dev": "cd .\\client && npm start",
+    "serve": "cd .\\functions && npm run build && cd ..\\client && npm run build && cd .. && firebase serve -o 0.0.0.0",
+    "deploy": "cd .\\functions && npm run build && cd .. && firebase deploy"
+  },
+  "author": "",
+  "license": "ISC"
+}

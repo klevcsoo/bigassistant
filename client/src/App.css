@@ -1,0 +1,46 @@
+:root {
+  --colour-app-light: #EBEBEB;
+  --colour-app-dark: #616161;
+  --colour-app-shadow: #00000029;
+
+  --colour-app-main: #32A5FC;
+  /* --colour-app-main: linear-gradient(135deg, #05C7F2, #11E960); */
+  --colour-app-homework: #1EE26C;
+  /* --colour-app-homework: linear-gradient(135deg, #F2167D, #32A5FC); */
+  --colour-app-exam: #FD514C;
+  /* --colour-app-exam: linear-gradient(135deg, #F2C641, #F17828); */
+
+  --colour-facebook: #1778F2;
+  --colour-facebook-dark: #0c3b75;
+
+  --colour-warning-light: #f44336;
+  --colour-warning-dark: #b71c1c;
+}
+
+html { margin: 0; padding: 0; }
+
+body {
+  width: 100vw; height: auto;
+  margin: 0; padding: 0;
+  overflow-x: hidden;
+
+  background: #ffffff;
+  color: #000000;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+* { transition: 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94) all; }
+*:focus {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

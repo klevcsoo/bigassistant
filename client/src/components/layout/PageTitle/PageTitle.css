@@ -1,0 +1,37 @@
+.page-title-container {
+  width: calc(100vw - 10px); height: 50px;
+  margin: 0; padding: 0 5px;
+
+  display: grid;
+  grid-template-columns: min-content auto;
+
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 100;
+
+  background: var(--colour-app-main);
+  box-shadow: 0px 3px 6px var(--colour-app-shadow);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.page-title-container h1 {
+  grid-column: 2 / span 1;
+
+  height: 50px;
+  margin: 0; padding: 0;
+  text-align: center;
+  line-height: 50px;
+
+  font-family: 'Rubik', sans-serif;
+  font-weight: normal;
+  font-size: 25px;
+}
+
+.page-title-container button {
+  grid-column: 1 / span 1;
+
+  width: auto; height: 50px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}

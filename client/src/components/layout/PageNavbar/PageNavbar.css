@@ -1,0 +1,44 @@
+.page-navbar-container {
+  width: 100vw; height: 50px;
+  margin: 0; padding: 0;
+
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+
+  position: fixed;
+  bottom: 0;
+  z-index: 85;
+
+  background: #ffffff;
+  box-shadow: 0px -3px 6px var(--colour-app-shadow);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.page-navbar-container button.icon{
+  grid-column: auto;
+  position: relative;
+  background: transparent;
+  border: none;
+}
+.page-navbar-container button.icon:active{
+  background: var(--colour-app-dark);
+}
+.page-navbar-container svg {
+  width: auto; height: 70%;
+
+  display: block;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+
+  fill: #000000;
+
+  object-position: center;
+  object-fit: cover;
+}
+.page-navbar-container svg.active {
+  fill: var(--colour-app-main)
+}
+.page-navbar-container button {
+  grid-column: 1 / span 5;
+}

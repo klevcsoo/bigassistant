@@ -1,0 +1,71 @@
+.app-switch {
+  width: 270px; height: min-content;
+  min-height: 40px;
+
+  display: block;
+  margin: 5px auto 5px auto; padding: 0 5px 0 15px;
+
+  color: #000000;
+  background: #ffffff;
+  border: none;
+  border-radius: 20px;
+}
+.app-switch > h2 {
+  width: fit-content; max-width: calc(100% - 80px);
+  margin: 0; padding: 0;
+  line-height: 40px;
+  display: inline-block;
+
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
+  font-size: 20px;
+}
+.app-switch > p {
+  margin: 0; padding: 5px 0;
+  text-align: left;
+  font-weight: 400;
+}
+
+.app-switch-label {
+  width: 60px; height: 30px;
+  margin: 5px; padding: 0;
+  display: block; float: right;
+  position: relative;
+}
+
+.app-switch-input {
+  width: 0; height: 0;
+  opacity: 0;
+}
+.app-switch-input:checked + .app-switch-span {
+  background: var(--colour-app-main) !important;
+}
+.app-switch-input:checked + .app-switch-span::before {
+  transform: translateX(30px);
+}
+
+.app-switch-span {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+
+  background: var(--colour-app-dark);
+  border: none;
+  border-radius: 15px;
+
+  transition: none;
+  -webkit-tap-highlight-color: transparent;
+
+}
+.app-switch-span::before {
+  width: 26px; height: 26px;
+  content: '';
+
+  position: absolute;
+  top: 2px; left: 2px;
+
+  background: #ffffff;
+  border-radius: 100%;
+
+  transition: 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+}

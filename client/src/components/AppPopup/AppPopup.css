@@ -1,0 +1,39 @@
+.app-popup {
+  width: auto; height: auto;
+  margin: 0; padding: 0;
+
+  display: block; z-index: 90;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+
+  background: hsla(0, 0%, 0%, 0.45);
+}
+
+.app-popup > div {
+  width: min-content; height: auto;
+  max-width: 300px;
+  margin: 0; padding: 0;
+  overflow: hidden;
+
+  display: grid;
+  grid-template-rows: min-content min-content;
+
+  position: relative;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+
+  background: #ffffff;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 3px 3px 6px var(--colour-app-shadow);
+}
+
+.app-popup > div > p {
+  margin: 10px 5px; padding: 0;
+  font-weight: 300;
+  text-align: center;
+}
+
+.app-popup > div > button {
+  margin: 5px !important;
+}
