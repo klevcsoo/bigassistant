@@ -147,6 +147,8 @@ exports.leaveClass = functions.https.onCall(async (data, context) => {
     return {classId: classId};
 });
 
+// TODO: Delete class function
+
 exports.addSubjectToClass = functions.https.onCall(async (data, context) => {
     if (context.auth === undefined) {
         throw new functions.https.HttpsError('unauthenticated', 'User is not authenticated');
@@ -250,7 +252,36 @@ exports.updateClass = functions.https.onCall(async (data, context) => {
     });
 });
 
-// TODO: Delete class function
+exports.getUserInfo = functions.https.onCall(async (data, context) => {
+    if (context.auth === undefined) {
+        throw new functions.https.HttpsError('unauthenticated', 'User is not authenticated');
+    }
+
+    const uid = data.uid;
+    if (!uid) {
+        throw new functions.https.HttpsError('invalid-argument', 'No user id was provided');
+    }
+
+    const user = await admin.auth().getUser(uid).catch((error) => {
+        throw new functions.https.HttpsError('unknown', error);
+    });
+    if (!user) {
+        throw new functions.https.HttpsError('not-found', 'No user found with given id');
+    }
+
+    const joinedSnapshot = await admin.database().ref(`/users/${user.uid}/joined`).once('value').catch((err) => {
+        throw new functions.https.HttpsError('internal', err);
+    });
+
+    return {
+        name: user.displayName,
+        photo: utils.getUserHQPicture(user),
+        className: user.customClaims ? (<any>user.customClaims).className : undefined,
+        classRank: user.customClaims? ((<any>user.customClaims).classAdmin ? 'admin' : 'tag') : undefined,
+        facebookId: user.providerData[0].providerId === 'facebook.com' ? user.providerData[0].uid : undefined,
+        joinedAt: utils.formatDate(joinedSnapshot.val())
+    }
+});
 // ---------- CLOUD FUNCTION CALLABLES ----------
 
 // ---------- CLOUD FUNCTION TRIGGERS ----------
