@@ -12,6 +12,7 @@ import AboutPage from './components/pages/AboutPage/AboutPage';
 import ClassPage from './components/pages/main/ClassPage/ClassPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 import HomeworkPage from './components/pages/main/HomeworkPage/HomeworkPage';
+import ExamsPage from './components/pages/main/ExamsPage/ExamsPage';
 
 export class App extends Component {
   render() {
@@ -33,7 +34,7 @@ export class App extends Component {
             <Route exact path={Routes.HOMEWORK} component={HomeworkPage} />
             {/* <Route path={Routes.HOMEWORK_ADD} component={} /> */}
 
-            {/* <Route exact path={Routes.EXAMS} component={} /> */}
+            <Route exact path={Routes.EXAMS} component={ExamsPage} />
             {/* <Route path={Routes.EXAMS_ADD} component={} /> */}
 
             <Route exact path={Routes.USER} component={UserPage} />
