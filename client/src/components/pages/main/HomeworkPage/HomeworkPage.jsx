@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Routes from '../../../../constants/routes'
-import FirebaseHandler from '../../../../FirebaseHandler'
+import FirebaseHandler from '../../../../utils/FirebaseHandler'
 
 // Components
 import MainPageLayout from '../../../layout/MainPageLayout'

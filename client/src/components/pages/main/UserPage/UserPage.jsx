@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './UserPage.css'
-import FirebaseHandler from '../../../../FirebaseHandler'
+import FirebaseHandler from '../../../../utils/FirebaseHandler'
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import Routes from '../../../../constants/routes'
 

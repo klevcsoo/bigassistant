@@ -5,7 +5,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 import App from './App';
-import FirebaseHandler from './FirebaseHandler';
+import FirebaseHandler from './utils/FirebaseHandler';
 
 // Firebase app needs to be initalized before the virtual DOM is built.
 FirebaseHandler.initializeFirebase();

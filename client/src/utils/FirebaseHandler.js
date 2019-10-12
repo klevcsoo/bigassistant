@@ -1,5 +1,5 @@
 import app from 'firebase/app';
-import { inProduction } from './constants/appInfo'
+import { inProduction } from '../constants/appInfo'
 import 'firebase/auth'; import 'firebase/database'; import 'firebase/functions';
 
 const prodConfig = {

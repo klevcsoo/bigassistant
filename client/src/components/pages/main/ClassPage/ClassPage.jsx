@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './ClassPage.css';
-import FirebaseHandler from '../../../../FirebaseHandler';
+import FirebaseHandler from '../../../../utils/FirebaseHandler';
 import Routes from '../../../../constants/routes';
 
 // Components

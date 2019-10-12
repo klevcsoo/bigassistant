@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import FirebaseHandler from '../../FirebaseHandler'
+import FirebaseHandler from '../../utils/FirebaseHandler'
 import Routes from '../../constants/routes'
 import PageTitle from './PageTitle/PageTitle';
 import PageNavbar from './PageNavbar/PageNavbar';

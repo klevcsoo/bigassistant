@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import FirebaseHandler from '../../../../FirebaseHandler'
+import FirebaseHandler from '../../../../utils/FirebaseHandler'
 import AppUserButton from '../../../AppButton/AppUserButton';
 
 export class AuthContinue extends Component {

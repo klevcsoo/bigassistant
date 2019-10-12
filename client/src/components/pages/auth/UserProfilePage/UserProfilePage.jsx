@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './UserProfilePage.css'
-import FirebaseHandler from '../../../../FirebaseHandler'
+import FirebaseHandler from '../../../../utils/FirebaseHandler'
 import Routes from '../../../../constants/routes'
 import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
 
