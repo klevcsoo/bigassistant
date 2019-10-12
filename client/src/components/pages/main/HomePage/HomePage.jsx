@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import PageNavbar from '../../../layout/PageNavbar/PageNavbar'
 import AppPopup from '../../../AppPopup/AppPopup'
-import PageTitle from '../../../layout/PageTitle/PageTitle'
 import LoadingSpinner from '../../../LoadingSpinner'
 import AppSubtitle from '../../../AppSubtitle'
 import MainPageLayout from '../../../layout/MainPageLayout'

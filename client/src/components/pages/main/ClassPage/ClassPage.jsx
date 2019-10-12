@@ -6,8 +6,6 @@ import Routes from '../../../../constants/routes';
 // Components
 import LoadingSpinner from '../../../LoadingSpinner';
 import AppPopup from '../../../AppPopup/AppPopup';
-import PageTitle from '../../../layout/PageTitle/PageTitle';
-import PageNavbar from '../../../layout/PageNavbar/PageNavbar';
 import AppDivider from '../../../AppDivider';
 import AppButton from '../../../AppButton/AppButton';
 import AppUserButton from '../../../AppButton/AppUserButton';
