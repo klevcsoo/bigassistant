@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
+import FirebaseHandler from '../../../../FirebaseHandler'
+import Routes from '../../../../constants/routes'
+
+// Components
 import MainPageLayout from '../../../layout/MainPageLayout'
 import AppPopup from '../../../AppPopup/AppPopup'
 import AppButton from '../../../AppButton/AppButton'
-import Routes from '../../../../constants/routes'
 import AppDivider from '../../../AppDivider'
 import LoadingSpinner from '../../../LoadingSpinner'
 import AppCardClassContent from '../../../AppCard/AppCardClassContent'
-import FirebaseHandler from '../../../../FirebaseHandler'
 
 export class ExamsPage extends Component {
   state = {
