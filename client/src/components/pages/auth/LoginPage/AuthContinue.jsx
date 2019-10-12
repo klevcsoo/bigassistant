@@ -11,7 +11,7 @@ export class AuthContinue extends Component {
   render() {
     return (
       <React.Fragment>
-        <AppUserButton photoUrl={this.state.profilePic} name={this.state.name} onClick={this.props.onContinue} />
+        <AppUserButton photo={this.state.profilePic} name={this.state.name} onClick={this.props.onContinue} />
       </React.Fragment>
     )
   }
