@@ -36,7 +36,7 @@ export class ExamsPage extends Component {
 
   render() {
     return (
-      <MainPageLayout pageTitle="Dolgozatok" pageActive="homework" history={this.props.history}>
+      <MainPageLayout pageTitle="Dolgozatok" pageActive="exams" history={this.props.history}>
         {this.state.popupVisible ? <AppPopup message={this.state.popupMessage} onClose={this.hidePopup} /> : null}
         <AppButton text="Hozzáadás" onClick={() => {this.props.history.push(Routes.HOMEWORK_ADD)}} />
         <AppDivider />
