@@ -1,6 +1,7 @@
 import app from 'firebase/app';
 import { inProduction } from '../constants/appInfo'
 import 'firebase/auth'; import 'firebase/database'; import 'firebase/functions';
+import LocalizationHandler from './LocalizationHandler';
 
 const prodConfig = {
   apiKey: "AIzaSyA3nyWdbq3VdnfTpaBEKR4vspv5tX1zc_M",
@@ -81,7 +82,7 @@ class FirebaseHandler {
             className: claims.className,
             classRank: claims.classAdmin ? 'admin' : 'tag',
             facebookId: user.providerData[0].providerId === 'facebook.com' ? user.providerData[0].uid : undefined,
-            joined: formatDate((await app.database().ref(`/user/${user.uid}/joined`).once('value')).val())
+            joined: LocalizationHandler.formatDate((await app.database().ref(`/user/${user.uid}/joined`).once('value')).val())
           });
         })
       } else console.warn('No user found');
@@ -153,21 +154,3 @@ class FirebaseHandler {
 }
 
 export default FirebaseHandler
-
-// UTILS
-const formatDate = (date) => {
-  const innerDate = new Date(date);
-  const months = [
-      'január', 'február', 'március',
-      'április', 'május', 'június',
-      'július', 'augusztus', 'szeptember',
-      'október', 'november', 'december'
-  ];
-
-  const year = innerDate.getFullYear();
-  const month = months[innerDate.getMonth()];
-  const day = innerDate.getDate();
-
-  return `${year}. ${month} ${day}.`;
-}
-// UTILS
