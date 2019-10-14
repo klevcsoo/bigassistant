@@ -113,44 +113,6 @@ class FirebaseHandler {
       } else console.log('Cannot read from database, user is not logged in');
     });
   }
-
-  static async getExams(handler) {
-    this.getClientInfo((claims) => {
-      console.log('Info: ', claims);
-      this.readDataContinuously(`/classes/${claims.classId}/exams`, (snapshot) => {
-        let exams = [];
-        snapshot.forEach((examSnapshot) => {
-          exams.push(examSnapshot.val());
-        });
-
-        handler(exams);
-      });
-    });
-  }
-  static getHomework(handler) {
-    this.getClientInfo((claims) => {
-      this.readDataContinuously(`/classes/${claims.classId}/homework`, (snapshot) => {
-        let homeworks = [];
-        snapshot.forEach((homeworkSnapshot) => {
-          homeworks.push(homeworkSnapshot.val());
-        });
-
-        handler(homeworks);
-      });
-    });
-  }
-  static getClassmates(handler) {
-    this.getClientInfo((claims) => {
-      this.readDataContinuously(`/classes/${claims.classId}/members`, (snapshot) => {
-        let classmates = [];
-        snapshot.forEach((memberSnapshot) => {
-          classmates.push(memberSnapshot.val());
-        });
-
-        handler(classmates);
-      });
-    });
-  }
 }
 
 export default FirebaseHandler
