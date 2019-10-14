@@ -6,11 +6,10 @@ export class AppInput extends Component {
     inputValue: this.props.text
   }
 
-  onTextChanged = (event) => {
+  handleTextChange = (event) => {
     this.setState({
       inputValue: event.target.value
-    });
-    if (this.props.onTextChanged) this.props.onTextChanged(this.state.inputValue);
+    }, () => { if (this.props.onTextChanged) this.props.onTextChanged(this.state.inputValue); });
   }
 
   render() {
@@ -18,7 +17,7 @@ export class AppInput extends Component {
       <React.Fragment>
         <input type="text" className="app-input" value={this.state.inputValue}
         placeholder={this.props.placeholder} maxLength={this.props.maxLength}
-        onChange={this.onTextChanged} />
+        onChange={this.handleTextChange} />
       </React.Fragment>
     )
   }
