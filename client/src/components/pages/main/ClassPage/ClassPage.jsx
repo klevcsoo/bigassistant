@@ -65,6 +65,7 @@ export class ClassPage extends Component {
             </div>
             <AppDivider/>
             <AppButton type="highlight" text="Órarend" />
+            <AppButton text="Osztály beállítások" onClick={() => {this.props.history.push(Routes.CLASS_SETTINGS)}} />
             <AppDivider />
             <div>
               {this.state.classmates.map((classmate) => (
