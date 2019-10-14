@@ -113,6 +113,25 @@ class FirebaseHandler {
       } else console.log('Cannot read from database, user is not logged in');
     });
   }
+
+  static getClassInfo(handler, id) {
+    let classId = id;
+    this.getClientInfo((result) => {
+      classId = result.classId;
+      this.readData(`/classes/${classId}/metadata`, (snapshot) => {
+        let subjects = [];
+        snapshot.forEach((subjectSnapshot) => {
+          subjects.push(subjectSnapshot.val());
+        });
+
+        handler({
+          photo: snapshot.child('pictureUrl').val(),
+          name: snapshot.child('name').val(),
+          subjects: subjects
+        });
+      });
+    });
+  }
 }
 
 export default FirebaseHandler
