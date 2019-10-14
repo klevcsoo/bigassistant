@@ -17,7 +17,7 @@ export class AppInput extends Component {
       <React.Fragment>
         <input type="text" className="app-input" value={this.state.inputValue}
         placeholder={this.props.placeholder} maxLength={this.props.maxLength}
-        onChange={this.handleTextChange} />
+        onChange={this.handleTextChange} style={this.props.style} />
       </React.Fragment>
     )
   }
