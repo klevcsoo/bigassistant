@@ -38,7 +38,7 @@ export class App extends Component {
             {/* <Route path={Routes.EXAMS_ADD} component={} /> */}
 
             <Route exact path={Routes.USER} component={UserPage} />
-            <Route exact path={Routes.USER_PROFILE} component={UserProfilePage} />
+            <Route path={Routes.USER_PROFILE} component={UserProfilePage} />
 
             <Route path="*" component={NotFoundPage} />
           </Switch>
