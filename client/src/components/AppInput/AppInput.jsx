@@ -10,7 +10,7 @@ export class AppInput extends Component {
     this.setState({
       inputValue: event.target.value
     });
-    this.props.onTextChanged(this.state.inputValue);
+    if (this.props.onTextChanged) this.props.onTextChanged(this.state.inputValue);
   }
 
   render() {
