@@ -48,7 +48,7 @@ export class UserPage extends Component {
             <AppButton type="warning" text="Kijelentkezés" onClick={this.logout} />
             <AppDivider/>
             <AppCardButtonContainer>
-              <AppMenuButton text="Bejelentkezési adatok" />
+              <AppMenuButton text="Bejelentkezési adatok" onClick={() => {this.props.history.push(Routes.LOGIN_OPTIONS)}} />
               <AppMenuButton text="Értesítések" />
             </AppCardButtonContainer>
             <AppCardUserClass className={this.state.clientInfo.className} classRank={this.state.clientInfo.classRank} />
