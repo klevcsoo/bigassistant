@@ -13,6 +13,7 @@ import ClassPage from './components/pages/main/ClassPage/ClassPage';
 import NotFoundPage from './components/pages/NotFoundPage';
 import HomeworkPage from './components/pages/main/HomeworkPage/HomeworkPage';
 import ExamsPage from './components/pages/main/ExamsPage/ExamsPage';
+import AddHomeworkPage from './components/pages/class-content/AddHomeworkPage/AddHomeworkPage';
 
 export class App extends Component {
   render() {
@@ -32,7 +33,7 @@ export class App extends Component {
             {/* <Route path={Routes.CLASS_SETTINGS} component={} /> */}
 
             <Route exact path={Routes.HOMEWORK} component={HomeworkPage} />
-            {/* <Route path={Routes.HOMEWORK_ADD} component={} /> */}
+            <Route path={Routes.HOMEWORK_ADD} component={AddHomeworkPage} />
 
             <Route exact path={Routes.EXAMS} component={ExamsPage} />
             {/* <Route path={Routes.EXAMS_ADD} component={} /> */}
