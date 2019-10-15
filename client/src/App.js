@@ -14,6 +14,7 @@ import NotFoundPage from './components/pages/NotFoundPage';
 import HomeworkPage from './components/pages/main/HomeworkPage/HomeworkPage';
 import ExamsPage from './components/pages/main/ExamsPage/ExamsPage';
 import ClassSettings from './components/pages/class/ClassSettingsPage/ClassSettings';
+import LoginOptionsPage from './components/pages/user/LoginOptionsPage';
 
 export class App extends Component {
   render() {
@@ -40,6 +41,8 @@ export class App extends Component {
 
             <Route exact path={Routes.USER} component={UserPage} />
             <Route path={Routes.USER_PROFILE} component={UserProfilePage} />
+
+            <Route path={Routes.LOGIN_OPTIONS} component={LoginOptionsPage} />
 
             <Route path="*" component={NotFoundPage} />
           </Switch>
