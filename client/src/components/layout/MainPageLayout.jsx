@@ -14,7 +14,8 @@ export class MainPageLayout extends Component {
   render() {
     return (
       <React.Fragment>
-        <PageTitle title={this.props.pageTitle} history={this.props.history} />
+        <PageTitle title={this.props.pageTitle} history={this.props.history}
+          noBackButton={this.props.pageActive === 'home'} />
         <PageNavbar active={this.props.pageActive} history={this.props.history} />
         {this.props.children}
         <div style={{ height: 80 }}></div>
