@@ -13,7 +13,8 @@ class Routes {
   static EXAMS = '/exams';
   static USER = '/user';
   static ABOUT = '/about';
-  static LOGIN_OPTIONS = '/login-providers'
+  static LOGIN_OPTIONS = '/user/login-providers';
+  static DELETE_ACCOUNT = '/user/delete-account';
 }
 
 export default Routes

@@ -52,7 +52,7 @@ export class UserPage extends Component {
               <AppMenuButton text="Értesítések" />
             </AppCardButtonContainer>
             <AppCardUserClass className={this.state.clientInfo.className} classRank={this.state.clientInfo.classRank} />
-            <AppMenuButton text="Fiók törlése" />
+            <AppMenuButton text="Fiók törlése" onClick={() => {this.props.history.push(Routes.DELETE_ACCOUNT)}} />
             <Router>
               <div className="information-container">
                 <AppDivider/>

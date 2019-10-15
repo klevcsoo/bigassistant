@@ -15,6 +15,7 @@ import HomeworkPage from './components/pages/main/HomeworkPage/HomeworkPage';
 import ExamsPage from './components/pages/main/ExamsPage/ExamsPage';
 import ClassSettings from './components/pages/class/ClassSettingsPage/ClassSettings';
 import LoginOptionsPage from './components/pages/user/LoginOptionsPage';
+import DeleteAccountPage from './components/pages/user/DeleteAccountPage';
 
 export class App extends Component {
   render() {
@@ -40,9 +41,9 @@ export class App extends Component {
             {/* <Route path={Routes.EXAMS_ADD} component={} /> */}
 
             <Route exact path={Routes.USER} component={UserPage} />
+            <Route exact path={Routes.LOGIN_OPTIONS} component={LoginOptionsPage} />
+            <Route exact path={Routes.DELETE_ACCOUNT} component={DeleteAccountPage} />
             <Route path={Routes.USER_PROFILE} component={UserProfilePage} />
-
-            <Route path={Routes.LOGIN_OPTIONS} component={LoginOptionsPage} />
 
             <Route path="*" component={NotFoundPage} />
           </Switch>
