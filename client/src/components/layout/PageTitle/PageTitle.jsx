@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './PageTitle.css'
 import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
+import AppColours from '../../../constants/appColors';
 
 export class PageTitle extends Component {
   gotoLastPage = () => {
@@ -8,9 +9,13 @@ export class PageTitle extends Component {
   }
 
   render() {
+    let bgColor = this.props.type === 'exam' ? AppColours.EXAM : (
+      this.props.type === 'homework' ? AppColours.HOMEWORK : AppColours.MAIN
+    )
+
     return (
       <React.Fragment>
-        <div className="page-title-container">
+        <div className="page-title-container" style={{ background: bgColor }}>
           {!this.props.noBackButton ? (
             <button onClick={this.gotoLastPage}><ArrowBackRoundedIcon /></button>
           ) : null}
