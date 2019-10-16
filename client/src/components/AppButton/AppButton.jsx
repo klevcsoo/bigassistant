@@ -8,7 +8,7 @@ export class AppButton extends Component {
 
     return (
       <React.Fragment>
-        <button className={`app-button ${type} ${facebook}`} onClick={() => {setTimeout(this.props.onClick, 200)}}><h2>{this.props.text}</h2></button>
+        <button className={`app-button ${type} ${facebook}`} onClick={() => {setTimeout(this.props.onClick, 200)}} style={this.props.style}><h2>{this.props.text}</h2></button>
       </React.Fragment>
     )
   }

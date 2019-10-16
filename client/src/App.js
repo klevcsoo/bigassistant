@@ -35,7 +35,7 @@ export class App extends Component {
             <Route path={Routes.CLASS_SETTINGS} component={ClassSettings} />
 
             <Route exact path={Routes.HOMEWORK} component={HomeworkPage} />
-            {/* <Route path={Routes.HOMEWORK_ADD} component={} /> */}
+            <Route path={Routes.HOMEWORK_ADD} component={AddHomeworkPage} />
 
             <Route exact path={Routes.EXAMS} component={ExamsPage} />
             {/* <Route path={Routes.EXAMS_ADD} component={} /> */}
