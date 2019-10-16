@@ -16,6 +16,7 @@ import ExamsPage from './components/pages/main/ExamsPage/ExamsPage';
 import ClassSettings from './components/pages/class/ClassSettingsPage/ClassSettings';
 import LoginOptionsPage from './components/pages/user/LoginOptionsPage';
 import DeleteAccountPage from './components/pages/user/DeleteAccountPage';
+import AddHomeworkPage from './components/pages/class-content/AddHomeworkPage/AddHomeworkPage';
 
 export class App extends Component {
   render() {
