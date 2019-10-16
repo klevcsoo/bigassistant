@@ -14,7 +14,7 @@ export class AppDropDown extends Component {
           borderRadius: 20,
           fontFamily: '"Roboto", sans-serif',
           fontSize: 20
-        }}>
+        }} onChange={this.props.onSelected}>
           {this.props.children}
         </select>
       </div>
