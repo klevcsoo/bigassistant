@@ -45,6 +45,13 @@ class FirebaseHandler {
   static getUser() {
     return app.auth().currentUser
   }
+
+  static getNewFacebookProvider() {
+    return new app.auth.FacebookAuthProvider();
+  }
+  static getNewGoogleProvider() {
+    return new app.auth.GoogleAuthProvider();
+  }
   
   static loginWithFacebook() {
     let provider = new app.auth.FacebookAuthProvider();
