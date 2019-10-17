@@ -9,7 +9,7 @@ export class SaveablePageLayout extends Component {
     return (
       <React.Fragment>
         <PageTitle title={this.props.pageTitle} type={this.props.pageType} history={this.props.history} />
-        <PageNavbarSaveable type={this.props.type} text={this.props.buttonText || 'Mentés'} onClick={this.props.onSave} />
+        <PageNavbarSaveable type={this.props.pageType} text={this.props.buttonText || 'Mentés'} onClick={this.props.onSave} />
         {this.props.children}
         <div style={{ height: 80 }}></div>
       </React.Fragment>
