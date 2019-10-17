@@ -69,7 +69,7 @@ export class ClassPage extends Component {
             <AppDivider />
             <div>
               {this.state.classmates.map((classmate) => (
-                <AppUserButton {...classmate} onClick={this.handleClassmateClick.bind(this, classmate.uid)} />)
+                <AppUserButton {...classmate} key={classmate.uid} onClick={this.handleClassmateClick.bind(this, classmate.uid)} />)
               )}
             </div>
           </div>
