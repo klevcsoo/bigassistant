@@ -9,7 +9,7 @@ export class PageNavbarSaveable extends Component {
     return (
       <React.Fragment>
         <div className="page-navbar-container">
-          <AppButton text={this.props.text} type={this.props.type} onClick={this.props.onClick}
+          <AppButton text={this.props.text} type={this.props.type || "highlight"} onClick={this.props.onClick}
             style={{ width: 'calc(100% - 10px)' }} />
         </div>
       </React.Fragment>
