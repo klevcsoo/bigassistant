@@ -12,6 +12,7 @@ class AppColours {
 
   static WARNING = '#f44336';
   static WARNING_DARK = '#b71c1c';
+  static POSITIVE_FEEDBACK = '#76ff03'
 }
 
 export default AppColours
