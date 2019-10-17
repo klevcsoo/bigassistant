@@ -17,6 +17,7 @@ export class ClassPage extends Component {
     popupMessage: '',
     clientInfo: null,
     classmates: [],
+    classmatesPath: '',
     inviteCode: null
   }
 
@@ -27,8 +28,8 @@ export class ClassPage extends Component {
   componentDidMount() {
     FirebaseHandler.getClientInfo((result) => {
       this.setState({ clientInfo: result });
-
       FirebaseHandler.readDataContinuously(`/classes/${this.state.clientInfo.classId}/members`, (snapshot) => {
+        this.setState({ classmatesPath: `/classes/${result.classId}/members` });
         snapshot.forEach((memberSnapshot) => {
           let uid = memberSnapshot.val();
           FirebaseHandler.callFunction('getUserInfo', { uid: uid }).then((userInfo) => {
@@ -47,6 +48,10 @@ export class ClassPage extends Component {
         this.setState({ inviteCode: snapshot.val() });
       });
     });
+  }
+
+  componentWillUnmount() {
+    FirebaseHandler.removeDataListener(this.state.classmatesPath);
   }
 
   render() {
