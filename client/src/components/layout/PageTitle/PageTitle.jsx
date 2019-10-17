@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './PageTitle.css'
 import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
 import AppColours from '../../../constants/appColors';
+import { Helmet } from 'react-helmet';
 
 export class PageTitle extends Component {
   gotoLastPage = () => {
@@ -15,6 +16,9 @@ export class PageTitle extends Component {
 
     return (
       <React.Fragment>
+        <Helmet>
+          <meta name="theme-color" content={bgColor} />
+        </Helmet>
         <div className="page-title-container" style={{ background: bgColor }}>
           {!this.props.noBackButton ? (
             <button onClick={this.gotoLastPage}><ArrowBackRoundedIcon /></button>
