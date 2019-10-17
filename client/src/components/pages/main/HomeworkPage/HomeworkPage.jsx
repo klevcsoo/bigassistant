@@ -43,7 +43,7 @@ export class HomeworkPage extends Component {
         <div>
           {this.state.homework.length === 0 ? <LoadingSpinner /> : null}
           {this.state.homework.map((hw) => (
-            <AppCardClassContent type="homework" {...hw} />
+            <AppCardClassContent type="homework" {...hw} key={hw.id} />
           ))}
         </div>
       </MainPageLayout>
