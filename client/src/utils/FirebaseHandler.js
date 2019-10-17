@@ -97,27 +97,24 @@ class FirebaseHandler {
   }
   
   static readData(path, handler) {
-    console.log(`Reading data from ${path}`);
     app.auth().onAuthStateChanged((user) => {
       if (user) {
         app.database().ref(path).once('value', (snapshot) => { handler(snapshot) });
-      } else console.log('Cannot read from database, user is not logged in');
+      } else console.warn('Cannot read from database, user is not logged in');
     });
   }
   static readDataContinuously(path, handler) {
-    console.log(`Attaching data listener to ${path}`);
     app.auth().onAuthStateChanged((user) => {
       if (user) {
         app.database().ref(path).on('value', (snapshot) => { handler(snapshot) })
-      } else console.log('Cannot read from database, user is not logged in');
+      } else console.warn('Cannot read from database, user is not logged in');
     });
   }
   static writeData(path, data, handler) {
-    console.log(`Writing data to ${path}`);
     app.auth().onAuthStateChanged((user) => {
       if (user) {
         app.database().ref(path).set(data, (err) => { if (handler) handler(err) });
-      } else console.log('Cannot read from database, user is not logged in');
+      } else console.warn('Cannot read from database, user is not logged in');
     });
   }
 
