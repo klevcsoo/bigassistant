@@ -18,7 +18,7 @@ export class AddHomeworkPage extends Component {
   state = {
     currentHomework: {
       title: '',
-      date: new Date(),
+      date: new Date().getTime(),
       subject: null
     },
     addingHomework: false,
@@ -67,7 +67,7 @@ export class AddHomeworkPage extends Component {
   }
   setDate = (date) => {
     this.setState((state) => {
-      state.currentHomework.date = date;
+      state.currentHomework.date = new Date(date).getTime();
       return state;
     });
   }
