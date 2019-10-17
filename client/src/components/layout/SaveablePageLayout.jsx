@@ -8,7 +8,7 @@ export class SaveablePageLayout extends Component {
   render() {
     return (
       <React.Fragment>
-        <PageTitle title="Házi feladat" type="homework" />
+        <PageTitle title={this.props.pageTitle} type={this.props.pageType} history={this.props.history} />
         <PageNavbarSaveable type="homework" text="Hozzáadás" onClick={this.props.onSave} />
         {this.props.children}
         <div style={{ height: 80 }}></div>
