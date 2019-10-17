@@ -21,6 +21,7 @@ export class HomeworkPage extends Component {
     FirebaseHandler.getClientInfo((result) => {
       let classId = result.classId;
       FirebaseHandler.readDataContinuously(`/classes/${classId}/homework`, (snapshot) => {
+        this.setState({ homework: [] });
         snapshot.forEach((homeworkSnapshot) => {
           let hw = homeworkSnapshot.val();
           hw.id = homeworkSnapshot.key;
