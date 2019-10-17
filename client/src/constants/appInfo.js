@@ -1,2 +1,2 @@
 export const inProduction = false;
-export const version = 'v0.19.10.0'
+export const version = 'v0.25.0'
