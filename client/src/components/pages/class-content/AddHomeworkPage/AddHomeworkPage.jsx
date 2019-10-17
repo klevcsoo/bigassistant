@@ -93,7 +93,8 @@ export class AddHomeworkPage extends Component {
             transform: 'translate(-50%, -50%)'
           }}><LoadingSpinner /></div></div>
         )}
-        <SaveablePageLayout onSave={this.saveHomework} pageTitle="Házi feladat" pageType="homework" history={this.props.history}>
+        <SaveablePageLayout onSave={this.saveHomework} pageTitle="Házi feladat" pageType="homework"
+        history={this.props.history} buttonText="Hozzáadás">
           {this.state.popupVisible ? <AppPopup message={this.state.popupMessage} onClose={this.closePopup} /> : null}
           <AppSubtitle text="Előnézet:" />
           <AppCardClassContent type="homework" {...this.state.currentHomework} />
