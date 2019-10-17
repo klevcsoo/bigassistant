@@ -8,7 +8,8 @@
   overflow: hidden;
 
   animation: flow 10s ease-in-out infinite;
-  background: var(--colour-app-main);
+  /* background: var(--colour-app-main); */
+  background: #ffffff;
   background-size: 300%; 
 }
 
@@ -48,3 +49,38 @@
   font-size: 25px;
   font-weight: 400;
 }
+
+/* BACKGROUND SHOOTING STAR ANIMATION */
+@keyframes particleAnimation
+{
+    from {
+        left: -100px;
+    }
+    to {
+        left: calc( 100% + 100px );
+    }
+}
+
+.p{
+  position:fixed;
+  left:0px;
+  top:50px;
+  width:2px;
+  height:2px;
+  background-color: var(--colour-app-main);
+  position:fixed;
+  animation-name:particleAnimation;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.p::before{
+  position:absolute;
+  display:block;
+  content:"";
+  width:100px;
+  right:2px;
+  top:0px;
+  height:2px;
+  background: linear-gradient(to right, rgba(0,0,0,0) 0%,var(--colour-app-main) 100%); 
+}
+/* BACKGROUND SHOOTING STAR ANIMATION */

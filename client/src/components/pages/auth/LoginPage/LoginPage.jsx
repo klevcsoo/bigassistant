@@ -48,6 +48,23 @@ export class LoginPage extends Component {
     this.props.history.push('/');
   }
 
+  createBackground = () => {
+    const nOfStars = 20;
+    const maxAnimDuration = 10; // seconds
+
+    let stars = [];
+    for (let i = 0; i < nOfStars; i++) {
+      stars.push((
+        <div className="p" style={{
+          animationDuration: `${Math.floor(Math.random() * maxAnimDuration)}s`,
+          top: `${Math.floor(Math.random() * 100)}%`
+        }} key={Math.random().toString()}></div>
+      ));
+    }
+
+    return stars;
+  }
+
   componentDidMount() {
     FirebaseHandler.getApp().auth().onAuthStateChanged((user) => {
       this.setState({
@@ -63,7 +80,10 @@ export class LoginPage extends Component {
         {this.state.popupVisible ? <AppPopup message={this.state.popupMessage} onClose={this.hidePopup} /> : null }
 
         <div className="login-main-container">
-          <div className="login-background-mask"></div>
+          {/* <div className="login-background-mask"></div> */}
+          <div>
+            {this.createBackground()}
+          </div>
           <div className="login-methods-container">
               <AppTitle text="BIGAssistant" />
               {this.state.authLoading ? <LoadingSpinner static /> :
