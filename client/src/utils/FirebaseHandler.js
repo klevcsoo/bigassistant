@@ -110,6 +110,9 @@ class FirebaseHandler {
       } else console.warn('Cannot read from database, user is not logged in');
     });
   }
+  static removeDataListener(path) {
+    app.database().ref(path).off('value');
+  }
   static writeData(path, data, handler) {
     app.auth().onAuthStateChanged((user) => {
       if (user) {
