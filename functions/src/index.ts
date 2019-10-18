@@ -230,6 +230,23 @@ exports.updateClass = functions.https.onCall(async (data, context) => {
 
     if (name) classRef.child('name').set(name).then(() => {
         console.log('Class name updated!');
+        classRef.parent!.child('members').once('value').then((membersSnapshot) => {
+            membersSnapshot.forEach((member) => {
+                admin.auth().getUser(member.val()).then((memberUser) => {
+                    const newClaims = memberUser.customClaims!;
+                    (<any>newClaims).className = name;
+                    admin.auth().setCustomUserClaims(memberUser.uid, newClaims).then(() => {
+                        console.log(`Updated custom claims for user: ${memberUser.displayName}`);
+                    }).catch((error) => {
+                        throw new functions.https.HttpsError('unknown', error);
+                    });
+                }).catch((error) => {
+                    throw new functions.https.HttpsError('unknown', error);
+                });
+            });
+        }).catch((error) => {
+            throw new functions.https.HttpsError('unknown', error);
+        });
     }).catch((error) => {
         throw new functions.https.HttpsError('unknown', error);
     });
