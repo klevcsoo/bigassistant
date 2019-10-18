@@ -27,10 +27,6 @@ export class UserPage extends Component {
     this.props.history.push(Routes.LOGIN);
   }
 
-  openAboutPage = () => {
-    this.props.history.push(Routes.ABOUT);
-  }
-
   componentDidMount() {
     FirebaseHandler.getClientInfo((result) => {
       this.setState({ clientInfo: result });
@@ -56,7 +52,7 @@ export class UserPage extends Component {
             <Router>
               <div className="information-container">
                 <AppDivider/>
-                <Router><Link onClick={this.openAboutPage}><h1>Információ</h1></Link></Router>
+                <h1 onClick={() => {this.props.history.push(Routes.ABOUT)}}>Információ</h1>
               </div>
             </Router>
           </div>
