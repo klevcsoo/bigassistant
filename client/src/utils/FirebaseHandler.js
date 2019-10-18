@@ -127,7 +127,7 @@ class FirebaseHandler {
       classId = result.classId;
       this.readData(`/classes/${classId}/metadata`, (snapshot) => {
         let subjects = [];
-        snapshot.forEach((subjectSnapshot) => {
+        snapshot.child('subjects').forEach((subjectSnapshot) => {
           subjects.push(subjectSnapshot.val());
         });
 
