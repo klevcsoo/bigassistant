@@ -3,6 +3,7 @@ import AppTitle from '../AppTitle'
 import AppSubtitle from '../AppSubtitle'
 import AppButton from '../AppButton/AppButton'
 import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
+import Routes from '../../constants/routes';
 
 export class NotFoundPage extends Component {
   render() {
@@ -25,7 +26,7 @@ export class NotFoundPage extends Component {
           }}><span role="img">🙈</span></p>
           <AppTitle text="Oldal nem található!" />
           <AppSubtitle text="Az adott link nem vezet semmilyen oldalhoz." />
-          <AppButton type="highlight" text="Vissza a kezdőlapra" />
+          <AppButton type="highlight" text="Vissza a kezdőlapra" onClick={() => {this.props.history.push(Routes.HOME)}} />
         </div>
       </React.Fragment>
     )
