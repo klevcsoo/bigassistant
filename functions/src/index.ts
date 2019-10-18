@@ -222,8 +222,9 @@ exports.updateClass = functions.https.onCall(async (data, context) => {
 
     const name = data.name;
     const isClosed = data.isClosed;
-    const pictureUrl = data.pictureUrl;
+    const pictureUrl = data.photo;
     const isInviteVisible = data.isInviteVisible;
+    const subjects = data.subjects;
 
     const classRef = admin.database().ref(`/classes/${(<any>user.customClaims).class}/metadata`);
 
@@ -250,6 +251,12 @@ exports.updateClass = functions.https.onCall(async (data, context) => {
     }).catch((error) => {
         throw new functions.https.HttpsError('unknown', error);
     });
+
+    if (subjects) classRef.child('subjects').set(subjects).then(() => {
+        console.log('Updated subjects!');
+    }).catch((error) => {
+        throw new functions.https.HttpsError('unknown', error);
+    })
 });
 
 exports.getUserInfo = functions.https.onCall(async (data, context) => {
