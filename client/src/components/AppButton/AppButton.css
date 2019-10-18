@@ -47,6 +47,7 @@
 }
 
 .app-button-highlight {
+  color: #ffffff;
   background: var(--colour-app-main) !important;
 }
 
