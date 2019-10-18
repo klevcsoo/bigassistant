@@ -9,11 +9,13 @@ export class AppDropDown extends Component {
           width: 290,
           height: 40,
           padding: '0 15px',
-          background: AppColours.LIGHT,
+          color: 'white',
+          background: 'black',
           border: 'none',
           borderRadius: 20,
           fontFamily: '"Roboto", sans-serif',
-          fontSize: 20
+          fontSize: 20,
+          fontWeight: 300
         }} onChange={this.props.onSelected}>
           {this.props.children}
         </select>
