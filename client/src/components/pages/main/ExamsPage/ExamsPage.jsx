@@ -38,12 +38,12 @@ export class ExamsPage extends Component {
     return (
       <MainPageLayout pageTitle="Dolgozatok" pageActive="exams" history={this.props.history}>
         {this.state.popupVisible ? <AppPopup message={this.state.popupMessage} onClose={this.hidePopup} /> : null}
-        <AppButton text="Hozzáadás" onClick={() => {this.props.history.push(Routes.HOMEWORK_ADD)}} />
+        <AppButton text="Hozzáadás" onClick={() => {this.props.history.push(Routes.EXAMS_ADD)}} />
         <AppDivider />
         <div>
           {this.state.exams.length === 0 ? <LoadingSpinner /> : null}
           {this.state.exams.map((exam) => (
-            <AppCardClassContent type="exam" {...exam} />
+            <AppCardClassContent type="exam" {...exam} key={Math.random()} />
           ))}
         </div>
       </MainPageLayout>
