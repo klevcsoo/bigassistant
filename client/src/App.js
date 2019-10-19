@@ -18,6 +18,7 @@ import LoginOptionsPage from './components/pages/user/LoginOptionsPage';
 import DeleteAccountPage from './components/pages/user/DeleteAccountPage';
 import AddHomeworkPage from './components/pages/class-content/AddHomeworkPage/AddHomeworkPage';
 import AddExamPage from './components/pages/class-content/AddExamPage/AddExamPage';
+import ClassJoinPage from './components/pages/class/ClassJoinPage/ClassJoinPage';
 
 export class App extends Component {
   render() {
@@ -33,7 +34,7 @@ export class App extends Component {
 
             <Route exact path={Routes.CLASS} component={ClassPage} />
             {/* <Route path={Routes.CLASS_CREATE} component={} /> */}
-            {/* <Route path={Routes.CLASS_JOIN} component={} /> */}
+            <Route path={Routes.CLASS_JOIN} component={ClassJoinPage} />
             <Route path={Routes.CLASS_SETTINGS} component={ClassSettings} />
 
             <Route exact path={Routes.HOMEWORK} component={HomeworkPage} />
