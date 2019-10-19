@@ -17,6 +17,7 @@ import ClassSettings from './components/pages/class/ClassSettingsPage/ClassSetti
 import LoginOptionsPage from './components/pages/user/LoginOptionsPage';
 import DeleteAccountPage from './components/pages/user/DeleteAccountPage';
 import AddHomeworkPage from './components/pages/class-content/AddHomeworkPage/AddHomeworkPage';
+import AddExamPage from './components/pages/class-content/AddExamPage/AddExamPage';
 
 export class App extends Component {
   render() {
@@ -39,7 +40,7 @@ export class App extends Component {
             <Route path={Routes.HOMEWORK_ADD} component={AddHomeworkPage} />
 
             <Route exact path={Routes.EXAMS} component={ExamsPage} />
-            {/* <Route path={Routes.EXAMS_ADD} component={} /> */}
+            <Route path={Routes.EXAMS_ADD} component={AddExamPage} />
 
             <Route exact path={Routes.USER} component={UserPage} />
             <Route exact path={Routes.LOGIN_OPTIONS} component={LoginOptionsPage} />
