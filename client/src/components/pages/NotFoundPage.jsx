@@ -20,7 +20,7 @@ export class NotFoundPage extends Component {
           transform: 'translate(-50%, -50%)'
         }}>
           <p style={{
-            margin: 30, padding: 0,
+            margin: 10, padding: 0,
             textAlign: 'center',
             fontSize: 100
           }}><span role="img" aria-label="monkey">🙈</span></p>
