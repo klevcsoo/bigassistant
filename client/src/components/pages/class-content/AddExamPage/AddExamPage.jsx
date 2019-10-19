@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import FirebaseHandler from '../../../../utils/FirebaseHandler';
+import AppColours from '../../../../constants/appColors';
+import 'date-fns'; import DateFnsUtils from '@date-io/date-fns'
+import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
+
+// Components
 import SaveablePageLayout from '../../../layout/SaveablePageLayout';
 import AppSubtitle from '../../../AppSubtitle';
 import AppCardClassContent from '../../../AppCard/AppCardClassContent';
 import AppInput from '../../../AppInput/AppInput';
-import AppColours from '../../../../constants/appColors';
 import LoadingSpinner from '../../../LoadingSpinner';
 import AppPopup from '../../../AppPopup/AppPopup';
-import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
-import 'date-fns'; import DateFnsUtils from '@date-io/date-fns'
 import AppClassSubjectsDropDown from '../../../AppDropDown/AppClassSubjectsDropDown';
 
 export class AddExamPage extends Component {
