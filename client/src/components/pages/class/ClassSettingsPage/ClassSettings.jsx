@@ -1,20 +1,15 @@
 import React, { Component } from 'react'
 import FirebaseHandler from '../../../../utils/FirebaseHandler'
-import Routes from '../../../../constants/routes';
-import PublishRoundedIcon from '@material-ui/icons/PublishRounded';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 
 // Components
-import PageTitle from '../../../layout/PageTitle/PageTitle'
 import LoadingSpinner from '../../../LoadingSpinner';
 import UnauthorizedPage from '../../auth/UnauthorizedPage/UnauthorizedPage';
 import UserProfileHeader from '../../../layout/UserProfileHeader';
 import AppDivider from '../../../AppDivider';
 import AppInput from '../../../AppInput/AppInput';
-import AppSwitch from '../../../AppSwitch/AppSwitch';
 import AppColours from '../../../../constants/appColors';
 import SaveablePageLayout from '../../../layout/SaveablePageLayout';
-import AppSubtitle from '../../../AppSubtitle';
 import AppButton from '../../../AppButton/AppButton';
 import AppPopup from '../../../AppPopup/AppPopup';
 

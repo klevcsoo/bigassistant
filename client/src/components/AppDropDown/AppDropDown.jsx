@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import AppColours from '../../constants/appColors'
 
 export class AppDropDown extends Component {
   render() {

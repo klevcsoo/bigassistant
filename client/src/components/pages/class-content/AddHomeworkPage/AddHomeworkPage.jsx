@@ -8,7 +8,6 @@ import SaveablePageLayout from '../../../layout/SaveablePageLayout';
 import AppSubtitle from '../../../AppSubtitle';
 import AppCardClassContent from '../../../AppCard/AppCardClassContent';
 import AppInput from '../../../AppInput/AppInput';
-import AppDropDown from '../../../AppDropDown/AppDropDown';
 import AppClassSubjectsDropDown from '../../../AppDropDown/AppClassSubjectsDropDown';
 import FirebaseHandler from '../../../../utils/FirebaseHandler';
 import LoadingSpinner from '../../../LoadingSpinner';
