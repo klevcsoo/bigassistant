@@ -23,7 +23,7 @@ export class NotFoundPage extends Component {
             margin: 30, padding: 0,
             textAlign: 'center',
             fontSize: 100
-          }}><span role="img">🙈</span></p>
+          }}><span role="img" aria-label="monkey">🙈</span></p>
           <AppTitle text="Oldal nem található!" />
           <AppSubtitle text="Az adott link nem vezet semmilyen oldalhoz." />
           <AppButton type="highlight" text="Vissza a kezdőlapra" onClick={() => {this.props.history.push(Routes.HOME)}} />
