@@ -15,7 +15,7 @@ export class AppSwitch extends Component {
 
   render() {
     return (
-      <div className="app-switch" style={{ marginTop: '10px' }}>
+      <div className="app-switch">
         <h2>{this.props.text}</h2>
         <label className="app-switch-label">
           <input type="checkbox" onChange={this.onCheckedChanged} className="app-switch-input" id="closed-class-switch" checked={this.state.checked} />
