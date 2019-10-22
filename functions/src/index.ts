@@ -31,7 +31,7 @@ exports.joinClass = functions.https.onCall(async (data, context) => {
     let inviteCode: string = utils.makeDatabasePath(data.inviteCode);
 
     // These are only defined, if the class is just to be created.
-    const classPictureUrl: string = data.pictureUrl;
+    const classPictureUrl: string = data.photo;
     const classClosed: boolean = data.closed;
 
     if (className === undefined && inviteCode === undefined) {
