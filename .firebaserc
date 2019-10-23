@@ -1,6 +1,5 @@
 {
   "projects": {
-    "default": "bigassistant",
-    "dev": "bigassistant-dev"
+    "default": "bigassistant"
   }
 }
