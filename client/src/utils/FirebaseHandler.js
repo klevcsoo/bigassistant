@@ -1,9 +1,8 @@
 import app from 'firebase/app';
-import { inProduction } from '../constants/appInfo'
 import 'firebase/auth'; import 'firebase/database'; import 'firebase/functions';
 import LocalizationHandler from './LocalizationHandler';
 
-const prodConfig = {
+const config = {
   apiKey: "AIzaSyA3nyWdbq3VdnfTpaBEKR4vspv5tX1zc_M",
   authDomain: "bigassistant.firebaseapp.com",
   databaseURL: "https://bigassistant.firebaseio.com",
@@ -12,18 +11,6 @@ const prodConfig = {
   messagingSenderId: "352051169799",
   appId: "1:352051169799:web:58d79fdd20254f6a9678a2"
 }
-
-const devConfig = {
-  apiKey: "AIzaSyArKGZOSh35hgHbKnOBfSN5abniS-ybc8M",
-  authDomain: "bigassistant-dev.firebaseapp.com",
-  databaseURL: "https://bigassistant-dev.firebaseio.com",
-  projectId: "bigassistant-dev",
-  storageBucket: "",
-  messagingSenderId: "807197900482",
-  appId: "1:807197900482:web:55acfb1504765a93a3455b"
-}
-
-const config = inProduction ? prodConfig : devConfig;
 
 class FirebaseHandler {
   static initializeFirebase() {
