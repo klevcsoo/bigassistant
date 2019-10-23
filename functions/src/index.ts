@@ -4,10 +4,8 @@ import * as admin from 'firebase-admin';
 import utils = require('./utils');
 // ---------- IMPORTS ----------
 
-const isProduction = false;
-
 // ---------- ADMIN FUNCTIONALITY SETUP ----------
-const serviceAccount = require(isProduction ? '../service-account.json' : '../service-account-dev.json');
+const serviceAccount = require('../service-account.json');
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`
