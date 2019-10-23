@@ -15,14 +15,14 @@ export class HomeworkPage extends Component {
     popupVisible: false,
     popupMessage: '',
     homework: [],
-    homeworkPath: ''
+    classId: null
   }
 
   componentDidMount() {
     FirebaseHandler.getClientInfo((result) => {
       let classId = result.classId;
       FirebaseHandler.readDataContinuously(`/classes/${classId}/homework`, (snapshot) => {
-        this.setState({ homework: [], homeworkPath: `/classes/${classId}/homework` });
+        this.setState({ homework: [], classId: classId });
         snapshot.forEach((homeworkSnapshot) => {
           let hw = homeworkSnapshot.val();
           hw.id = homeworkSnapshot.key;
@@ -37,7 +37,9 @@ export class HomeworkPage extends Component {
   }
 
   componentWillUnmount() {
-    FirebaseHandler.removeDataListener(this.state.homeworkPath);
+    if (this.state.classId) {
+      FirebaseHandler.removeDataListener(`/classes/${this.state.classId}/homework`);
+    } else console.log('No listener attached.');
   }
 
   render() {

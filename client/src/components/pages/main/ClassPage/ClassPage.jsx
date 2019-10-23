@@ -17,7 +17,6 @@ export class ClassPage extends Component {
     popupMessage: '',
     clientInfo: null,
     classmates: [],
-    classmatesPath: '',
     inviteCode: null
   }
 
@@ -29,7 +28,6 @@ export class ClassPage extends Component {
     FirebaseHandler.getClientInfo((result) => {
       this.setState({ clientInfo: result });
       FirebaseHandler.readDataContinuously(`/classes/${this.state.clientInfo.classId}/members`, (snapshot) => {
-        this.setState({ classmatesPath: `/classes/${result.classId}/members` });
         snapshot.forEach((memberSnapshot) => {
           let uid = memberSnapshot.val();
           FirebaseHandler.callFunction('getUserInfo', { uid: uid }).then((userInfo) => {
@@ -51,7 +49,9 @@ export class ClassPage extends Component {
   }
 
   componentWillUnmount() {
-    FirebaseHandler.removeDataListener(this.state.classmatesPath);
+    if (this.state.clientInfo) {
+      FirebaseHandler.removeDataListener(`/classes/${this.state.clientInfo.classId}/members`);
+    } else console.log('No listener attached.');
   }
 
   render() {

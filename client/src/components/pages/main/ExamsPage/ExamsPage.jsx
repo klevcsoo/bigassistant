@@ -14,13 +14,15 @@ export class ExamsPage extends Component {
   state = {
     popupVisible: false,
     popupMessage: '',
-    exams: []
+    exams: [],
+    classId: null
   }
 
   componentDidMount() {
     FirebaseHandler.getClientInfo((result) => {
       let classId = result.classId;
       FirebaseHandler.readDataContinuously(`/classes/${classId}/exams`, (snapshot) => {
+        this.setState({ exams: [], classId: classId });
         snapshot.forEach((examSnapshot) => {
           let exam = examSnapshot.val();
           exam.id = examSnapshot.key;
@@ -32,6 +34,12 @@ export class ExamsPage extends Component {
         });
       });
     });
+  }
+
+  componentWillUnmount() {
+    if (this.state.classId) {
+      FirebaseHandler.removeDataListener(`/classes/${this.state.classId}/exams`);
+    } else console.log('No listener attached.');
   }
 
   render() {
