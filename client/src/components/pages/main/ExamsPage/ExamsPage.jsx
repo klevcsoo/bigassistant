@@ -22,7 +22,7 @@ export class ExamsPage extends Component {
     FirebaseHandler.getClientInfo((result) => {
       let classId = result.classId;
       FirebaseHandler.readDataContinuously(`/classes/${classId}/exams`, (snapshot) => {
-        this.setState({ exams: [], classId: classId });
+        this.setState({ exams: [ null ], classId: classId });
         snapshot.forEach((examSnapshot) => {
           let exam = examSnapshot.val();
           exam.id = examSnapshot.key;
@@ -50,9 +50,11 @@ export class ExamsPage extends Component {
         <AppDivider />
         <div>
           {this.state.exams.length === 0 ? <LoadingSpinner /> : null}
-          {this.state.exams.map((exam) => (
-            <AppCardClassContent type="exam" {...exam} key={Math.random()} />
-          ))}
+          {this.state.exams.map((exam) => {
+            if (exam) return (
+              <AppCardClassContent type="exam" {...exam} key={Math.random()} />
+            )
+          })}
         </div>
       </MainPageLayout>
     )

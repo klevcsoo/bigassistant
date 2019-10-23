@@ -22,7 +22,7 @@ export class HomeworkPage extends Component {
     FirebaseHandler.getClientInfo((result) => {
       let classId = result.classId;
       FirebaseHandler.readDataContinuously(`/classes/${classId}/homework`, (snapshot) => {
-        this.setState({ homework: [], classId: classId });
+        this.setState({ homework: [ null ], classId: classId });
         snapshot.forEach((homeworkSnapshot) => {
           let hw = homeworkSnapshot.val();
           hw.id = homeworkSnapshot.key;
@@ -50,9 +50,11 @@ export class HomeworkPage extends Component {
         <AppDivider />
         <div>
           {this.state.homework.length === 0 ? <LoadingSpinner /> : null}
-          {this.state.homework.map((hw) => (
-            <AppCardClassContent type="homework" {...hw} key={hw.id} />
-          ))}
+          {this.state.homework.map((hw) => {
+            if (hw) return (
+              <AppCardClassContent type="homework" {...hw} key={hw.id} />
+            )
+          })}
         </div>
       </MainPageLayout>
     )

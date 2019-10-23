@@ -10,6 +10,7 @@ import AppDivider from '../../../AppDivider';
 import AppButton from '../../../AppButton/AppButton';
 import AppUserButton from '../../../AppButton/AppUserButton';
 import MainPageLayout from '../../../layout/MainPageLayout';
+import AppSubtitle from '../../../AppSubtitle';
 
 export class ClassPage extends Component {
   state = {
@@ -28,6 +29,7 @@ export class ClassPage extends Component {
     FirebaseHandler.getClientInfo((result) => {
       this.setState({ clientInfo: result });
       FirebaseHandler.readDataContinuously(`/classes/${this.state.clientInfo.classId}/members`, (snapshot) => {
+        this.setState({ classmates: [] });
         snapshot.forEach((memberSnapshot) => {
           let uid = memberSnapshot.val();
           FirebaseHandler.callFunction('getUserInfo', { uid: uid }).then((userInfo) => {
@@ -58,8 +60,19 @@ export class ClassPage extends Component {
     return (
       <MainPageLayout pageTitle="Osztály" pageActive="class" history={this.props.history}>
         {this.state.popupVisible ? <AppPopup message={this.state.popupMessage} onClose={this.hidePopup} /> : null }
-
-        {!this.state.clientInfo || this.state.classmates.length === 0 ? <LoadingSpinner/> : (
+        {!this.state.clientInfo ? <LoadingSpinner /> : !this.state.clientInfo.classId ? (
+          <div style={{
+            position: 'absolute',
+            top: '50%', left: '50%',
+            transform: 'translate(-50%, -50%)'
+          }}>
+            <p style={{
+              textAlign: 'center',
+              fontSize: 20,
+              fontWeight: 300
+            }}>Nem vagy tagja egy osztálynak sem🤨</p>
+          </div>
+        ) : (
           <div>
             <div>
               <h3 style={{
@@ -72,11 +85,14 @@ export class ClassPage extends Component {
             <AppButton type="highlight" text="Órarend" />
             <AppButton text="Osztály beállítások" onClick={() => {this.props.history.push(Routes.CLASS_SETTINGS)}} />
             <AppDivider />
-            <div>
-              {this.state.classmates.map((classmate) => (
-                <AppUserButton {...classmate} key={classmate.uid} onClick={this.handleClassmateClick.bind(this, classmate.uid)} />)
-              )}
-            </div>
+            <AppSubtitle text="Osztály tagjai:" />
+            {this.state.classmates.length === 0 ? <LoadingSpinner/> : (
+              <div>
+                {this.state.classmates.map((classmate) => (
+                  <AppUserButton {...classmate} key={classmate.uid} onClick={this.handleClassmateClick.bind(this, classmate.uid)} />)
+                )}
+              </div>
+            )}
           </div>
         )}
       </MainPageLayout>
