@@ -15,7 +15,7 @@ export class ClassCreatePage extends Component {
   state = {
     classInfo: {
       name: 'Osztály',
-      photo: 'https://firebasestorage.googleapis.com/v0/b/bigassistant-dev.appspot.com/o/def-class-pic.png?alt=media&token=057b7534-0c9c-4280-aa91-1d9bf5fb96f1',
+      photo: 'https://firebasestorage.googleapis.com/v0/b/bigassistant.appspot.com/o/default-class-photo.png?alt=media&token=afd84e32-c0f6-4563-be8b-b326d3099972',
       closed: false
     },
     addingClass: false,
