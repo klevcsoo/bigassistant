@@ -6,7 +6,7 @@ export class AppCard extends Component {
     return (
       <React.Fragment>
         {this.props.title ? <h1 className="app-card-group-title">{this.props.title}</h1> : null}
-        <div className="app-card"></div>
+        <div className="app-card">{this.props.children}</div>
       </React.Fragment>
     )
   }
