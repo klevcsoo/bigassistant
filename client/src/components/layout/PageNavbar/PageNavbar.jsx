@@ -11,6 +11,7 @@ import UserIcon from '@material-ui/icons/PersonRounded'
 
 export class PageNavbar extends Component {
   loadPage = (link) => {
+    if (this.props.history.location.pathname === link) return;
     setTimeout(() => { this.props.history.push(link); }, 200);
   }
 
