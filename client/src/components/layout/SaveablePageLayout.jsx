@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
+import FirebaseHandler from '../../utils/FirebaseHandler';
+import Routes from '../../constants/routes';
 
 // Components
 import PageTitle from './PageTitle/PageTitle';
 import PageNavbarSaveable from './PageNavbar/PageNavbarSaveable';
 
 export class SaveablePageLayout extends Component {
+  componentDidMount() {
+    FirebaseHandler.getApp().auth().onAuthStateChanged((user) => {
+      if (!user) this.props.history.push(Routes.LOGIN);
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
