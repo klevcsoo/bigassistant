@@ -52,7 +52,9 @@ export class ExamsPage extends Component {
           {this.state.exams.length === 0 ? <LoadingSpinner /> : null}
           {this.state.exams.map((exam) => {
             if (exam) return (
-              <AppCardClassContent type="exam" {...exam} key={Math.random()} />
+              <AppCardClassContent type="exam" {...exam} key={exam.id} onOpen={() => {
+                this.props.history.push(`${Routes.EXAMS}/${exam.id}`)
+              }} />
             )
           })}
         </div>

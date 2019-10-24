@@ -52,7 +52,9 @@ export class HomeworkPage extends Component {
           {this.state.homework.length === 0 ? <LoadingSpinner /> : null}
           {this.state.homework.map((hw) => {
             if (hw) return (
-              <AppCardClassContent type="homework" {...hw} key={hw.id} />
+              <AppCardClassContent type="homework" {...hw} key={hw.id} onOpen={() => {
+                this.props.history.push(`${Routes.HOMEWORK}/${hw.id}`)
+              }} />
             )
           })}
         </div>
