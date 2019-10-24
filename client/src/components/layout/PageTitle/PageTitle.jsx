@@ -18,6 +18,7 @@ export class PageTitle extends Component {
       <React.Fragment>
         <Helmet>
           <meta name="theme-color" content={bgColor} />
+          <title>{this.props.title}</title>
         </Helmet>
         <div className="page-title-container" style={{ background: bgColor }}>
           {!this.props.noBackButton ? (
