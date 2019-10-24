@@ -7,6 +7,7 @@ import FirebaseHandler from '../../../utils/FirebaseHandler';
 import AppTitle from '../../AppTitle'
 import AppButton from '../../AppButton/AppButton'
 import AppPopup from '../../AppPopup/AppPopup';
+import AppBackButton from '../../AppButton/AppBackButton';
 
 export class DeleteAccountPage extends Component {
   state = {
@@ -39,11 +40,7 @@ export class DeleteAccountPage extends Component {
     return (
       <React.Fragment>
         {!this.state.popupVisible ? null : <AppPopup message={this.state.popupMessage} />}
-        <button style={{
-          width: 50, height: 50,
-          background: 'transparent',
-          border: 'none'
-        }} onClick={() => {this.props.history.goBack()}}><ArrowBackRoundedIcon /></button>
+        <AppBackButton history={this.props.history} />
         <div style={{
           display: 'block',
           margin: 'auto',

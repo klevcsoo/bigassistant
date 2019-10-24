@@ -7,6 +7,7 @@ import LoadingSpinner from '../../../LoadingSpinner';
 import FirebaseHandler from '../../../../utils/FirebaseHandler';
 import Routes from '../../../../constants/routes';
 import AppColours from '../../../../constants/appColors';
+import AppBackButton from '../../../AppButton/AppBackButton';
 
 export class ClassJoinPage extends Component {
   state = {
@@ -28,11 +29,7 @@ export class ClassJoinPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <button style={{
-          width: 50, height: 50,
-          background: 'transparent',
-          border: 'none'
-        }} onClick={() => {this.props.history.goBack()}}><ArrowBackRoundedIcon /></button>
+        <AppBackButton history={this.props.history} />
         <div style={{
           width: 310,
           position: 'absolute',

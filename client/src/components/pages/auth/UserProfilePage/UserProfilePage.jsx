@@ -11,6 +11,7 @@ import UserProfileHeader from '../../../layout/UserProfileHeader';
 import AppDivider from '../../../AppDivider';
 import AppCardUserClass from '../../../AppCard/AppCardUserClass';
 import AppMenuButton from '../../../AppButton/AppMenuButton';
+import AppBackButton from '../../../AppButton/AppBackButton';
 
 export class UserProfilePage extends Component {
   state = {
@@ -47,11 +48,7 @@ export class UserProfilePage extends Component {
     return (
       <React.Fragment>
         {this.state.popupVisible ? <AppPopup message={this.state.popupMessage} onClose={this.hidePopup} /> : null }
-        <button style={{
-          width: 50, height: 50,
-          background: 'transparent',
-          border: 'none'
-        }} onClick={() => {this.props.history.goBack()}}><ArrowBackRoundedIcon /></button>
+        <AppBackButton history={this.props.history} />
         <div style={{ height: 20 }}></div>
         {!this.state.userInfo ? <LoadingSpinner/> : (
           <div>

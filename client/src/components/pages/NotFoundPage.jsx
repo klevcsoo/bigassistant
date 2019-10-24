@@ -4,16 +4,13 @@ import AppSubtitle from '../AppSubtitle'
 import AppButton from '../AppButton/AppButton'
 import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
 import Routes from '../../constants/routes';
+import AppBackButton from '../AppButton/AppBackButton';
 
 export class NotFoundPage extends Component {
   render() {
     return (
       <React.Fragment>
-        <button style={{
-          width: 50, height: 50,
-          background: 'transparent',
-          border: 'none'
-        }} onClick={() => {this.props.history.goBack()}}><ArrowBackRoundedIcon /></button>
+        <AppBackButton history={this.props.history} />
         <div style={{
           position: 'absolute',
           top: '50%', left: '50%',
