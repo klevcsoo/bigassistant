@@ -6,7 +6,9 @@ class Routes {
   static CLASS_JOIN = '/class/join';
   static CLASS_SETTINGS = '/class/settings';
   static EXAMS_ADD = '/exams/add';
+  static EXAMS_INSPECT = '/exams/:id';
   static HOMEWORK_ADD = '/homework/add';
+  static HOMEWORK_INSPECT = '/homework/:id';
   static CLASS = '/class';
   static HOMEWORK = '/homework';
   static HOME = '/';

@@ -20,6 +20,7 @@ import AddHomeworkPage from './components/pages/class-content/AddHomeworkPage/Ad
 import AddExamPage from './components/pages/class-content/AddExamPage/AddExamPage';
 import ClassJoinPage from './components/pages/class/ClassJoinPage/ClassJoinPage';
 import ClassCreatePage from './components/pages/class/ClassCreatePage/ClassCreatePage';
+import InspectExamPage from './components/pages/class-content/InspectExamPage';
 
 export class App extends Component {
   render() {
@@ -40,9 +41,11 @@ export class App extends Component {
 
             <Route exact path={Routes.HOMEWORK} component={HomeworkPage} />
             <Route path={Routes.HOMEWORK_ADD} component={AddHomeworkPage} />
+            {/* <Route path={Routes.HOMEWORK_INSPECT} component={} /> */}
 
             <Route exact path={Routes.EXAMS} component={ExamsPage} />
             <Route path={Routes.EXAMS_ADD} component={AddExamPage} />
+            <Route path={Routes.EXAMS_INSPECT} component={InspectExamPage} />
 
             <Route exact path={Routes.USER} component={UserPage} />
             <Route exact path={Routes.LOGIN_OPTIONS} component={LoginOptionsPage} />
