@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import AppColours from '../../../../constants/appColors'
-import FirebaseHandler from '../../../../utils/FirebaseHandler'
+import AppColours from '../../../constants/appColors'
+import FirebaseHandler from '../../../utils/FirebaseHandler'
 
 // Components
-import SaveablePageLayout from '../../../layout/SaveablePageLayout'
-import UserProfileHeader from '../../../layout/UserProfileHeader'
-import AppDivider from '../../../AppDivider'
-import AppInput from '../../../AppInput/AppInput'
-import AppSwitch from '../../../AppSwitch/AppSwitch'
-import LoadingSpinner from '../../../LoadingSpinner'
-import AppPopup from '../../../AppPopup/AppPopup'
+import SaveablePageLayout from '../../layout/SaveablePageLayout'
+import UserProfileHeader from '../../layout/UserProfileHeader'
+import AppDivider from '../../AppDivider'
+import AppInput from '../../AppInput/AppInput'
+import AppSwitch from '../../AppSwitch/AppSwitch'
+import LoadingSpinner from '../../LoadingSpinner'
+import AppPopup from '../../AppPopup/AppPopup'
 
 export class ClassCreatePage extends Component {
   state = {

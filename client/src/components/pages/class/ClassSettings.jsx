@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import FirebaseHandler from '../../../../utils/FirebaseHandler'
+import FirebaseHandler from '../../../utils/FirebaseHandler'
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 
 // Components
-import LoadingSpinner from '../../../LoadingSpinner';
-import UnauthorizedPage from '../../UnauthorizedPage';
-import UserProfileHeader from '../../../layout/UserProfileHeader';
-import AppDivider from '../../../AppDivider';
-import AppInput from '../../../AppInput/AppInput';
-import AppColours from '../../../../constants/appColors';
-import SaveablePageLayout from '../../../layout/SaveablePageLayout';
-import AppButton from '../../../AppButton/AppButton';
-import AppPopup from '../../../AppPopup/AppPopup';
+import LoadingSpinner from '../../LoadingSpinner';
+import UnauthorizedPage from '../UnauthorizedPage';
+import UserProfileHeader from '../../layout/UserProfileHeader';
+import AppDivider from '../../AppDivider';
+import AppInput from '../../AppInput/AppInput';
+import AppColours from '../../../constants/appColors';
+import SaveablePageLayout from '../../layout/SaveablePageLayout';
+import AppButton from '../../AppButton/AppButton';
+import AppPopup from '../../AppPopup/AppPopup';
 
 export class ClassSettings extends Component {
   state = {

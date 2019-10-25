@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
-import AppTitle from '../../../AppTitle';
-import AppInput from '../../../AppInput/AppInput';
-import AppButton from '../../../AppButton/AppButton';
-import LoadingSpinner from '../../../LoadingSpinner';
-import FirebaseHandler from '../../../../utils/FirebaseHandler';
-import Routes from '../../../../constants/routes';
-import AppColours from '../../../../constants/appColors';
-import AppBackButton from '../../../AppButton/AppBackButton';
+import AppTitle from '../../AppTitle';
+import AppInput from '../../AppInput/AppInput';
+import AppButton from '../../AppButton/AppButton';
+import LoadingSpinner from '../../LoadingSpinner';
+import FirebaseHandler from '../../../utils/FirebaseHandler';
+import Routes from '../../../constants/routes';
+import AppColours from '../../../constants/appColors';
+import AppBackButton from '../../AppButton/AppBackButton';
 
 export class ClassJoinPage extends Component {
   state = {
