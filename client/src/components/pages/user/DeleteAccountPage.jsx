@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
 import AppColours from '../../../constants/appColors'
 import FirebaseHandler from '../../../utils/FirebaseHandler';
 

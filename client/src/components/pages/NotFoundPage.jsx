@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import AppTitle from '../AppTitle'
 import AppSubtitle from '../AppSubtitle'
 import AppButton from '../AppButton/AppButton'
-import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
 import Routes from '../../constants/routes';
 import AppBackButton from '../AppButton/AppBackButton';
 

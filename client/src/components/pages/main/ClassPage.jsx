@@ -70,7 +70,7 @@ export class ClassPage extends Component {
               textAlign: 'center',
               fontSize: 20,
               fontWeight: 300
-            }}>Nem vagy tagja egy osztálynak sem🤨</p>
+            }}>Nem vagy tagja egy osztálynak sem<span role="img" aria-label="emoji">🤨</span></p>
           </div>
         ) : (
           <div>

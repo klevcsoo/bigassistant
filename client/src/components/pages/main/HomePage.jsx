@@ -43,7 +43,7 @@ export class HomePage extends Component {
                     fontSize: 18,
                     fontWeight: 300
                   }}>
-                    Hát ez még nincs🤷‍♀️
+                    Hát ez még nincs<span role="img" aria-label="emoji">🤷‍♀️</span>
                   </p>
                 </AppCard>
               </div>

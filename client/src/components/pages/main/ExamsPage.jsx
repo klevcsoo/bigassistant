@@ -62,7 +62,7 @@ export class ExamsPage extends Component {
                   </div>
                 )}
               </Spring>
-            )
+            ); else return null;
           })}
         </div>
       </MainPageLayout>

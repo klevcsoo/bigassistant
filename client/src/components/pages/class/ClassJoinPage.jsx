@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
 import AppTitle from '../../AppTitle';
 import AppInput from '../../AppInput/AppInput';
 import AppButton from '../../AppButton/AppButton';
