@@ -1,39 +1,39 @@
 import React, { Component } from 'react'
-import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers'
+import FirebaseHandler from '../../../utils/FirebaseHandler';
+import AppColours from '../../../constants/appColors';
 import 'date-fns'; import DateFnsUtils from '@date-io/date-fns'
-import AppColours from '../../../../constants/appColors';
+import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers';
 
 // Components
-import SaveablePageLayout from '../../../layout/SaveablePageLayout';
-import AppSubtitle from '../../../AppSubtitle';
-import AppCardClassContent from '../../../AppCard/AppCardClassContent';
-import AppInput from '../../../AppInput/AppInput';
-import AppClassSubjectsDropDown from '../../../AppDropDown/AppClassSubjectsDropDown';
-import FirebaseHandler from '../../../../utils/FirebaseHandler';
-import LoadingSpinner from '../../../LoadingSpinner';
-import AppPopup from '../../../AppPopup/AppPopup';
+import SaveablePageLayout from '../../layout/SaveablePageLayout';
+import AppSubtitle from '../../AppSubtitle';
+import AppCardClassContent from '../../AppCard/AppCardClassContent';
+import AppInput from '../../AppInput/AppInput';
+import LoadingSpinner from '../../LoadingSpinner';
+import AppPopup from '../../AppPopup/AppPopup';
+import AppClassSubjectsDropDown from '../../AppDropDown/AppClassSubjectsDropDown';
 
-export class AddHomeworkPage extends Component {
+export class AddExamPage extends Component {
   state = {
-    currentHomework: {
+    currentExam: {
       title: '',
       date: new Date().getTime(),
       subject: null
     },
-    addingHomework: false,
-    addedHomework: false,
+    addingExam: false,
+    addedExam: false,
     popupVisible: false,
     popupMessage: ''
   }
 
-  saveHomework = () =>  {
-    this.setState({ addingHomework: true });
+  saveExam = () => {
+    this.setState({ addingExam: true });
     FirebaseHandler.callFunction('addContentToClass', {
-      typeOf: 'homework',
-      content: this.state.currentHomework
+      typeOf: 'exams',
+      content: this.state.currentExam
     }).then(() => {
-      this.setState({ addedHomework: true }, () => {
-        this.displayPopup('Házi feladat hozzáadva!');
+      this.setState({ addedExam: true }, () => {
+        this.displayPopup('Dolgozat hozzáadva!');
       });
     }).catch((err) => {
       console.log(err);
@@ -48,31 +48,31 @@ export class AddHomeworkPage extends Component {
     })
   }
   closePopup = () => {
-    if (this.state.addedHomework) this.props.history.goBack();
+    if (this.state.addedExam) this.props.history.goBack();
     else {
       this.setState({
         popupVisible: false,
         popupMessage: '',
-        addingHomework: false
+        addingExam: false
       });
     }
   }
 
   setTitle = (text) => {
     this.setState((state) => {
-      state.currentHomework.title = text;
+      state.currentExam.title = text;
       return state;
     });
   }
   setDate = (date) => {
     this.setState((state) => {
-      state.currentHomework.date = new Date(date).getTime();
+      state.currentExam.date = new Date(date).getTime();
       return state;
     });
   }
   setSubject = (subject) => {
     this.setState((state) => {
-      state.currentHomework.subject = subject;
+      state.currentExam.subject = subject;
       return state;
     });
   }
@@ -80,7 +80,7 @@ export class AddHomeworkPage extends Component {
   render() {
     return (
       <React.Fragment>
-        {!this.state.addingHomework ? null : (
+        {!this.state.addingExam ? null : (
           <div style={{
             position: 'fixed',
             top: 0, left: 0, bottom: 0, right: 0,
@@ -92,25 +92,25 @@ export class AddHomeworkPage extends Component {
             transform: 'translate(-50%, -50%)'
           }}><LoadingSpinner /></div></div>
         )}
-        <SaveablePageLayout onSave={this.saveHomework} pageTitle="Házi feladat" pageType="homework"
+        <SaveablePageLayout onSave={this.saveExam} pageTitle="Dolgozat" pageType="exam"
         history={this.props.history} buttonText="Hozzáadás">
           {this.state.popupVisible ? <AppPopup message={this.state.popupMessage} onClose={this.closePopup} /> : null}
           <AppSubtitle text="Előnézet:" />
-          <AppCardClassContent type="homework" {...this.state.currentHomework} />
+          <AppCardClassContent type="exam" {...this.state.currentExam} />
           <AppSubtitle text="Beállítások:" />
           <div>
-            <AppInput placeholder="Házi feladat címe" text={this.state.currentHomework.title}
+            <AppInput placeholder="Dolgozat címe" text={this.state.currentExam.title}
             onTextChanged={(text) => {this.setTitle(text)}} />
             <div style={{
               width: 'fit-content',
               margin: '5px auto',
               color: AppColours.HOMEWORK
             }}>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <DatePicker margin="normal" label="Házi feladat dátuma" format="yyyy. MMMM dd."
-              value={this.state.currentHomework.date} onChange={this.setDate} inputVariant="outlined"
-              style={{ width: 290 }} />
-            </MuiPickersUtilsProvider>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <DatePicker margin="normal" label="Dolgozat dátuma" format="yyyy. MMMM dd."
+                value={this.state.currentExam.date} onChange={this.setDate} inputVariant="outlined"
+                style={{ width: 290 }} />
+              </MuiPickersUtilsProvider>
             </div>
             <AppClassSubjectsDropDown onSubjectChoosen={(subject) => {this.setSubject(subject)}} />
           </div>
@@ -120,4 +120,4 @@ export class AddHomeworkPage extends Component {
   }
 }
 
-export default AddHomeworkPage
+export default AddExamPage
