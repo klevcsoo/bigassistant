@@ -4,7 +4,7 @@ import AddRoundedIcon from '@material-ui/icons/AddRounded';
 
 // Components
 import LoadingSpinner from '../../../LoadingSpinner';
-import UnauthorizedPage from '../../auth/UnauthorizedPage/UnauthorizedPage';
+import UnauthorizedPage from '../../UnauthorizedPage';
 import UserProfileHeader from '../../../layout/UserProfileHeader';
 import AppDivider from '../../../AppDivider';
 import AppInput from '../../../AppInput/AppInput';
