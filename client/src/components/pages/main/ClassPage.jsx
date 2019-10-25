@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import './ClassPage.css';
-import FirebaseHandler from '../../../../utils/FirebaseHandler';
-import Routes from '../../../../constants/routes';
+import FirebaseHandler from '../../../utils/FirebaseHandler';
+import Routes from '../../../constants/routes';
 import { Spring } from 'react-spring/renderprops';
 
 // Components
-import LoadingSpinner from '../../../LoadingSpinner';
-import AppPopup from '../../../AppPopup/AppPopup';
-import AppDivider from '../../../AppDivider';
-import AppButton from '../../../AppButton/AppButton';
-import AppUserButton from '../../../AppButton/AppUserButton';
-import MainPageLayout from '../../../layout/MainPageLayout';
-import AppSubtitle from '../../../AppSubtitle';
+import LoadingSpinner from '../../LoadingSpinner';
+import AppPopup from '../../AppPopup/AppPopup';
+import AppDivider from '../../AppDivider';
+import AppButton from '../../AppButton/AppButton';
+import AppUserButton from '../../AppButton/AppUserButton';
+import MainPageLayout from '../../layout/MainPageLayout';
+import AppSubtitle from '../../AppSubtitle';
 
 export class ClassPage extends Component {
   state = {
