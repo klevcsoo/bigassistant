@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler';
+import LocalizationHandler from '../../../utils/LocalizationHandler';
+import AppColours from '../../../constants/appColors';
+
+// Components
 import AppBackButton from '../../AppButton/AppBackButton';
 import LoadingSpinner from '../../LoadingSpinner';
 import AppTitle from '../../AppTitle';
-import LocalizationHandler from '../../../utils/LocalizationHandler';
 import AppDivider from '../../AppDivider';
 import AppUserButton from '../../AppButton/AppUserButton';
-import AppColours from '../../../constants/appColors';
 
 export class InspectHomeworkPage extends Component {
   state = {
