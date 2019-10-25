@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Routes from '../../../../constants/routes'
 import FirebaseHandler from '../../../../utils/FirebaseHandler'
+import { Spring } from 'react-spring/renderprops'
 
 // Components
 import MainPageLayout from '../../../layout/MainPageLayout'
@@ -52,9 +53,15 @@ export class HomeworkPage extends Component {
           {this.state.homework.length === 0 ? <LoadingSpinner /> : null}
           {this.state.homework.map((hw) => {
             if (hw) return (
-              <AppCardClassContent type="homework" {...hw} key={hw.id} onOpen={() => {
-                this.props.history.push(`${Routes.HOMEWORK}/${hw.id}`)
-              }} />
+              <Spring from={{ opacity: 0 }} to={{ opacity: 1 }} key={hw.id}>
+                {(props) => (
+                  <div style={props}>
+                    <AppCardClassContent type="homework" {...hw} onOpen={() => {
+                      this.props.history.push(`${Routes.HOMEWORK}/${hw.id}`)
+                    }} />
+                  </div>
+                )}
+              </Spring>
             )
           })}
         </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import FirebaseHandler from '../../../../utils/FirebaseHandler'
 import Routes from '../../../../constants/routes'
+import { Spring } from 'react-spring/renderprops'
 
 // Components
 import MainPageLayout from '../../../layout/MainPageLayout'
@@ -52,9 +53,15 @@ export class ExamsPage extends Component {
           {this.state.exams.length === 0 ? <LoadingSpinner /> : null}
           {this.state.exams.map((exam) => {
             if (exam) return (
-              <AppCardClassContent type="exam" {...exam} key={exam.id} onOpen={() => {
-                this.props.history.push(`${Routes.EXAMS}/${exam.id}`)
-              }} />
+              <Spring from={{ opacity: 0 }} to={{ opacity: 1 }} key={exam.id}>
+                {(props) => (
+                  <div style={props}>
+                    <AppCardClassContent type="exam" {...exam} onOpen={() => {
+                      this.props.history.push(`${Routes.EXAMS}/${exam.id}`)
+                    }} />
+                  </div>
+                )}
+              </Spring>
             )
           })}
         </div>

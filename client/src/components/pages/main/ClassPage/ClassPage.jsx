@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './ClassPage.css';
 import FirebaseHandler from '../../../../utils/FirebaseHandler';
 import Routes from '../../../../constants/routes';
+import { Spring } from 'react-spring/renderprops';
 
 // Components
 import LoadingSpinner from '../../../LoadingSpinner';
@@ -89,8 +90,14 @@ export class ClassPage extends Component {
             {this.state.classmates.length === 0 ? <LoadingSpinner/> : (
               <div>
                 {this.state.classmates.map((classmate) => (
-                  <AppUserButton {...classmate} key={classmate.uid} onClick={this.handleClassmateClick.bind(this, classmate.uid)} />)
-                )}
+                  <Spring from={{ opacity: 0 }} to={{ opacity: 1 }} key={classmate.uid}>
+                    {(props) => (
+                      <div style={props}>
+                        <AppUserButton {...classmate} onClick={this.handleClassmateClick.bind(this, classmate.uid)} />
+                      </div>
+                    )}
+                  </Spring>
+                ))}
               </div>
             )}
           </div>
