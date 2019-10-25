@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import Routes from '../../../../constants/routes'
-import { version } from './../../../../constants/appInfo'
-import AppColours from './../../../../constants/appColors'
+import Routes from '../../../constants/routes'
+import { version } from '../../../constants/appInfo'
+import AppColours from '../../../constants/appColors'
 import { Zoom } from '@material-ui/core'
 
 // Components
-import MainPageLayout from '../../../layout/MainPageLayout'
-import AppDivider from '../../../AppDivider'
-import AppButton from '../../../AppButton/AppButton'
-import AppCard from '../../../AppCard/AppCard'
-import AppTitle from '../../../AppTitle'
-import AppSubtitle from '../../../AppSubtitle'
+import MainPageLayout from '../../layout/MainPageLayout'
+import AppDivider from '../../AppDivider'
+import AppButton from '../../AppButton/AppButton'
+import AppCard from '../../AppCard/AppCard'
+import AppTitle from '../../AppTitle'
+import AppSubtitle from '../../AppSubtitle'
 
 export class HomePage extends Component {
   state = {
