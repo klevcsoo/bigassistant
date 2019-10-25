@@ -6,7 +6,7 @@ import Routes from './constants/routes'
 // Pages
 import LoginPage from './components/pages/auth/LoginPage/LoginPage';
 import UserProfilePage from './components/pages/user/UserProfilePage';
-import UserPage from './components/pages/main/UserPage/UserPage';
+import UserPage from './components/pages/main/UserPage';
 import HomePage from './components/pages/main/HomePage';
 import AboutPage from './components/pages/AboutPage/AboutPage';
 import ClassPage from './components/pages/main/ClassPage';

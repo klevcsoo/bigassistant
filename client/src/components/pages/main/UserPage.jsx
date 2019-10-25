@@ -1,19 +1,18 @@
 import React, { Component } from 'react'
-import './UserPage.css'
-import FirebaseHandler from '../../../../utils/FirebaseHandler'
+import FirebaseHandler from '../../../utils/FirebaseHandler'
 import { BrowserRouter as Router } from 'react-router-dom'
-import Routes from '../../../../constants/routes'
+import Routes from '../../../constants/routes'
 
 // Components
-import LoadingSpinner from '../../../LoadingSpinner'
-import UserProfileHeader from '../../../layout/UserProfileHeader'
-import AppPopup from '../../../AppPopup/AppPopup'
-import AppButton from '../../../AppButton/AppButton'
-import AppDivider from '../../../AppDivider'
-import AppCardButtonContainer from '../../../AppCard/AppCardButtonContainer'
-import AppMenuButton from '../../../AppButton/AppMenuButton'
-import AppCardUserClass from '../../../AppCard/AppCardUserClass'
-import MainPageLayout from '../../../layout/MainPageLayout'
+import LoadingSpinner from '../../LoadingSpinner'
+import UserProfileHeader from '../../layout/UserProfileHeader'
+import AppPopup from '../../AppPopup/AppPopup'
+import AppButton from '../../AppButton/AppButton'
+import AppDivider from '../../AppDivider'
+import AppCardButtonContainer from '../../AppCard/AppCardButtonContainer'
+import AppMenuButton from '../../AppButton/AppMenuButton'
+import AppCardUserClass from '../../AppCard/AppCardUserClass'
+import MainPageLayout from '../../layout/MainPageLayout'
 
 export class UserPage extends Component {
   state = {
@@ -50,9 +49,15 @@ export class UserPage extends Component {
             <AppCardUserClass className={this.state.clientInfo.className} classRank={this.state.clientInfo.classRank} />
             <AppMenuButton text="Fiók törlése" onClick={() => {this.props.history.push(Routes.DELETE_ACCOUNT)}} />
             <Router>
-              <div className="information-container">
+              <div>
                 <AppDivider/>
-                <h1 onClick={() => {this.props.history.push(Routes.ABOUT)}}>Információ</h1>
+                <h1 style={{
+                  margin: 20,
+                  textAlign: 'center',
+                  fontFamily: '"Rubik", sans-serif',
+                  fontSize: 25,
+                  fontWeight: 400,
+                }} onClick={() => {this.props.history.push(Routes.ABOUT)}}>Információ</h1>
               </div>
             </Router>
           </div>
