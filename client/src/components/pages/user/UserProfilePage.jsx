@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
-import './UserProfilePage.css'
-import FirebaseHandler from '../../../../utils/FirebaseHandler'
-import Routes from '../../../../constants/routes'
-import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
+import FirebaseHandler from '../../../utils/FirebaseHandler'
+import Routes from '../../../constants/routes'
 
 // Components
-import AppPopup from '../../../AppPopup/AppPopup';
-import LoadingSpinner from '../../../LoadingSpinner';
-import UserProfileHeader from '../../../layout/UserProfileHeader';
-import AppDivider from '../../../AppDivider';
-import AppCardUserClass from '../../../AppCard/AppCardUserClass';
-import AppMenuButton from '../../../AppButton/AppMenuButton';
-import AppBackButton from '../../../AppButton/AppBackButton';
+import AppPopup from '../../AppPopup/AppPopup';
+import LoadingSpinner from '../../LoadingSpinner';
+import UserProfileHeader from '../../layout/UserProfileHeader';
+import AppDivider from '../../AppDivider';
+import AppCardUserClass from '../../AppCard/AppCardUserClass';
+import AppMenuButton from '../../AppButton/AppMenuButton';
+import AppBackButton from '../../AppButton/AppBackButton';
 
 export class UserProfilePage extends Component {
   state = {
