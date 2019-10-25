@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './ClassPage.css';
 import FirebaseHandler from '../../../utils/FirebaseHandler';
 import Routes from '../../../constants/routes';
 import { Spring } from 'react-spring/renderprops';

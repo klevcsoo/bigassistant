@@ -7,19 +7,19 @@ import Routes from './constants/routes'
 import LoginPage from './components/pages/auth/LoginPage/LoginPage';
 import UserProfilePage from './components/pages/user/UserProfilePage';
 import UserPage from './components/pages/main/UserPage/UserPage';
-import HomePage from './components/pages/main/HomePage/HomePage';
+import HomePage from './components/pages/main/HomePage';
 import AboutPage from './components/pages/AboutPage/AboutPage';
-import ClassPage from './components/pages/main/ClassPage/ClassPage';
+import ClassPage from './components/pages/main/ClassPage';
 import NotFoundPage from './components/pages/NotFoundPage';
-import HomeworkPage from './components/pages/main/HomeworkPage/HomeworkPage';
-import ExamsPage from './components/pages/main/ExamsPage/ExamsPage';
-import ClassSettings from './components/pages/class/ClassSettingsPage/ClassSettings';
+import HomeworkPage from './components/pages/main/HomeworkPage';
+import ExamsPage from './components/pages/main/ExamsPage';
+import ClassSettings from './components/pages/class/ClassSettings';
 import LoginOptionsPage from './components/pages/user/LoginOptionsPage';
 import DeleteAccountPage from './components/pages/user/DeleteAccountPage';
 import AddHomeworkPage from './components/pages/class-content/AddHomeworkPage';
 import AddExamPage from './components/pages/class-content/AddExamPage';
-import ClassJoinPage from './components/pages/class/ClassJoinPage/ClassJoinPage';
-import ClassCreatePage from './components/pages/class/ClassCreatePage/ClassCreatePage';
+import ClassJoinPage from './components/pages/class/ClassJoinPage';
+import ClassCreatePage from './components/pages/class/ClassCreatePage';
 import InspectExamPage from './components/pages/class-content/InspectExamPage';
 import InspectHomeworkPage from './components/pages/class-content/InspectHomeworkPage';
 
