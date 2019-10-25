@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
-import FirebaseHandler from '../../../../utils/FirebaseHandler'
-import Routes from '../../../../constants/routes'
+import FirebaseHandler from '../../../utils/FirebaseHandler'
+import Routes from '../../../constants/routes'
 import { Spring } from 'react-spring/renderprops'
 
 // Components
-import MainPageLayout from '../../../layout/MainPageLayout'
-import AppPopup from '../../../AppPopup/AppPopup'
-import AppButton from '../../../AppButton/AppButton'
-import AppDivider from '../../../AppDivider'
-import LoadingSpinner from '../../../LoadingSpinner'
-import AppCardClassContent from '../../../AppCard/AppCardClassContent'
+import MainPageLayout from '../../layout/MainPageLayout'
+import AppPopup from '../../AppPopup/AppPopup'
+import AppButton from '../../AppButton/AppButton'
+import AppDivider from '../../AppDivider'
+import LoadingSpinner from '../../LoadingSpinner'
+import AppCardClassContent from '../../AppCard/AppCardClassContent'
 
 export class ExamsPage extends Component {
   state = {
