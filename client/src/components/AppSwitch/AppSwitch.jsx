@@ -7,10 +7,9 @@ export class AppSwitch extends Component {
   }
 
   onCheckedChanged = (event) => {
-    this.setState({
-      checked: event.target.checked
+    this.setState({ checked: event.target.checked }, () => {
+      this.props.onCheckedChanged(this.state.checked);
     });
-    this.props.onCheckedChanged(this.state.checked);
   }
 
   render() {
