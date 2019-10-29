@@ -11,7 +11,6 @@ import AppButton from '../../AppButton/AppButton'
 import AppCard from '../../AppCard/AppCard'
 import AppTitle from '../../AppTitle'
 import AppSubtitle from '../../AppSubtitle'
-import AppSwitch from '../../AppSwitch/AppSwitch'
 
 export class HomePage extends Component {
   state = {
