@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
 import { BrowserRouter as Router } from 'react-router-dom'
 import Routes from '../../../constants/routes'
+import AppColours from '../../../constants/appColors'
 
 // Components
 import LoadingSpinner from '../../LoadingSpinner'
@@ -13,6 +14,7 @@ import AppCardButtonContainer from '../../AppCard/AppCardButtonContainer'
 import AppMenuButton from '../../AppButton/AppMenuButton'
 import AppCardUserClass from '../../AppCard/AppCardUserClass'
 import MainPageLayout from '../../layout/MainPageLayout'
+import AppSwitch from '../../AppSwitch/AppSwitch'
 
 export class UserPage extends Component {
   state = {
@@ -41,6 +43,9 @@ export class UserPage extends Component {
           <div>
             <UserProfileHeader photo={this.state.clientInfo.photo} name={this.state.clientInfo.name} />
             <AppButton type="warning" text="Kijelentkezés" onClick={this.logout} />
+            <AppDivider/>
+            <AppSwitch text="Sötét mód" onCheckedChanged={(checked) => {AppColours.setDarkModeEnabled(checked)}}
+            checked={AppColours.getDarkModeEnabled()} />
             <AppDivider/>
             <AppCardButtonContainer>
               <AppMenuButton text="Bejelentkezési adatok" onClick={() => {this.props.history.push(Routes.LOGIN_OPTIONS)}} />
