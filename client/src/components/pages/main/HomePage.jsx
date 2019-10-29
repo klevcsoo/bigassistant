@@ -84,12 +84,12 @@ export class HomePage extends Component {
         <p style={{
           margin: 10,
           textAlign: 'center',
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: 400,
           color: AppColours.WARNING_DARK
         }}>
-          Az alábbi két gomb használata nem biztos, hogy a várt eredmény hozza,
-          ha már tagja vagy egy osztálynak!
+          The functions below are experimental, and are under testing. They may not work
+          as you would expect them to. Use them at your own risk!
         </p>
         <AppButton text="Join class" onClick={() => {this.props.history.push(Routes.CLASS_JOIN)}} />
         <AppButton text="Create class" onClick={() => {this.props.history.push(Routes.CLASS_CREATE)}} />
