@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Link } from 'react-router-dom'
-import Routes from '../../../../constants/routes'
 import FirebaseHandler from '../../../../utils/FirebaseHandler'
 import './LoginPage.css'
 
@@ -8,9 +6,9 @@ import './LoginPage.css'
 import AppPopup from '../../../AppPopup/AppPopup'
 import AppTitle from '../../../AppTitle'
 import AppButton from '../../../AppButton/AppButton'
-import AppDivider from '../../../AppDivider'
 import LoadingSpinner from '../../../LoadingSpinner'
 import AuthContinue from './AuthContinue'
+import AppColours from '../../../../constants/appColors'
 
 export class LoginPage extends Component {
   state = {
@@ -79,11 +77,8 @@ export class LoginPage extends Component {
       <React.Fragment>
         {this.state.popupVisible ? <AppPopup message={this.state.popupMessage} onClose={this.hidePopup} /> : null }
 
-        <div className="login-main-container">
-          {/* <div className="login-background-mask"></div> */}
-          <div>
-            {this.createBackground()}
-          </div>
+        <div className="login-main-container" style={{ backgroundColor: AppColours.BACKGROUND }}>
+          <div>{this.createBackground()}</div>
           <div className="login-methods-container">
               <AppTitle text="BIGAssistant" />
               {this.state.authLoading ? <LoadingSpinner static /> :
@@ -95,10 +90,6 @@ export class LoginPage extends Component {
                   </React.Fragment>
                 )
               }
-          </div>
-          <div className="login-information-container">
-              <AppDivider/>
-              <Router><Link to={Routes.ABOUT}><h1>Információ</h1></Link></Router>
           </div>
       </div>
       </React.Fragment>
