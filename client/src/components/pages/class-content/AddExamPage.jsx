@@ -104,7 +104,7 @@ export class AddExamPage extends Component {
             <div style={{
               width: 'fit-content',
               margin: '5px auto',
-              color: AppColours.HOMEWORK
+              filter: `invert(${AppColours.getDarkModeEnabled() ? '1' : '0'})`
             }}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <DatePicker margin="normal" label="Dolgozat dátuma" format="yyyy. MMMM dd."
