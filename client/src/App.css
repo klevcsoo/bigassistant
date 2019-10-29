@@ -3,12 +3,12 @@
   --colour-app-dark: #616161;
   --colour-app-shadow: #00000029;
 
+  --colour-app-background: #ffffff;
+  --colour-app-text: #000000;
+
   --colour-app-main: #32A5FC;
-  /* --colour-app-main: linear-gradient(135deg, #05C7F2, #11E960); */
   --colour-app-homework: #1EE26C;
-  /* --colour-app-homework: linear-gradient(135deg, #F2167D, #32A5FC); */
   --colour-app-exam: #FD514C;
-  /* --colour-app-exam: linear-gradient(135deg, #F2C641, #F17828); */
 
   --colour-facebook: #1778F2;
   --colour-facebook-dark: #0c3b75;
@@ -24,8 +24,8 @@ body {
   margin: 0; padding: 0;
   overflow-x: hidden;
 
-  background: #ffffff;
-  color: #000000;
+  background: var(--colour-app-background);
+  color: var(--colour-app-text);
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
 }

@@ -55,6 +55,7 @@ h1.app-card-group-title {
 .app-card-class-content > p {
   margin: 0 0 5px 0; padding: 0;
 
+  color: var(--colour-app-background);
   text-align: left;
   font-size: 18px;
   font-weight: 300;

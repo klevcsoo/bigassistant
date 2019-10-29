@@ -5,7 +5,7 @@ input.app-input {
   display: block; margin: 5px auto 5px auto;
   padding-left: 15px; padding-right: 15px;
 
-  color: #000000;
+  color: var(--colour-app-text);
   background: var(--colour-app-light);
   border: none;
   border-radius: 20px;

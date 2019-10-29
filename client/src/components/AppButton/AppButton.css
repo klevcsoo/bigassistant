@@ -5,7 +5,7 @@
   display: block;
   margin: 5px auto 5px auto; padding: 0 15px 0 15px;
 
-  color: #000000;
+  color: var(--colour-app-text);
   background: var(--colour-app-light);
   border: none;
   border-radius: 20px;
@@ -13,11 +13,11 @@
   cursor: pointer;
 }
 .app-button:hover {
-  color: #ffffff;
+  color: var(--colour-app-background);
 }
 .app-button:active {
   background: var(--colour-app-dark);
-  color: #ffffff;
+  color: var(--colour-app-background);
 }
 .app-button:disabled {
   opacity: 70%;
@@ -35,14 +35,14 @@
 }
 
 .app-button-warning {
-  background: #ffffff !important;
+  background: transparent !important;
   border: 1px solid var(--colour-warning-light) !important;
 }
 .app-button-warning:hover {
   background: var(--colour-app-light);
 }
 .app-button-warning:active {
-  color: #ffffff;
+  color: var(--colour-app-background);
   background: var(--colour-warning-light);
 }
 
