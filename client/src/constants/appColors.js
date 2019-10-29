@@ -19,7 +19,6 @@ class AppColours {
 
   static getDarkModeEnabled = () => {
     let state = localStorage.getItem(darkModeKey) === 'true' ? true : false;
-    console.log('Dark mode:', state);
     return state;
   }
 
@@ -36,7 +35,6 @@ class AppColours {
     root.style.setProperty('--colour-app-text', this.TEXT);
 
     localStorage.setItem(darkModeKey, isEnabled);
-    console.log('Dark mode:', this.getDarkModeEnabled());
     if (!noReload) window.location.reload(false);
   }
 }
