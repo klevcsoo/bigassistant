@@ -93,8 +93,6 @@ export class HomePage extends Component {
         </p>
         <AppButton text="Join class" onClick={() => {this.props.history.push(Routes.CLASS_JOIN)}} />
         <AppButton text="Create class" onClick={() => {this.props.history.push(Routes.CLASS_CREATE)}} />
-        <AppSwitch text="Dark mode" onCheckedChanged={(checked) => {AppColours.setDarkModeEnabled(checked)}}
-        checked={AppColours.getDarkModeEnabled()} description="Toggles dark mode" />
         {/* ----------DEBUG---------- */}
       </MainPageLayout>
     )
