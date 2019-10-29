@@ -15,12 +15,14 @@ export class AppSwitch extends Component {
   render() {
     return (
       <div className="app-switch">
-        <h2>{this.props.text}</h2>
+        <h2 style={{
+          fontWeight: this.props.description ? 400 : 300
+        }}>{this.props.text}</h2>
         <label className="app-switch-label">
           <input type="checkbox" onChange={this.onCheckedChanged} className="app-switch-input" id="closed-class-switch" checked={this.state.checked} />
           <span className="app-switch-span noshadow"></span>
         </label>
-        <p>{this.props.description}</p>
+        {this.props.description ? (<p>{this.props.description}</p>) : null}
       </div>
     )
   }
