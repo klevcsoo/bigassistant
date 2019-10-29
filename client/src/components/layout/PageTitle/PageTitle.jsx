@@ -10,9 +10,10 @@ export class PageTitle extends Component {
   }
 
   render() {
-    let bgColor = this.props.type === 'exam' ? AppColours.EXAM : (
-      this.props.type === 'homework' ? AppColours.HOMEWORK : AppColours.MAIN
-    )
+    let bgColor = AppColours.getDarkModeEnabled() ? AppColours.LIGHT
+      : this.props.type === 'homework' ? AppColours.HOMEWORK
+      : this.props.type === 'exam' ? AppColours.EXAM
+      : AppColours.MAIN;
 
     return (
       <React.Fragment>
@@ -22,7 +23,7 @@ export class PageTitle extends Component {
         </Helmet>
         <div className="page-title-container" style={{ background: bgColor }}>
           {!this.props.noBackButton ? (
-            <button onClick={this.gotoLastPage}><ArrowBackRoundedIcon /></button>
+            <button onClick={this.gotoLastPage}><ArrowBackRoundedIcon style={{ fill: AppColours.TEXT }} /></button>
           ) : null}
           <h1 className="noselect">{this.props.title || "BIGAssistant"}</h1>
         </div>

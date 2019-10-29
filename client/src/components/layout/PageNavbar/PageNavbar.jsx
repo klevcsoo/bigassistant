@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './PageNavbar.css'
 import Routes from '../../../constants/routes'
+import AppColours from '../../../constants/appColors'
 
 // Icons
 import ClassIcon from '@material-ui/icons/PeopleRounded'
@@ -18,21 +19,23 @@ export class PageNavbar extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className="page-navbar-container">
+        <div className="page-navbar-container" style={{
+          backgroundColor: AppColours.getDarkModeEnabled() ? AppColours.LIGHT : AppColours.BACKGROUND
+        }}>
           <button className="icon" onClick={this.loadPage.bind(this, Routes.CLASS)}>
-            <ClassIcon className={this.props.active === 'class' ? 'active' : ''} />
+            <ClassIcon style={{ fill: this.props.active === 'class' ? AppColours.MAIN : AppColours.TEXT }} />
           </button>
           <button className="icon" onClick={this.loadPage.bind(this, Routes.HOMEWORK)}>
-            <HomeworkIcon className={this.props.active === 'homework' ? 'active' : ''} />
+            <HomeworkIcon style={{ fill: this.props.active === 'homework' ? AppColours.MAIN : AppColours.TEXT }} />
           </button>
           <button className="icon" onClick={this.loadPage.bind(this, Routes.HOME)}>
-            <HomeIcon className={this.props.active === 'home' ? 'active' : ''} />
+            <HomeIcon style={{ fill: this.props.active === 'home' ? AppColours.MAIN : AppColours.TEXT }} />
           </button>
           <button className="icon" onClick={this.loadPage.bind(this, Routes.EXAMS)}>
-            <ExamsIcon className={this.props.active === 'exams' ? 'active' : ''} />
+            <ExamsIcon style={{ fill: this.props.active === 'exams' ? AppColours.MAIN : AppColours.TEXT }} />
           </button>
           <button className="icon" onClick={this.loadPage.bind(this, Routes.USER)}>
-            <UserIcon className={this.props.active === 'user' ? 'active' : ''} />
+            <UserIcon style={{ fill: this.props.active === 'user' ? AppColours.MAIN : AppColours.TEXT }} />
           </button>
         </div>
       </React.Fragment>
