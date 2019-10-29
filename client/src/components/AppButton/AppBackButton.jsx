@@ -14,7 +14,7 @@ export class AppBackButton extends Component {
           background: AppColours.LIGHT
         }
       }} onClick={() => {setTimeout(() => {this.props.history.goBack()}, 200)}}>
-        <ArrowBackRoundedIcon />
+        <ArrowBackRoundedIcon style={{ fill: AppColours.TEXT }} />
       </button>
     )
   }

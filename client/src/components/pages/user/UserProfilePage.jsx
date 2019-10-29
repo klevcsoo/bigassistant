@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
 import Routes from '../../../constants/routes'
+import { Helmet } from 'react-helmet';
+import AppColours from '../../../constants/appColors';
 
 // Components
 import AppPopup from '../../AppPopup/AppPopup';
@@ -45,6 +47,9 @@ export class UserProfilePage extends Component {
   render() {
     return (
       <React.Fragment>
+        <Helmet>
+          <meta name="theme-color" content={AppColours.BACKGROUND} />
+        </Helmet>
         {this.state.popupVisible ? <AppPopup message={this.state.popupMessage} onClose={this.hidePopup} /> : null }
         <AppBackButton history={this.props.history} />
         <div style={{ height: 20 }}></div>

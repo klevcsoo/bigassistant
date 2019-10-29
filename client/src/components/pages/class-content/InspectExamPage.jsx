@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler';
 import LocalizationHandler from '../../../utils/LocalizationHandler';
+import { Helmet } from 'react-helmet';
 
 // Components
 import AppBackButton from '../../AppButton/AppBackButton';
@@ -46,6 +47,9 @@ export class InspectExamPage extends Component {
         boxSizing: 'border-box',
         borderBottom: `5px solid ${AppColours.EXAM}`
       }}>
+        <Helmet>
+          <meta name="theme-color" content={AppColours.BACKGROUND} />
+        </Helmet>
         <AppBackButton history={this.props.history} />
         <div style={{
           position: 'absolute',

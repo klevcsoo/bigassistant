@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
+import FirebaseHandler from '../../../utils/FirebaseHandler';
+import Routes from '../../../constants/routes';
+import AppColours from '../../../constants/appColors';
+import { Helmet } from 'react-helmet';
+
+// Components
 import AppTitle from '../../AppTitle';
 import AppInput from '../../AppInput/AppInput';
 import AppButton from '../../AppButton/AppButton';
 import LoadingSpinner from '../../LoadingSpinner';
-import FirebaseHandler from '../../../utils/FirebaseHandler';
-import Routes from '../../../constants/routes';
-import AppColours from '../../../constants/appColors';
 import AppBackButton from '../../AppButton/AppBackButton';
 
 export class ClassJoinPage extends Component {
@@ -28,6 +31,9 @@ export class ClassJoinPage extends Component {
   render() {
     return (
       <React.Fragment>
+        <Helmet>
+          <meta name="theme-color" content={AppColours.BACKGROUND} />
+        </Helmet>
         <AppBackButton history={this.props.history} />
         <div style={{
           width: 310,

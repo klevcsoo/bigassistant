@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AppColours from '../../../constants/appColors'
 import FirebaseHandler from '../../../utils/FirebaseHandler';
+import { Helmet } from 'react-helmet';
 
 // Components
 import AppTitle from '../../AppTitle'
@@ -38,6 +39,9 @@ export class DeleteAccountPage extends Component {
   render() {
     return (
       <React.Fragment>
+        <Helmet>
+          <meta name="theme-color" content={AppColours.BACKGROUND} />
+        </Helmet>
         {!this.state.popupVisible ? null : <AppPopup message={this.state.popupMessage} />}
         <AppBackButton history={this.props.history} />
         <div style={{
