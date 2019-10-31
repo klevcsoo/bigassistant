@@ -333,11 +333,27 @@ exports.whenExamAdded = functions.database.ref('/classes/{classId}/exams/{examId
                     console.log(`Failed to delete ${examSnapshot.ref.path}. Reason: ${err}`);
                 });
             }
-    
-            return false;
         });
-    }).catch((err) => {
-        console.log(err);
-    });
+    }).catch((err) => console.log(err));
+});
+
+exports.whenHomeworkAdded = functions.database.ref('/classes/{classId}/homework/{homeworkId}').onCreate((snapshot, context) => {
+    const deleteTime = 30/*days*/ * (24 * 3600 * 1000);
+
+    snapshot.ref.parent!.once('value').then((homeworkSnapshot) => {
+        homeworkSnapshot.forEach((hwSnapshot) => {
+            const date = Number(hwSnapshot.child('date').val());
+            const now = new Date().getTime();
+
+            console.log(`Testing ${hwSnapshot.ref.path}...`);
+            if (now - date >= deleteTime) {
+                hwSnapshot.ref.remove().then(() => {
+                    console.log(`${hwSnapshot.ref.path} deleted.`);
+                }).catch((err) => {
+                    console.log(`Failed to delete ${hwSnapshot.ref.path}. Reason: ${err}`);
+                });
+            }
+        });
+    }).catch((err) => console.log(err));
 });
 // ---------- CLOUD FUNCTION TRIGGERS ----------
