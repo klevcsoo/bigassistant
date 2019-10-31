@@ -316,4 +316,28 @@ exports.whenUserCreated = functions.auth.user().onCreate(async (user, context) =
 exports.whenUserDeleted = functions.auth.user().onDelete(async (user, context) => {
     return admin.database().ref(`/user/${user.uid}`).remove();
 });
+
+exports.whenExamAdded = functions.database.ref('/classes/{classId}/exams/{examId}').onCreate((snapshot, context) => {
+    const deleteTime = 30/*days*/ * (24 * 3600 * 1000);
+
+    snapshot.ref.parent!.once('value').then((examsSnapshot) => {
+        examsSnapshot.forEach((examSnapshot) => {
+            const date = Number(examSnapshot.child('date').val());
+            const now = new Date().getTime();
+    
+            console.log(`Testing ${examSnapshot.ref.path}...`);
+            if (now - date >= deleteTime) {
+                examSnapshot.ref.remove().then(() => {
+                    console.log(`${examSnapshot.ref.path} deleted.`);
+                }).catch((err) => {
+                    console.log(`Failed to delete ${examSnapshot.ref.path}. Reason: ${err}`);
+                });
+            }
+    
+            return false;
+        });
+    }).catch((err) => {
+        console.log(err);
+    });
+});
 // ---------- CLOUD FUNCTION TRIGGERS ----------
