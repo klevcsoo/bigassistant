@@ -168,8 +168,6 @@ exports.leaveClass = functions.https.onCall(async (data, context) => {
     return {classId: classId};
 });
 
-// TODO: Delete class function
-
 exports.addSubjectToClass = functions.https.onCall(async (data, context) => {
     if (context.auth === undefined) {
         throw new functions.https.HttpsError('unauthenticated', 'User is not authenticated');
@@ -326,6 +324,33 @@ exports.getUserInfo = functions.https.onCall(async (data, context) => {
         facebookId: user.providerData[0].providerId === 'facebook.com' ? user.providerData[0].uid : undefined,
         joinedAt: utils.formatDate(joinedSnapshot.val())
     }
+});
+
+exports.getClassPreview = functions.https.onCall(async (data, context) => {
+    if (context.auth === undefined) {
+        throw new functions.https.HttpsError('unauthenticated', 'User is not authenticated');
+    }
+
+    const code = data.inviteCode;
+    if (!code) {
+        throw new functions.https.HttpsError('invalid-argument', 'No invite code provided');
+    }
+
+    const classId = await admin.database().ref(`/classInvites/${code}`).once('value').catch((err) => {
+        throw new functions.https.HttpsError('internal', err);
+    });
+    if (!classId) {
+        throw new functions.https.HttpsError('invalid-argument', 'Invite code is not attached to any class');
+    }
+
+    const classSnapshot = await admin.database().ref(`/classes/${classId}/metadata`).once('value').catch((err) => {
+        throw new functions.https.HttpsError('internal', err);
+    });
+
+    return {
+        name: classSnapshot.child('name').val(),
+        photo: classSnapshot.child('pictureUrl').val()
+    };
 });
 // ---------- CLOUD FUNCTION CALLABLES ----------
 
