@@ -102,6 +102,9 @@ exports.leaveClass = functions.https.onCall(async (data, context) => {
         throw new functions.https.HttpsError('failed-precondition', 'User has no class');
     }
 
+    // If present, the user with data.uid will be removed of the invoking user is an admin
+    const userToRemove = data.uid;
+
     console.log(`Leaving class with id ${classId}`);
 
     const classSnapshot = await admin.database().ref(`/classes/${classId}`).once('value').catch((error) => {
@@ -109,6 +112,26 @@ exports.leaveClass = functions.https.onCall(async (data, context) => {
     });
 
     if (isAdmin) {
+        if (userToRemove) {
+            console.log(`Removing ${userToRemove} from their class`);
+
+            admin.auth().setCustomUserClaims(userToRemove.uid, {}).catch((error) => {
+                throw new functions.https.HttpsError('unknown', error);
+            });
+    
+            classSnapshot.child('members/').ref.once('value').then((snapshot) => {
+                snapshot.forEach((child) => {
+                    if (child.val() === userToRemove.uid) {
+                        child.ref.remove().catch((error) => {
+                            throw new functions.https.HttpsError('unknown', error);
+                        });
+                    }
+                });
+            }).catch((error) => {
+                throw new functions.https.HttpsError('unknown', error);
+            });
+        }
+
         classSnapshot.child(`members`).forEach((memberSnapshot) => {
             const memberId = memberSnapshot.val();
             console.log(`Removing claims of user with id ${memberId}`);
