@@ -9,6 +9,7 @@ import AppButton from '../../../AppButton/AppButton'
 import LoadingSpinner from '../../../LoadingSpinner'
 import AuthContinue from './AuthContinue'
 import AppColours from '../../../../constants/appColors'
+import { Helmet } from 'react-helmet';
 
 export class LoginPage extends Component {
   state = {
@@ -75,6 +76,9 @@ export class LoginPage extends Component {
   render() {
     return (
       <React.Fragment>
+        <Helmet>
+          <meta name="theme-color" content={AppColours.BACKGROUND} />
+        </Helmet>
         {this.state.popupVisible ? <AppPopup message={this.state.popupMessage} onClose={this.hidePopup} /> : null }
 
         <div className="login-main-container" style={{ backgroundColor: AppColours.BACKGROUND }}>
