@@ -18,11 +18,15 @@ export class ClassPage extends Component {
     popupMessage: '',
     clientInfo: null,
     classmates: [],
-    inviteCode: null
+    inviteCode: null,
+    leavingClass: false
   }
 
-  handleClassmateClick = (uid) => {
-    this.props.history.push(`${Routes.USER}/${uid}`);
+  leaveClass = () => {
+    this.setState({ leavingClass: true });
+    FirebaseHandler.callFunction('leaveClass', {}).then(() => {
+      this.props.history.push(Routes.HOME);
+    });
   }
 
   componentDidMount() {
@@ -83,7 +87,11 @@ export class ClassPage extends Component {
             </div>
             <AppDivider/>
             <AppButton type="highlight" text="Órarend" />
-            <AppButton text="Osztály beállítások" onClick={() => {this.props.history.push(Routes.CLASS_SETTINGS)}} />
+            {this.state.clientInfo.classRank === 'admin' ? (
+              <AppButton text="Osztály beállítások" onClick={() => {this.props.history.push(Routes.CLASS_SETTINGS)}} />
+            ) : this.state.leavingClass ? <LoadingSpinner /> : (
+              <AppButton type="warning" text="Kilépés az osztályból" onClick={this.leaveClass} />
+            )}
             <AppDivider />
             <AppSubtitle text="Osztály tagjai:" />
             {this.state.classmates.length === 0 ? <LoadingSpinner/> : (
@@ -92,7 +100,9 @@ export class ClassPage extends Component {
                   <Spring from={{ opacity: 0 }} to={{ opacity: 1 }} key={classmate.uid}>
                     {(props) => (
                       <div style={props}>
-                        <AppUserButton {...classmate} onClick={this.handleClassmateClick.bind(this, classmate.uid)} />
+                        <AppUserButton {...classmate} onClick={() => {
+                          this.props.history.push(`${Routes.USER}/${classmate.uid}`)
+                        }} />
                       </div>
                     )}
                   </Spring>
