@@ -343,7 +343,7 @@ exports.getClassPreview = functions.https.onCall(async (data, context) => {
         throw new functions.https.HttpsError('invalid-argument', 'Invite code is not attached to any class');
     }
 
-    const classSnapshot = await admin.database().ref(`/classes/${classId}/metadata`).once('value').catch((err) => {
+    const classSnapshot = await admin.database().ref(`/classes/${classId.val()}/metadata`).once('value').catch((err) => {
         throw new functions.https.HttpsError('internal', err);
     });
 
