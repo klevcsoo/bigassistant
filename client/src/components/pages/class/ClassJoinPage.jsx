@@ -10,7 +10,7 @@ import AppInput from '../../AppInput/AppInput';
 import AppButton from '../../AppButton/AppButton';
 import LoadingSpinner from '../../LoadingSpinner';
 import AppBackButton from '../../AppButton/AppBackButton';
-import { UserProfileHeader } from './../../layout/UserProfileHeader';
+import UserProfileHeader from './../../layout/UserProfileHeader';
 
 export class ClassJoinPage extends Component {
   state = {

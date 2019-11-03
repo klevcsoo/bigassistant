@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './AppInput.css'
 
-const AppInput = ({ text, placeholder, style, maxLength, onTextChanged }) => {
+const AppInput = ({ text, placeholder, style, maxLength, onTextChanged, reference }) => {
   const [ value, setValue ] = useState(text)
 
   return (
@@ -10,7 +10,7 @@ const AppInput = ({ text, placeholder, style, maxLength, onTextChanged }) => {
     onChange={(e) => {
       setValue(e.target.value)
       if (onTextChanged) onTextChanged(e.target.value)
-    }} style={style} />
+    }} style={style} ref={reference} />
   )
 }
 

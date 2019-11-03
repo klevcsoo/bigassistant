@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './AboutPage.css'
 import AppColours from '../../../constants/appColors'
 import { version } from '../../../constants/appInfo'
@@ -11,21 +11,11 @@ import AppMenuButton from '../../AppButton/AppMenuButton'
 import AppDivider from '../../AppDivider'
 import AboutSocialMediaButtons from './AboutSocialMediaButtons'
 
-export class AboutPage extends Component {
-  state = {
-    popupVisible: false,
-    popupMessage: ''
-  }
-
-  openConsole = () => {
-    this.props.history.push('/admin-console');
-  }
-
-  render() {
-    return (
+const AboutPage = ({ history }) => {
+  return (
+    <div>
       <React.Fragment>
-        {this.state.popupVisible ? <AppPopup message={this.state.popupMessage} onClose={this.hidePopup} /> : null }
-        <PageTitle title="Információ" history={this.props.history} />
+        <PageTitle title="Információ" history={history} />
         <div>
           <ParallaxHeaderImage src="https://graph.facebook.com/172915553841122/picture?height=500" />
           <div style={{ height: '80vw' }}></div>
@@ -44,12 +34,12 @@ export class AboutPage extends Component {
             }}>Ez az ember csinálta vagymi</h2>
           </div>
           <div style={{ margin: '20px' }}>
-            <AppMenuButton text="Facebookja amugy" facebook onClick={this.openFacebook} />
+            <AppMenuButton text="Facebookja amugy" facebook />
           </div>
           <AppDivider/>
           <AboutSocialMediaButtons/>
           <AppDivider/>
-          <AppMenuButton text="Szuper titkos konzol" onClick={this.openConsole} />
+          <AppMenuButton text="Szuper titkos konzol" />
           <AppDivider/>
           <p style={{
             color: AppColours.appColorDark,
@@ -59,8 +49,8 @@ export class AboutPage extends Component {
           }}>BIGAssistant {version}</p>
         </div>
       </React.Fragment>
-    )
-  }
+    </div>
+  )
 }
 
 export default AboutPage

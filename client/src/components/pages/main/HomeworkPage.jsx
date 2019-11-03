@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Routes from '../../../constants/routes'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
 import { Spring } from 'react-spring/renderprops'
+import { useClassContent } from '../../../utils/AppHooks'
 
 // Components
 import MainPageLayout from '../../layout/MainPageLayout'
@@ -11,63 +12,31 @@ import AppDivider from '../../AppDivider'
 import AppCardClassContent from '../../AppCard/AppCardClassContent'
 import LoadingSpinner from '../../LoadingSpinner'
 
-export class HomeworkPage extends Component {
-  state = {
-    popupVisible: false,
-    popupMessage: '',
-    homework: [],
-    classId: null
-  }
+const HomeworkPage = ({ history }) => {
+  const homework = useClassContent('homework')
 
-  componentDidMount() {
-    FirebaseHandler.getClientInfo((result) => {
-      let classId = result.classId;
-      FirebaseHandler.readDataContinuously(`/classes/${classId}/homework`, (snapshot) => {
-        this.setState({ homework: [ null ], classId: classId });
-        snapshot.forEach((homeworkSnapshot) => {
-          let hw = homeworkSnapshot.val();
-          hw.id = homeworkSnapshot.key;
-          this.setState((state) => {
-            let updatedState = state;
-            updatedState.homework.push(hw);
-            return updatedState;
-          });
-        });
-      });
-    });
-  }
-
-  componentWillUnmount() {
-    if (this.state.classId) {
-      FirebaseHandler.removeDataListener(`/classes/${this.state.classId}/homework`);
-    } else console.log('No listener attached.');
-  }
-
-  render() {
-    return (
-      <MainPageLayout pageTitle="Házi feladat" pageActive="homework" history={this.props.history}>
-        {this.state.popupVisible ? <AppPopup message={this.state.popupMessage} onClose={this.hidePopup} /> : null }
-        <AppButton text="Hozzáadás" onClick={() => {this.props.history.push(Routes.HOMEWORK_ADD)}} />
-        <AppDivider />
-        <div>
-          {this.state.homework.length === 0 ? <LoadingSpinner /> : null}
-          {this.state.homework.map((hw) => {
-            if (hw) return (
-              <Spring from={{ opacity: 0 }} to={{ opacity: 1 }} key={hw.id}>
-                {(props) => (
-                  <div style={props}>
-                    <AppCardClassContent type="homework" {...hw} onOpen={() => {
-                      this.props.history.push(`${Routes.HOMEWORK}/${hw.id}`)
-                    }} />
-                  </div>
-                )}
-              </Spring>
-            ); else return null;
-          })}
-        </div>
-      </MainPageLayout>
-    )
-  }
+  return (
+    <MainPageLayout pageTitle="Házi feladat" pageActive="homework" history={history}>
+      <AppButton text="Hozzáadás" onClick={() => {history.push(Routes.HOMEWORK_ADD)}} />
+      <AppDivider />
+      <div>
+        {homework.length === 0 ? <LoadingSpinner /> : null}
+        {homework.map((hw) => {
+          if (hw) return (
+            <Spring from={{ opacity: 0 }} to={{ opacity: 1 }} key={hw.id}>
+              {(props) => (
+                <div style={props}>
+                  <AppCardClassContent type="homework" {...hw} onOpen={() => {
+                    history.push(`${Routes.HOMEWORK}/${hw.id}`)
+                  }} />
+                </div>
+              )}
+            </Spring>
+          ); else return null;
+        })}
+      </div>
+    </MainPageLayout>
+  )
 }
 
 export default HomeworkPage

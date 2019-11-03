@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import AppColours from '../../../constants/appColors'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
+import { defaultClassPhoto } from '../../../constants/appInfo'
 
 // Components
 import SaveablePageLayout from '../../layout/SaveablePageLayout'
@@ -11,89 +12,64 @@ import AppSwitch from '../../AppSwitch/AppSwitch'
 import LoadingSpinner from '../../LoadingSpinner'
 import AppPopup from '../../AppPopup/AppPopup'
 
-export class ClassCreatePage extends Component {
-  state = {
-    classInfo: {
-      name: 'Osztály',
-      photo: 'https://firebasestorage.googleapis.com/v0/b/bigassistant.appspot.com/o/default-class-photo.png?alt=media&token=afd84e32-c0f6-4563-be8b-b326d3099972',
-      closed: false
-    },
-    addingClass: false,
-    addedClass: false,
-    popupVisible: false,
-    popupMessage: ''
-  }
+const ClassCreatePage = ({ history }) => {
+  const [ classInfo, setClassInfo ] = useState({ name: 'Osztály', photo: defaultClassPhoto, closed: false })
+  const [ popup, setPopup ] = useState({ visible: false, message: '' })
+  const [ addingClass, setAddingClass ] = useState(false)
+  const [ addedClass, setAddedClass ] = useState(false)
 
-  displayPopup = (message) => {
-    this.setState({
-      popupMessage: message,
-      popupVisible: true
-    })
+  const displayPopup = (message) => {
+    setPopup({ visible: true, message: message })
   }
-  closePopup = () => {
-    if (this.state.addedClass) this.props.history.goBack();
+  const closePopup = () => {
+    if (addedClass) history.goBack()
     else {
-      this.setState({
-        popupVisible: false,
-        popupMessage: '',
-        addedClass: false
-      });
+      setPopup({ visible: false, message: '' })
+      setAddedClass(false)
     }
   }
 
-  createClass = () => {
-    this.setState({ addingClass: true });
-    FirebaseHandler.callFunction('joinClass', this.state.classInfo).then(() => {
-      this.setState({ addedClass: true }, () => {
-        this.displayPopup('Osztály létrehozva!');
-      });
+  const createClass = () => {
+    setAddingClass(true)
+    FirebaseHandler.callFunction('joinClass', classInfo).then(() => {
+      setAddedClass(true)
+      displayPopup('Osztály létrehozva!')
     }).catch((err) => {
       console.log(err);
-      this.displayPopup(`Sikertelen létrehozás! Hibaüzenet: ${err}`);
-    });
+      displayPopup(`Sikertelen létrehozás! Hibaüzenet: ${err}`)
+    })
   }
 
-  render() {
-    return (
-      <SaveablePageLayout pageTitle="Osztály létrehozása" buttonText="Létrehozás"
-      history={this.props.history} onSave={this.createClass}>
-        {!this.state.addingClass ? null : (
-          <div style={{
-            position: 'fixed',
-            top: 0, left: 0, bottom: 0, right: 0,
-            zIndex: 90,
-            background: AppColours.SHADOW
-          }}><div style={{
-            position: 'fixed',
-            top: '50%', left: '50%',
-            transform: 'translate(-50%, -50%)'
-          }}><LoadingSpinner /></div></div>
-        )}
-        {this.state.popupVisible ? <AppPopup message={this.state.popupMessage} onClose={this.closePopup} /> : null}
-        <UserProfileHeader {...this.state.classInfo} />
-        <AppDivider />
-        <AppInput placeholder="Osztály neve" text={this.state.classInfo.name} onTextChanged={(text) => {
-          this.setState((state) => {
-            state.classInfo.name = text || 'Osztály';
-            return state;
-          })
-        }} maxLength={20} />
-        <AppSwitch text="Zárt osztály" description="Meghívókód használatával is engedély kell a csatlakozáshoz."
-        checked={this.state.classInfo.closed} onCheckedChanged={(checked) => {
-          this.setState((state) => {
-            state.classInfo.closed = checked;
-            return state;
-          })
-        }} />
-        <AppInput placeholder="Kép link" text={this.state.classInfo.photo} onTextChanged={(text) => {
-          this.setState((state) => {
-            state.classInfo.photo = text;
-            return state;
-          })
-        }} />
-      </SaveablePageLayout>
-    )
-  }
+  return (
+    <SaveablePageLayout pageTitle="Osztály létrehozása" buttonText="Létrehozás"
+    history={history} onSave={createClass}>
+      {!addingClass ? null : (
+        <div style={{
+          position: 'fixed',
+          top: 0, left: 0, bottom: 0, right: 0,
+          zIndex: 90,
+          background: AppColours.SHADOW
+        }}><div style={{
+          position: 'fixed',
+          top: '50%', left: '50%',
+          transform: 'translate(-50%, -50%)'
+        }}><LoadingSpinner /></div></div>
+      )}
+      {popup.visible ? <AppPopup message={popup.message} onClose={closePopup} /> : null}
+      <UserProfileHeader {...classInfo} />
+      <AppDivider />
+      <AppInput placeholder="Osztály neve" text={classInfo.name} onTextChanged={(text) => {
+        setClassInfo((prevClassInfo) => { return { ...prevClassInfo, name: text } })
+      }} maxLength={20} />
+      <AppSwitch text="Zárt osztály" description="Meghívókód használatával is engedély kell a csatlakozáshoz."
+      checked={classInfo.closed} onCheckedChanged={(checked) => {
+        setClassInfo((prevClassInfo) => { return { ...prevClassInfo, closed: checked } })
+      }} />
+      <AppInput placeholder="Kép link" text={classInfo.photo} onTextChanged={(text) => {
+        setClassInfo((prevClassInfo) => { return { ...prevClassInfo, photo: text } })
+      }} />
+    </SaveablePageLayout>
+  )
 }
 
 export default ClassCreatePage

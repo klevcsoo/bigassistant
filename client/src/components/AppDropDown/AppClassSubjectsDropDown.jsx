@@ -10,6 +10,7 @@ const AppClassSubjectsDropDown = ({ onSubjectChoosen }) => {
     FirebaseHandler.getClientInfo((result) => {
       let classId = result.classId;
       FirebaseHandler.readData(`/classes/${classId}/metadata/subjects`, (snapshot) => {
+        if (!snapshot.exists()) { setSubjects([ '🤔' ]); return }
         snapshot.forEach((subjectSnapshot) => {
           setSubjects((currentSubjects) => [...currentSubjects, subjectSnapshot.val()])
         })
