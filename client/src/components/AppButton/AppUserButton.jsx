@@ -1,17 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './AppButton.css'
 
-export class AppUserButton extends Component {
-  render() {
-    return (
-      <button type="button" className="app-button app-button-classmate" onClick={() => {setTimeout(this.props.onClick, 200)}}>
-        <div>
-          <img src={this.props.photo} alt="Profilkép"/>
-          <h2>{this.props.name}</h2>
-        </div>
-      </button>
-    )
-  }
+const AppUserButton = ({ onClick, name, photo }) => {
+  return (
+    <button type="button" className="app-button app-button-classmate" onClick={() => {setTimeout(onClick, 200)}}>
+      <div>
+        <img src={photo} alt="Profilkép"/>
+        <h2>{name}</h2>
+      </div>
+    </button>
+  )
 }
 
 export default AppUserButton

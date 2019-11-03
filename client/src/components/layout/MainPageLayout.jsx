@@ -1,27 +1,27 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import FirebaseHandler from '../../utils/FirebaseHandler'
 import Routes from '../../constants/routes'
+
+// Components
 import PageTitle from './PageTitle/PageTitle';
 import PageNavbar from './PageNavbar/PageNavbar';
 
-export class MainPageLayout extends Component {
-  componentDidMount() {
+const MainPageLayout = ({ pageTitle, pageActive, history, children }) => {
+  useEffect(() => {
     FirebaseHandler.getApp().auth().onAuthStateChanged((user) => {
-      if (!user) this.props.history.push(Routes.LOGIN);
-    });
-  }
+      if (!user) history.push(Routes.LOGIN)
+    })
+  }, [])
 
-  render() {
-    return (
-      <React.Fragment>
-        <PageTitle title={this.props.pageTitle} history={this.props.history}
-          noBackButton={this.props.pageActive === 'home'} />
-        <PageNavbar active={this.props.pageActive} history={this.props.history} />
-        {this.props.children}
-        <div style={{ height: 80 }}></div>
-      </React.Fragment>
-    )
-  }
+  return (
+    <React.Fragment>
+      <PageTitle title={pageTitle} history={history}
+        noBackButton={pageActive === 'home'} />
+      <PageNavbar active={pageActive} history={history} />
+      {children}
+      <div style={{ height: 80 }}></div>
+    </React.Fragment>
+  )
 }
 
 export default MainPageLayout

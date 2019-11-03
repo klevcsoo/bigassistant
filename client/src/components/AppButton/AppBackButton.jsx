@@ -1,23 +1,22 @@
-import React, { Component } from 'react'
-import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
-import AppColours from '../../constants/appColors';
+import React from 'react'
+import AppColours from './../../constants/appColors'
+import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded'
 
-export class AppBackButton extends Component {
-  render() {
-    return (
-      <button style={{
-        width: 50, height: 50,
-        background: 'transparent',
-        border: 'none',
-        zIndex: 200,
-        '&:active': {
-          background: AppColours.LIGHT
-        }
-      }} onClick={() => {setTimeout(() => {this.props.history.goBack()}, 200)}}>
-        <ArrowBackRoundedIcon style={{ fill: AppColours.TEXT }} />
-      </button>
-    )
-  }
+
+const AppBackButton = ({ history }) => {
+  return (
+    <button style={{
+      width: 50, height: 50,
+      background: 'transparent',
+      border: 'none',
+      zIndex: 200,
+      '&:active': {
+        background: AppColours.LIGHT
+      }
+    }} onClick={() => {setTimeout(() => {history.goBack()}, 200)}}>
+      <ArrowBackRoundedIcon style={{ fill: AppColours.TEXT }} />
+    </button>
+  )
 }
 
 export default AppBackButton

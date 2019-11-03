@@ -1,18 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './AppPopup.css'
 import AppButton from '../AppButton/AppButton'
 
-export class AppPopup extends Component {
-  render() {
-    return (
-      <div className="app-popup">
-        <div>
-          <p>{this.props.message}</p>
-          <AppButton type="highlight" text="OK" onClick={this.props.onClose} />
-        </div>
+const AppPopup = ({ message, onClose }) => {
+  return (
+    <div className="app-popup">
+      <div>
+        <p>{message}</p>
+        <AppButton type="highlight" text="OK" onClick={onClose} />
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default AppPopup

@@ -1,14 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './AppCard.css'
 
-export class AppCardButtonContainer extends Component {
-  render() {
-    return (
-      <div className="app-card app-card-button-container">
-        {this.props.children}
-      </div>
-    )
-  }
+const AppCardButtonContainer = ({ children }) => {
+  return (
+    <div className="app-card app-card-button-container">
+      {children}
+    </div>
+  )
 }
 
 export default AppCardButtonContainer

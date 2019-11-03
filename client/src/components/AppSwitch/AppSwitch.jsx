@@ -1,31 +1,24 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import './AppSwitch.css'
 
-export class AppSwitch extends Component {
-  state = {
-    checked: this.props.checked
-  }
+const AppSwitch = ({ checked, text, description, onCheckedChanged }) => {
+  const [ checkedState, setCheckedState ] = useState(checked)
 
-  onCheckedChanged = (event) => {
-    this.setState({ checked: event.target.checked }, () => {
-      this.props.onCheckedChanged(this.state.checked);
-    });
-  }
-
-  render() {
-    return (
-      <div className="app-switch">
-        <h2 style={{
-          fontWeight: this.props.description ? 400 : 300
-        }}>{this.props.text}</h2>
-        <label className="app-switch-label">
-          <input type="checkbox" onChange={this.onCheckedChanged} className="app-switch-input" id="closed-class-switch" checked={this.state.checked} />
-          <span className="app-switch-span noshadow"></span>
-        </label>
-        {this.props.description ? (<p>{this.props.description}</p>) : null}
-      </div>
-    )
-  }
+  return (
+    <div className="app-switch">
+      <h2 style={{
+        fontWeight: description ? 400 : 300
+      }}>{text}</h2>
+      <label className="app-switch-label">
+        <input type="checkbox" onChange={(e) => {
+          setCheckedState(e.target.checked)
+          if (onCheckedChanged) onCheckedChanged(e.target.checked)
+        }} className="app-switch-input" id="closed-class-switch" checked={checkedState} />
+        <span className="app-switch-span noshadow"></span>
+      </label>
+      {description ? (<p>{description}</p>) : null}
+    </div>
+  )
 }
 
 export default AppSwitch

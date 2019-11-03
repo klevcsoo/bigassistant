@@ -1,45 +1,32 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 
-export class ParallaxHeaderImage extends Component {
-  state = {
-    scrollPos: 0
+const ParallaxHeaderImage = ({ src }) => {
+  const [ scrollPos, setScrollPos ] = useState(0)
+
+  const updateScroll = () => {
+    setScrollPos(window.scrollY * 0.5)
   }
 
-  updateScroll = () => {
-    this.setState({ scrollPos: window.scrollY * 0.5 });
-  }
-
-  componentDidMount() {
-    window.addEventListener('scroll', this.updateScroll, true);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.updateScroll);
-  }
-
-  render() {
-    return (
-      <div className="parallax-bg" style={{
-        width: '100vw', height: '100vw',
-        position: 'absolute', top: 0, left: 0,
-
-        backgroundImage: `url("${this.props.src}")`,
-        backgroundPositionX: 'center',
-        backgroundPositionY: `${this.state.scrollPos}px`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        borderRadius: '20px',
-
-        transition: '0ms all'
-      }}></div>
-    )
-  }
-}
-
-// background-position: center;
-//   background-size: cover;
-//   background-repeat: no-repeat;
+  useEffect(() => {
+    window.addEventListener('scroll', updateScroll)
+    return () => {
+      window.removeEventListener('scroll', updateScroll)
+    }
+  }, [])
   
-//   transition: 0ms all;
+  return (
+    <div className="parallax-bg" style={{
+      width: '100vw', height: '100vw',
+      position: 'absolute', top: 0, left: 0,
+      backgroundImage: `url("${src}")`,
+      backgroundPositionX: 'center',
+      backgroundPositionY: `${scrollPos}px`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      borderRadius: '20px',
+      transition: '0ms all'
+    }}></div>
+  )
+}
 
 export default ParallaxHeaderImage

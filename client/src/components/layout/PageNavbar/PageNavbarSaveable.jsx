@@ -1,23 +1,19 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './PageNavbar.css'
 import AppColours from '../../../constants/appColors'
 
 //Components
 import AppButton from '../../AppButton/AppButton'
 
-export class PageNavbarSaveable extends Component {
-  render() {
-    return (
-      <React.Fragment>
-        <div className="page-navbar-container" style={{
-          backgroundColor: AppColours.getDarkModeEnabled() ? AppColours.LIGHT : AppColours.BACKGROUND
-        }}>
-          <AppButton text={this.props.text} type={this.props.type || "highlight"} onClick={this.props.onClick}
-            style={{ width: 'calc(100% - 10px)' }} />
-        </div>
-      </React.Fragment>
-    )
-  }
+const PageNavbarSaveable = ({ type, text, onClick }) => {
+  return (
+    <div className="page-navbar-container" style={{
+      backgroundColor: AppColours.getDarkModeEnabled() ? AppColours.LIGHT : AppColours.BACKGROUND
+    }}>
+      <AppButton text={text} type={type || "highlight"} onClick={onClick}
+      style={{ width: 'calc(100% - 10px)' }} />
+    </div>
+  )
 }
 
 export default PageNavbarSaveable

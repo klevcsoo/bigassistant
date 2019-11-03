@@ -1,15 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export class UserProfileHeader extends Component {
-  render() {
-    return (
-      <React.Fragment>
+const UserProfileHeader = ({ name, photo }) => {
+  return (
+    <React.Fragment>
         <div style={{
           width: '100vw', height: '30vh',
           margin: '20px 0 0 0', padding: '0 0 10px 0',
           overflow: 'hidden'
         }}>
-          <img src={this.props.photo} alt="Profilkép" style={{
+          <img src={photo} alt="Profilkép" style={{
             width: '30vh', height: '30vh',
             display: 'block',
             margin: 'auto', padding: 0,
@@ -24,10 +23,9 @@ export class UserProfileHeader extends Component {
           fontWeight: 500,
           fontSize: '42px',
           textAlign: 'center'
-        }}>{this.props.name}</h1>
+        }}>{name}</h1>
       </React.Fragment>
-    )
-  }
+  )
 }
 
 export default UserProfileHeader

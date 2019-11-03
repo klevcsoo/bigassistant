@@ -1,26 +1,17 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import './AppInput.css'
 
-export class AppInput extends Component {
-  state = {
-    inputValue: this.props.text
-  }
+const AppInput = ({ text, placeholder, style, maxLength, onTextChanged }) => {
+  const [ value, setValue ] = useState(text)
 
-  handleTextChange = (event) => {
-    this.setState({
-      inputValue: event.target.value
-    }, () => { if (this.props.onTextChanged) this.props.onTextChanged(this.state.inputValue); });
-  }
-
-  render() {
-    return (
-      <React.Fragment>
-        <input type="text" className="app-input" value={this.state.inputValue}
-        placeholder={this.props.placeholder} maxLength={this.props.maxLength}
-        onChange={this.handleTextChange} style={this.props.style} />
-      </React.Fragment>
-    )
-  }
+  return (
+    <input type="text" className="app-input" value={value}
+    placeholder={placeholder} maxLength={maxLength}
+    onChange={(e) => {
+      setValue(e.target.value)
+      if (onTextChanged) onTextChanged(e.target.value)
+    }} style={style} />
+  )
 }
 
 export default AppInput
