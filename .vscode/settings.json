@@ -1,3 +1,4 @@
 {
-  "autoimport.filesToScan": "**/*.{ts,tsx,js,jsx}"
+  "autoimport.filesToScan": "**/*.{ts,tsx,js,jsx}",
+  "autoimport.useSemiColon": false
 }
