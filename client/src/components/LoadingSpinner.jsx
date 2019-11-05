@@ -1,6 +1,6 @@
 import React from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress'
-import AppColours from '../constants/appColors'
+import AppColours from '../constants/AppColours'
 
 export function LoadingSpinner() {
   return (

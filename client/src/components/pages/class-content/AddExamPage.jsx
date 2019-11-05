@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
-import AppColours from '../../../constants/appColors'
+import AppColours from '../../../constants/AppColours'
 import 'date-fns'; import DateFnsUtils from '@date-io/date-fns'
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers'
 

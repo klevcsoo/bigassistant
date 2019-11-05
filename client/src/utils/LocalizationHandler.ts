@@ -1,5 +1,5 @@
 class LocalizationHandler {
-  static formatDate(date) {
+  static formatDate(date: number | string | Date) {
     const innerDate = new Date(date);
     const months = [
         'január', 'február', 'március',

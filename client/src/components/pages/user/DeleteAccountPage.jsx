@@ -1,5 +1,5 @@
 import React from 'react'
-import AppColours from '../../../constants/appColors'
+import AppColours from '../../../constants/AppColours'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
 import { Helmet } from 'react-helmet'
 

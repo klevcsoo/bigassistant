@@ -1,7 +1,7 @@
 import React from 'react'
 import './AboutPage.css'
-import AppColours from '../../../constants/appColors'
-import { version } from '../../../constants/appInfo'
+import AppColours from '../../../constants/AppColours'
+import { version } from '../../../constants/AppInfo'
 
 // Components
 import AppPopup from '../../AppPopup/AppPopup'

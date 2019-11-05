@@ -2,7 +2,7 @@ import React from 'react'
 import { useClientInfo } from '../../../utils/AppHooks'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
 import Routes from '../../../constants/routes'
-import AppColours from '../../../constants/appColors'
+import AppColours from '../../../constants/AppColours'
 
 // Components
 import LoadingSpinner from '../../LoadingSpinner'

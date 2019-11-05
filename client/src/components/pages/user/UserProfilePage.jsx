@@ -1,7 +1,7 @@
 import React from 'react'
 import Routes from '../../../constants/routes'
 import { Helmet } from 'react-helmet'
-import AppColours from '../../../constants/appColors'
+import AppColours from '../../../constants/AppColours'
 import { useUserInfo } from '../../../utils/AppHooks'
 
 // Components

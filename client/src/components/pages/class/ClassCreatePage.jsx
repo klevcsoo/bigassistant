@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import AppColours from '../../../constants/appColors'
+import AppColours from '../../../constants/AppColours'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
-import { defaultClassPhoto } from '../../../constants/appInfo'
+import { defaultClassPhoto } from '../../../constants/AppInfo'
 
 // Components
 import SaveablePageLayout from '../../layout/SaveablePageLayout'

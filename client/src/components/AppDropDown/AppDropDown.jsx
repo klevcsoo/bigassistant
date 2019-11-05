@@ -1,5 +1,5 @@
 import React from 'react'
-import AppColours from './../../constants/appColors'
+import AppColours from './../../constants/AppColours'
 
 const AppDropDown = ({ onSelected, children }) => {
   return (

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler';
 import Routes from '../../../constants/routes';
-import AppColours from '../../../constants/appColors';
+import AppColours from '../../../constants/AppColours';
 import { Helmet } from 'react-helmet';
 
 // Components

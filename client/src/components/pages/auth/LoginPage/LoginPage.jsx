@@ -7,7 +7,7 @@ import Routes from '../../../../constants/routes'
 import AppTitle from '../../../AppTitle'
 import AppButton from '../../../AppButton/AppButton'
 import LoadingSpinner from '../../../LoadingSpinner'
-import AppColours from '../../../../constants/appColors'
+import AppColours from '../../../../constants/AppColours'
 import { Helmet } from 'react-helmet';
 import AppUserButton from '../../../AppButton/AppUserButton'
 

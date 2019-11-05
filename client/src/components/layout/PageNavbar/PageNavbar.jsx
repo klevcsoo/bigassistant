@@ -1,7 +1,7 @@
 import React from 'react'
 import './PageNavbar.css'
 import Routes from '../../../constants/routes'
-import AppColours from '../../../constants/appColors'
+import AppColours from '../../../constants/AppColours'
 
 // Icons
 import ClassIcon from '@material-ui/icons/PeopleRounded'

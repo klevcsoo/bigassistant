@@ -2,7 +2,7 @@
   "name": "constants",
   "version": "3.2.0",
   "description": "",
-  "main": "appColors.js",
+  "main": "AppColours.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

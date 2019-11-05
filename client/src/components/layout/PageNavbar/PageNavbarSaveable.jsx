@@ -1,6 +1,6 @@
 import React from 'react'
 import './PageNavbar.css'
-import AppColours from '../../../constants/appColors'
+import AppColours from '../../../constants/AppColours'
 
 //Components
 import AppButton from '../../AppButton/AppButton'

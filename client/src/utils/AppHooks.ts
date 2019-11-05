@@ -1,46 +1,35 @@
 import { useState, useEffect } from 'react'
 import FirebaseHandler from './FirebaseHandler'
+import { ClassInfo, ClientInfo, UserInfo, ClassContentInfo } from './UtilClasses'
 
-export function useClientInfo() {
-  const [ clientInfo, setClientInfo ] = useState(null)
+export function useClientInfo(): ClientInfo {
+  const [ clientInfo, setClientInfo ] = useState(new ClientInfo())
 
   useEffect(() => {
     FirebaseHandler.getClientInfo((result) => { setClientInfo(result) })
   }, [])
 
   // Just for autocompletion 👌
-  return !clientInfo ? null : {
-    name: clientInfo.name,
-    photo: clientInfo.photo,
-    classId: clientInfo.classId,
-    className: clientInfo.className,
-    classRank: clientInfo.classRank,
-    facebookId: clientInfo.facebookId,
-    joined: clientInfo.joined
-  }
+  return clientInfo
 }
 
-export function useClassInfo() {
+export function useClassInfo(): ClassInfo {
   const clientInfo = useClientInfo()
-  const [ classInfo, setClassInfo ] = useState(null)
+  const [ classInfo, setClassInfo ] = useState(new ClassInfo())
 
   FirebaseHandler.getClassInfo((result) => { setClassInfo(result) }, clientInfo.classId)
 
-  return !classInfo ? null : {
-    name: classInfo.name,
-    photo: classInfo.photo,
-    subjects: classInfo.subjects
-  }
+  return classInfo
 }
 
-export function useClassmates() {
-  const [ classmates, setClassmates ] = useState([])
+export function useClassmates(): UserInfo[] {
+  const [ classmates, setClassmates ] = useState(new Array<UserInfo>())
 
   useEffect(() => {
     FirebaseHandler.getClientInfo((result) => {
       let classId = result.classId
       FirebaseHandler.readDataContinuously(`/classes/${classId}/members`, (snapshot) => {
-        if (snapshot.numChildren === 0) { setClassmates(null); return }
+        if (snapshot.numChildren() === 0) { setClassmates([]); return }
         snapshot.forEach((memberSnapshot) => {
           let uid = memberSnapshot.val()
           FirebaseHandler.callFunction('getUserInfo', { uid: uid }).then(({ data }) => {
@@ -55,14 +44,14 @@ export function useClassmates() {
   return classmates
 }
 
-export function useClassContent(typeOf) {
-  const [ contents, setContents ] = useState([])
+export function useClassContent(typeOf: 'exams' | 'homework'): ClassContentInfo[] {
+  const [ contents, setContents ] = useState(new Array<ClassContentInfo>())
 
   useEffect(() => {
     FirebaseHandler.getClientInfo((result) => {
       let classId = result.classId;
       FirebaseHandler.readDataContinuously(`/classes/${classId}/${typeOf}`, (snapshot) => {
-        setContents([ null ])
+        setContents([])
         snapshot.forEach((contentSnapshot) => {
           let content = contentSnapshot.val()
           content.id = contentSnapshot.key
@@ -75,7 +64,7 @@ export function useClassContent(typeOf) {
   return contents
 }
 
-export function useUserInfo(uid, onError) {
+export function useUserInfo(uid: string, onError: (err: any) => void) {
   const [ userInfo, setUserInfo ] = useState(null)
 
   FirebaseHandler.callFunction('getUserInfo', { uid: uid }).then(({ data }) => {

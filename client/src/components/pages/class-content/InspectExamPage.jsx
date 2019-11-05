@@ -9,7 +9,7 @@ import LoadingSpinner from '../../LoadingSpinner'
 import AppTitle from '../../AppTitle'
 import AppDivider from '../../AppDivider'
 import AppUserButton from '../../AppButton/AppUserButton'
-import AppColours from '../../../constants/appColors'
+import AppColours from '../../../constants/AppColours'
 
 const InspectExamPage = ({ history, match }) => {
   const [ creatorInfo, setCreatorInfo ] = useState(null)

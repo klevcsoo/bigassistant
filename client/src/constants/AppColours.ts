@@ -22,19 +22,19 @@ class AppColours {
     return state;
   }
 
-  static setDarkModeEnabled = (isEnabled, noReload) => {
-    this.LIGHT = isEnabled ? darkColours.LIGHT : lightColours.LIGHT;
-    this.DARK = isEnabled ? darkColours.DARK : lightColours.DARK;
-    this.BACKGROUND = isEnabled ? darkColours.BACKGROUND : lightColours.BACKGROUND;
-    this.TEXT = isEnabled ? darkColours.TEXT : lightColours.TEXT;
+  static setDarkModeEnabled = (isEnabled: boolean, noReload: boolean) => {
+    AppColours.LIGHT = isEnabled ? darkColours.LIGHT : lightColours.LIGHT;
+    AppColours.DARK = isEnabled ? darkColours.DARK : lightColours.DARK;
+    AppColours.BACKGROUND = isEnabled ? darkColours.BACKGROUND : lightColours.BACKGROUND;
+    AppColours.TEXT = isEnabled ? darkColours.TEXT : lightColours.TEXT;
 
     let root = document.documentElement;
-    root.style.setProperty('--colour-app-light', this.LIGHT);
-    root.style.setProperty('--colour-app-dark', this.DARK);
-    root.style.setProperty('--colour-app-background', this.BACKGROUND);
-    root.style.setProperty('--colour-app-text', this.TEXT);
+    root.style.setProperty('--colour-app-light', AppColours.LIGHT);
+    root.style.setProperty('--colour-app-dark', AppColours.DARK);
+    root.style.setProperty('--colour-app-background', AppColours.BACKGROUND);
+    root.style.setProperty('--colour-app-text', AppColours.TEXT);
 
-    localStorage.setItem(darkModeKey, isEnabled);
+    localStorage.setItem(darkModeKey, String(isEnabled));
     if (!noReload) window.location.reload(false);
   }
 }

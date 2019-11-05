@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
-import AppColours from '../../../constants/appColors'
+import AppColours from '../../../constants/AppColours'
 import { Helmet } from 'react-helmet'
 // Components
 import AppTitle from '../../AppTitle'
