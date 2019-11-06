@@ -6,7 +6,6 @@ import { useClientInfo, useClassmates } from '../../../utils/AppHooks'
 
 // Components
 import LoadingSpinner from '../../LoadingSpinner'
-import AppPopup from '../../AppPopup/AppPopup'
 import AppDivider from '../../AppDivider'
 import AppButton from '../../AppButton/AppButton'
 import AppUserButton from '../../AppButton/AppUserButton'

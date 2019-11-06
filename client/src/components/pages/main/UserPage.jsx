@@ -7,7 +7,6 @@ import AppColours from '../../../constants/AppColours'
 // Components
 import LoadingSpinner from '../../LoadingSpinner'
 import UserProfileHeader from '../../layout/UserProfileHeader'
-import AppPopup from '../../AppPopup/AppPopup'
 import AppButton from '../../AppButton/AppButton'
 import AppDivider from '../../AppDivider'
 import AppCardButtonContainer from '../../AppCard/AppCardButtonContainer'

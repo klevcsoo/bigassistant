@@ -1,12 +1,10 @@
 import React from 'react'
 import Routes from '../../../constants/routes'
-import FirebaseHandler from '../../../utils/FirebaseHandler'
 import { Spring } from 'react-spring/renderprops'
 import { useClassContent } from '../../../utils/AppHooks'
 
 // Components
 import MainPageLayout from '../../layout/MainPageLayout'
-import AppPopup from '../../AppPopup/AppPopup'
 import AppButton from '../../AppButton/AppButton'
 import AppDivider from '../../AppDivider'
 import AppCardClassContent from '../../AppCard/AppCardClassContent'

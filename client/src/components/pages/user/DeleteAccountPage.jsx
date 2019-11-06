@@ -6,7 +6,6 @@ import { Helmet } from 'react-helmet'
 // Components
 import AppTitle from '../../AppTitle'
 import AppButton from '../../AppButton/AppButton'
-import AppPopup from '../../AppPopup/AppPopup'
 import AppBackButton from '../../AppButton/AppBackButton'
 
 const DeleteAccountPage = ({ history }) => {
