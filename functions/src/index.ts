@@ -225,6 +225,29 @@ exports.addContentToClass = functions.https.onCall(async (data, context) => {
     })
 })
 
+exports.removeContentFromClass = functions.https.onCall(async (data, context) => {
+    if (context.auth === undefined) {
+        throw new functions.https.HttpsError('unauthenticated', 'User is not authenticated')
+    }
+    const user = await admin.auth().getUser(context.auth.uid).catch((error) => {
+        throw new functions.https.HttpsError('unknown', error)
+    })
+    const classIdSnapshot = await admin.database().ref(`/users/${user.uid}/class`).once('value')
+    if (!classIdSnapshot.exists()) {
+        throw new functions.https.HttpsError('not-found', 'No user class found')
+    }
+
+    const type = data.type
+    const id = data.id
+    if (type === undefined || type === '' || id === undefined || id === '') {
+        throw new functions.https.HttpsError('invalid-argument', 'No content or content type was given')
+    }
+
+    await admin.database().ref(`/classes/${classIdSnapshot.val()}/${type}/${id}`).remove().catch((error) => {
+        throw new functions.https.HttpsError('unknown', error)
+    })
+})
+
 exports.updateClass = functions.https.onCall(async (data, context) => {
     if (context.auth === undefined) {
         throw new functions.https.HttpsError('unauthenticated', 'User is not authenticated')
