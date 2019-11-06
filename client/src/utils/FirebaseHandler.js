@@ -58,13 +58,6 @@ class FirebaseHandler {
     return func(data)
   }
   
-  static async getUserClaims(handler) {
-    app.auth().onAuthStateChanged(async (user) => {
-      if (user) {
-        handler((await user.getIdTokenResult(true)).claims)
-      }
-    })
-  }
   static getClientInfo(handler) {
     this.getClassId((classId) => {
       this.readData(`/classes/${classId}/metadata`, (snapshot) => {
