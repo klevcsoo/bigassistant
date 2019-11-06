@@ -1,6 +1,6 @@
-import app from 'firebase/app';
-import 'firebase/auth'; import 'firebase/database'; import 'firebase/functions';
-import LocalizationHandler from './LocalizationHandler';
+import app from 'firebase/app'
+import 'firebase/auth'; import 'firebase/database'; import 'firebase/functions'
+import LocalizationHandler from './LocalizationHandler'
 
 const config = {
   apiKey: "AIzaSyA3nyWdbq3VdnfTpaBEKR4vspv5tX1zc_M",
@@ -14,56 +14,56 @@ const config = {
 
 class FirebaseHandler {
   static initializeFirebase() {
-    if (app.apps.length === 0) app.initializeApp(config);
+    if (app.apps.length === 0) app.initializeApp(config)
   
     app.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log(`Logged in as ${user.displayName}`);
+        console.log(`Logged in as ${user.displayName}`)
         user.getIdToken(true).then((token) => {
-          document.cookie = `__session=${token};max-age=3600;path=/;`;
-        });
+          document.cookie = `__session=${token}max-age=3600path=/`
+        })
       }
-    });
+    })
   }
   
   static getApp() {
-    return app;
+    return app
   }
   static getUser() {
     return app.auth().currentUser
   }
 
   static getNewFacebookProvider() {
-    return new app.auth.FacebookAuthProvider();
+    return new app.auth.FacebookAuthProvider()
   }
   static getNewGoogleProvider() {
-    return new app.auth.GoogleAuthProvider();
+    return new app.auth.GoogleAuthProvider()
   }
   
   static loginWithFacebook() {
-    let provider = new app.auth.FacebookAuthProvider();
-    app.auth().signInWithRedirect(provider);
+    let provider = new app.auth.FacebookAuthProvider()
+    app.auth().signInWithRedirect(provider)
   }
   static loginWithGoogle() {
-    let provider = new app.auth.GoogleAuthProvider();
-    app.auth().signInWithRedirect(provider);
+    let provider = new app.auth.GoogleAuthProvider()
+    app.auth().signInWithRedirect(provider)
   }
   static logout() {
-    document.cookie = '__session=;max-age=0';
-    app.auth().signOut();
+    document.cookie = '__session=max-age=0'
+    app.auth().signOut()
   }
   
   static callFunction(name, data) {
-    let func = app.functions().httpsCallable(name);
-    return func(data);
+    let func = app.functions().httpsCallable(name)
+    return func(data)
   }
   
   static async getUserClaims(handler) {
     app.auth().onAuthStateChanged(async (user) => {
       if (user) {
-        handler((await user.getIdTokenResult(true)).claims);
+        handler((await user.getIdTokenResult(true)).claims)
       }
-    });
+    })
   }
   static getClientInfo(handler) {
     this.getClassId((classId) => {
@@ -97,45 +97,44 @@ class FirebaseHandler {
   static readData(path, handler) {
     app.auth().onAuthStateChanged((user) => {
       if (user) {
-        app.database().ref(path).once('value', (snapshot) => { handler(snapshot) });
-      } else console.warn('Cannot read from database, user is not logged in');
-    });
+        app.database().ref(path).once('value', (snapshot) => { handler(snapshot) })
+      } else console.warn('Cannot read from database, user is not logged in')
+    })
   }
   static readDataContinuously(path, handler) {
     app.auth().onAuthStateChanged((user) => {
       if (user) {
         app.database().ref(path).on('value', (snapshot) => { handler(snapshot) })
-      } else console.warn('Cannot read from database, user is not logged in');
-    });
+      } else console.warn('Cannot read from database, user is not logged in')
+    })
   }
   static removeDataListener(path) {
-    app.database().ref(path).off('value');
+    app.database().ref(path).off('value')
   }
   static writeData(path, data, handler) {
     app.auth().onAuthStateChanged((user) => {
       if (user) {
-        app.database().ref(path).set(data, (err) => { if (handler) handler(err) });
-      } else console.warn('Cannot read from database, user is not logged in');
-    });
+        app.database().ref(path).set(data, (err) => { if (handler) handler(err) })
+      } else console.warn('Cannot read from database, user is not logged in')
+    })
   }
 
   static getClassInfo(handler, id) {
-    let classId = id;
-    this.getClientInfo((result) => {
-      classId = result.classId;
-      this.readData(`/classes/${classId}/metadata`, (snapshot) => {
-        let subjects = [];
+    this.getClassId((classId) => {
+      let cid = id || classId
+      this.readData(`/classes/${cid}/metadata`, (snapshot) => {
+        let subjects = []
         snapshot.child('subjects').forEach((subjectSnapshot) => {
-          subjects.push(subjectSnapshot.val());
-        });
+          subjects.push(subjectSnapshot.val())
+        })
 
         handler({
           photo: snapshot.child('pictureUrl').val(),
           name: snapshot.child('name').val(),
           subjects: subjects
-        });
-      });
-    });
+        })
+      })
+    })
   }
 }
 

@@ -18,8 +18,7 @@ const InspectExamPage = ({ history, match }) => {
 
   useEffect(() => {
     let examId = match.params.id
-    FirebaseHandler.getClientInfo((result) => {
-      let classId = result.classId
+    FirebaseHandler.getClassId((classId) => {
       FirebaseHandler.readData(`/classes/${classId}/exams/${examId}`, (snapshot) => {
         if (!snapshot.exists()) {
           setExamInfo({})

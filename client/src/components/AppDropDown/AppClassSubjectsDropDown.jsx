@@ -4,11 +4,10 @@ import FirebaseHandler from './../../utils/FirebaseHandler'
 import LoadingSpinner from './../LoadingSpinner'
 
 const AppClassSubjectsDropDown = ({ onSubjectChoosen }) => {
-  const [ subjects, setSubjects ] = useState([]);
+  const [ subjects, setSubjects ] = useState([])
 
   useEffect(() => {
-    FirebaseHandler.getClientInfo((result) => {
-      let classId = result.classId;
+    FirebaseHandler.getClassId((classId) => {
       FirebaseHandler.readData(`/classes/${classId}/metadata/subjects`, (snapshot) => {
         if (!snapshot.exists()) { setSubjects([ '🤔' ]); return }
         snapshot.forEach((subjectSnapshot) => {

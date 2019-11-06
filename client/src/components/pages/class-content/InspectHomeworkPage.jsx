@@ -18,8 +18,7 @@ const InspectHomeworkPage = ({ history, match }) => {
 
   useEffect(() => {
     let homeworkId = match.params.id
-    FirebaseHandler.getClientInfo((result) => {
-      let classId = result.classId
+    FirebaseHandler.getClassId((classId) => {
       FirebaseHandler.readData(`/classes/${classId}/homework/${homeworkId}`, (snapshot) => {
         if (!snapshot.exists()) {
           setHomeworkInfo({})

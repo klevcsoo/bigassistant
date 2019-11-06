@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
 import AddRoundedIcon from '@material-ui/icons/AddRounded'
+import { useClientInfo } from '../../../utils/AppHooks'
 
 // Components
 import LoadingSpinner from '../../LoadingSpinner'
@@ -15,7 +16,7 @@ import AppPopup from '../../AppPopup/AppPopup'
 import Routes from '../../../constants/routes'
 
 const ClassSettings = ({ history }) => {
-  const [ clientInfo, setClientInfo ] = useState(null)
+  const clientInfo = useClientInfo()
   const [ classInfo, setClassInfo ] = useState(null)
   const [ popup, setPopup ] = useState({ visible: false, message: '' })
   const [ currentSubject, setCurrentSubject ] = useState('')
@@ -73,11 +74,8 @@ const ClassSettings = ({ history }) => {
   }
 
   useEffect(() => {
-    FirebaseHandler.getClientInfo((result) => {
-      setClientInfo(result)
-      FirebaseHandler.getClassInfo((classResult) => {
-        setClassInfo(classResult)
-      }, result.classId)
+    FirebaseHandler.getClassInfo((classResult) => {
+      setClassInfo(classResult)
     })
   }, [])
 
@@ -96,7 +94,7 @@ const ClassSettings = ({ history }) => {
         }}><LoadingSpinner /></div></div>
       )}
       {popup.visible ? <AppPopup message={popup.message} onClose={closePopup} /> : null}
-      {!classInfo ? <LoadingSpinner /> : (
+      {!classInfo || !clientInfo ? <LoadingSpinner /> : (
         <React.Fragment>
           {clientInfo.classRank !== 'admin' ? <UnauthorizedPage /> : (
             <div>
