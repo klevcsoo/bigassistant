@@ -21,7 +21,6 @@ const HomeworkPage = ({ history }) => {
         <div>
           {homework.length === 0 ? <LoadingSpinner /> : null}
           {homework.map((hw) => {
-            console.log('Inside JSX:', hw)
             if (hw) return (
               <Spring from={{ opacity: 0 }} to={{ opacity: 1 }} key={hw.id}>
                 {(props) => (
