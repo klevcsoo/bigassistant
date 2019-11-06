@@ -96,7 +96,11 @@ const InspectExamPage = ({ history, match }) => {
             <AppDivider />
             {!examInfo.notes ? null : (
               <React.Fragment>
-                <p style={secondaryPropStyle}>{examInfo.notes}</p>
+                <p style={{
+                  ...secondaryPropStyle,
+                  margin: 20,
+                  wordBreak: 'break-word'
+                }}>{examInfo.notes}</p>
                 <AppDivider />
               </React.Fragment>
             )}
