@@ -12,9 +12,15 @@ import AppInput from '../../AppInput/AppInput'
 import LoadingSpinner from '../../LoadingSpinner'
 import AppPopup from '../../AppPopup/AppPopup'
 import AppClassSubjectsDropDown from '../../AppDropDown/AppClassSubjectsDropDown'
+import AppDivider from '../../AppDivider';
 
 const AddHomeworkPage = ({ history }) => {
-  const [ currentHomework, setCurrentHomework ] = useState({ title: '', date: new Date().getTime(), subject: null })
+  const [ currentHomework, setCurrentHomework ] = useState({
+    title: '',
+    date: new Date().getTime(),
+    subject: null,
+    notes: ''
+  })
   const [ popup, setPopup ] = useState({ visible: false, message: '' })
   const [ addingHomework, setAddingHomework ] = useState(false)
   const [ addedHomework, setAddedHomework ] = useState(false)
@@ -69,6 +75,9 @@ const AddHomeworkPage = ({ history }) => {
           onTextChanged={(text) => {
             setCurrentHomework((prevHomework) => { return { ...prevHomework, title: text } })
           }} />
+          <AppClassSubjectsDropDown onSubjectChoosen={(subject) => {
+            setCurrentHomework((prevHomework) => { return { ...prevHomework, subject: subject } })
+          }} />
           <div style={{
             width: 'fit-content',
             margin: '5px auto',
@@ -82,8 +91,10 @@ const AddHomeworkPage = ({ history }) => {
               style={{ width: 290 }} />
             </MuiPickersUtilsProvider>
           </div>
-          <AppClassSubjectsDropDown onSubjectChoosen={(subject) => {
-            setCurrentHomework((prevHomework) => { return { ...prevHomework, subject: subject } })
+          <AppDivider />
+          <AppInput placeholder="Megjegyzés (nem szükséges)" text={currentHomework.notes}
+          onTextChanged={(text) => {
+            setCurrentHomework((prevHomework) => { return { ...prevHomework, notes: text } })
           }} />
         </div>
       </SaveablePageLayout>

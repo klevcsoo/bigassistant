@@ -12,9 +12,15 @@ import AppInput from '../../AppInput/AppInput'
 import LoadingSpinner from '../../LoadingSpinner'
 import AppPopup from '../../AppPopup/AppPopup'
 import AppClassSubjectsDropDown from '../../AppDropDown/AppClassSubjectsDropDown'
+import AppDivider from '../../AppDivider'
 
 const AddExamPage = ({ history }) => {
-  const [ currentExam, setCurrentExam ] = useState({ title: '', date: new Date().getTime(), subject: null })
+  const [ currentExam, setCurrentExam ] = useState({
+    title: '',
+    date: new Date().getTime(),
+    subject: null,
+    notes: ''
+  })
   const [ popup, setPopup ] = useState({ visible: false, message: '' })
   const [ addingExam, setAddingExam ] = useState(false)
   const [ addedExam, setAddedExam ] = useState(false)
@@ -69,6 +75,9 @@ const AddExamPage = ({ history }) => {
           onTextChanged={(text) => {
             setCurrentExam((prevExam) => { return { ...prevExam, title: text } })
           }} />
+          <AppClassSubjectsDropDown onSubjectChoosen={(subject) => {
+            setCurrentExam((prevExam) => { return { ...prevExam, subject: subject } })
+          }} />
           <div style={{
             width: 'fit-content',
             margin: '5px auto',
@@ -82,8 +91,10 @@ const AddExamPage = ({ history }) => {
               style={{ width: 290 }} />
             </MuiPickersUtilsProvider>
           </div>
-          <AppClassSubjectsDropDown onSubjectChoosen={(subject) => {
-            setCurrentExam((prevExam) => { return { ...prevExam, subject: subject } })
+          <AppDivider />
+          <AppInput placeholder="Megjegyzés (nem szükséges)" text={currentExam.notes}
+          onTextChanged={(text) => {
+            setCurrentExam((prevExam) => { return { ...prevExam, notes: text } })
           }} />
         </div>
       </SaveablePageLayout>
