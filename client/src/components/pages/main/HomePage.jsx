@@ -2,7 +2,6 @@ import React from 'react'
 import Routes from '../../../constants/routes'
 import { version } from '../../../constants/appInfo'
 import AppColours from '../../../constants/appColors'
-import { Zoom } from '@material-ui/core'
 
 // Components
 import MainPageLayout from '../../layout/MainPageLayout'

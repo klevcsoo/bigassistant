@@ -11,7 +11,7 @@ const MainPageLayout = ({ pageTitle, pageActive, history, children }) => {
     FirebaseHandler.getApp().auth().onAuthStateChanged((user) => {
       if (!user) history.push(Routes.LOGIN)
     })
-  }, [])
+  }, [ history ])
 
   return (
     <React.Fragment>

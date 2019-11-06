@@ -4,7 +4,6 @@ import AppColours from '../../../constants/appColors'
 import { version } from '../../../constants/appInfo'
 
 // Components
-import AppPopup from '../../AppPopup/AppPopup'
 import PageTitle from '../../layout/PageTitle/PageTitle'
 import ParallaxHeaderImage from '../../layout/ParallaxHeaderImage'
 import AppMenuButton from '../../AppButton/AppMenuButton'

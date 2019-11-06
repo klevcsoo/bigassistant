@@ -11,7 +11,7 @@ const SaveablePageLayout = ({ pageTitle, pageType, buttonText, onSave, history, 
     FirebaseHandler.getApp().auth().onAuthStateChanged((user) => {
       if (!user) history.push(Routes.LOGIN)
     })
-  }, [])
+  }, [ history ])
 
   return (
     <React.Fragment>

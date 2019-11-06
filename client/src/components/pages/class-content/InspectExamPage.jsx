@@ -29,7 +29,7 @@ const InspectExamPage = ({ history, match }) => {
         }
       })
     })
-  } , [])
+  } , [ match ])
 
   useEffect(() => {
     if (examInfo) {

@@ -29,7 +29,7 @@ const InspectHomeworkPage = ({ history, match }) => {
         }
       })
     })
-  } , [])
+  } , [ match ])
 
   useEffect(() => {
     if (homeworkInfo) {
