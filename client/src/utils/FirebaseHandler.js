@@ -82,6 +82,16 @@ class FirebaseHandler {
       } else console.warn('No user found');
     });
   }
+
+  static getClassId(handler) {
+    app.auth().onAuthStateChanged((user) => {
+      if (user) {
+        app.database().ref(`/users/${user.uid}/class`).once('value', (snapshot) => {
+          handler(snapshot.val())
+        })
+      } else console.warn('Cannot get class id, the user is npt logged in')
+    })
+  }
   
   static readData(path, handler) {
     app.auth().onAuthStateChanged((user) => {
