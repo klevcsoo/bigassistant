@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
 import LocalizationHandler from '../../../utils/LocalizationHandler'
 import { Helmet } from 'react-helmet'
+import Routes from '../../../constants/routes'
 
 // Components
 import AppBackButton from '../../AppButton/AppBackButton'
@@ -10,14 +11,26 @@ import AppTitle from '../../AppTitle'
 import AppDivider from '../../AppDivider'
 import AppUserButton from '../../AppButton/AppUserButton'
 import AppColours from '../../../constants/AppColours'
+import AppButton from '../../AppButton/AppButton'
 
 const InspectHomeworkPage = ({ history, match }) => {
   const [ creatorInfo, setCreatorInfo ] = useState(null)
   const [ homeworkInfo, setHomeworkInfo ] = useState(null)
   const [ homeworkNotFound, setHomeworkNotFound ] = useState(false)
+  const [ deleteLoading, setDeleteLoading ] = useState(false)
+  const homeworkId = match.params.id
+
+  const deleteHomework = () => {
+    setDeleteLoading(true)
+    FirebaseHandler.callFunction('removeContentFromClass', { type: 'homework', id: homeworkId }).then(() => {
+      history.push(Routes.HOMEWORK)
+    }).catch((err) => {
+      console.log(err)
+      setDeleteLoading(false)
+    })
+  }
 
   useEffect(() => {
-    let homeworkId = match.params.id
     FirebaseHandler.getClassId((classId) => {
       FirebaseHandler.readData(`/classes/${classId}/homework/${homeworkId}`, (snapshot) => {
         if (!snapshot.exists()) {
@@ -83,7 +96,11 @@ const InspectHomeworkPage = ({ history, match }) => {
             <AppDivider />
             {!homeworkInfo.notes ? null : (
               <React.Fragment>
-                <p style={secondaryPropStyle}>{homeworkInfo.notes}</p>
+                <p style={{
+                  ...secondaryPropStyle,
+                  margin: 20,
+                  wordBreak: 'break-word'
+                }}>{homeworkInfo.notes}</p>
                 <AppDivider />
               </React.Fragment>
             )}
@@ -92,6 +109,10 @@ const InspectHomeworkPage = ({ history, match }) => {
             </p>
             {!creatorInfo ? <LoadingSpinner /> : (
               <AppUserButton {...creatorInfo} />
+            )}
+            <AppDivider />
+            {deleteLoading ? <LoadingSpinner /> : (
+              <AppButton type="warning" text="Házi feladat törlése" onClick={deleteHomework} />
             )}
           </div>
         )}
