@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
 import LocalizationHandler from '../../../utils/LocalizationHandler'
 import { Helmet } from 'react-helmet'
+import Routes from '../../../constants/routes'
 
 // Components
 import AppBackButton from '../../AppButton/AppBackButton'
@@ -10,14 +11,26 @@ import AppTitle from '../../AppTitle'
 import AppDivider from '../../AppDivider'
 import AppUserButton from '../../AppButton/AppUserButton'
 import AppColours from '../../../constants/AppColours'
+import AppButton from '../../AppButton/AppButton'
 
 const InspectExamPage = ({ history, match }) => {
   const [ creatorInfo, setCreatorInfo ] = useState(null)
   const [ examInfo, setExamInfo ] = useState(null)
   const [ examNotFound, setExamNotFound ] = useState(false)
+  const [ deleteLoading, setDeleteLoading ] = useState(false)
+  const examId = match.params.id
+
+  const deleteExam = () => {
+    setDeleteLoading(true)
+    FirebaseHandler.callFunction('removeContentFromClass', { type: 'exams', id: examId }).then(() => {
+      history.push(Routes.EXAMS)
+    }).catch((err) => {
+      console.log(err)
+      setDeleteLoading(false)
+    })
+  }
 
   useEffect(() => {
-    let examId = match.params.id
     FirebaseHandler.getClassId((classId) => {
       FirebaseHandler.readData(`/classes/${classId}/exams/${examId}`, (snapshot) => {
         if (!snapshot.exists()) {
@@ -92,6 +105,10 @@ const InspectExamPage = ({ history, match }) => {
             </p>
             {!creatorInfo ? <LoadingSpinner /> : (
               <AppUserButton {...creatorInfo} />
+            )}
+            <AppDivider />
+            {deleteLoading ? <LoadingSpinner /> : (
+              <AppButton type="warning" text="Dolgozat törlése" onClick={deleteExam} />
             )}
           </div>
         )}
