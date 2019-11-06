@@ -182,7 +182,7 @@ exports.addSubjectToClass = functions.https.onCall(async (data, context) => {
     }
 
     const subjectName: string = data.name
-    if (subjectName === undefined || subjectName === '') {
+    if (!subjectName) {
         throw new functions.https.HttpsError('invalid-argument', 'No subject name given')
     }
 
@@ -205,7 +205,7 @@ exports.addContentToClass = functions.https.onCall(async (data, context) => {
 
     const type = data.typeOf
     const content = data.content
-    if (type === undefined || type === '' || content === undefined) {
+    if (!type || !content) {
         throw new functions.https.HttpsError('invalid-argument', 'No content or content type was given')
     }
     if (type !== 'homework' && type !== 'exams') {
@@ -239,7 +239,7 @@ exports.removeContentFromClass = functions.https.onCall(async (data, context) =>
 
     const type = data.type
     const id = data.id
-    if (type === undefined || type === '' || id === undefined || id === '') {
+    if (!type || !id) {
         throw new functions.https.HttpsError('invalid-argument', 'No content or content type was given')
     }
 
