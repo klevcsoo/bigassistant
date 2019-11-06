@@ -65,22 +65,23 @@ class FirebaseHandler {
       }
     });
   }
-  static async getClientInfo(handler) {
-    app.auth().onAuthStateChanged(async (user) => {
-      if (user) {
-        await this.getUserClaims(async (claims) => {
+  static getClientInfo(handler) {
+    this.getClassId((classId) => {
+      this.readData(`/classes/${classId}/metadata`, (snapshot) => {
+        let user = app.auth().currentUser
+        this.readData(`/users/${user.uid}/joinedAt`, (joinedSnapshot) => {
           handler({
             name: user.displayName,
             photo: `${user.photoURL}?height=500`,
-            classId: claims.class,
-            className: claims.className,
-            classRank: claims.classAdmin ? 'admin' : 'tag',
+            classId: classId,
+            className: snapshot.child('name').val(),
+            classRank: snapshot.child('admin').val() === user.uid ? 'admin' : 'tag',
             facebookId: user.providerData[0].providerId === 'facebook.com' ? user.providerData[0].uid : undefined,
-            joined: LocalizationHandler.formatDate((await app.database().ref(`/user/${user.uid}/joined`).once('value')).val())
-          });
+            joined: LocalizationHandler.formatDate(joinedSnapshot.val())
+          })
         })
-      } else console.warn('No user found');
-    });
+      })
+    })
   }
 
   static getClassId(handler) {
