@@ -85,6 +85,10 @@ exports.joinClass = functions.https.onCall(async (data, context) => {
         throw new functions.https.HttpsError('unknown', err);
     });
 
+    admin.database().ref(`/users/${user}/class`).set(classId).catch((err) => {
+        throw new functions.https.HttpsError('unknown', err);
+    });
+
     return {classId: classId};
 });
 
