@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import FirebaseHandler from './FirebaseHandler'
-import { ClassInfo, ClientInfo, UserInfo, ClassContentInfo } from './UtilClasses'
 
-export function useClientInfo(): ClientInfo {
+export function useClientInfo() {
   const [ clientInfo, setClientInfo ] = useState(new ClientInfo())
 
   useEffect(() => {
@@ -13,7 +12,7 @@ export function useClientInfo(): ClientInfo {
   return clientInfo
 }
 
-export function useClassInfo(): ClassInfo {
+export function useClassInfo() {
   const clientInfo = useClientInfo()
   const [ classInfo, setClassInfo ] = useState(new ClassInfo())
 
@@ -22,14 +21,14 @@ export function useClassInfo(): ClassInfo {
   return classInfo
 }
 
-export function useClassmates(): UserInfo[] {
-  const [ classmates, setClassmates ] = useState(new Array<UserInfo>())
+export function useClassmates() {
+  const [ classmates, setClassmates ] = useState([])
 
   useEffect(() => {
     FirebaseHandler.getClientInfo((result) => {
       let classId = result.classId
       FirebaseHandler.readDataContinuously(`/classes/${classId}/members`, (snapshot) => {
-        if (snapshot.numChildren() === 0) { setClassmates([]); return }
+        if (snapshot.numChildren() === 0) { setClassmates(null); return }
         snapshot.forEach((memberSnapshot) => {
           let uid = memberSnapshot.val()
           FirebaseHandler.callFunction('getUserInfo', { uid: uid }).then(({ data }) => {
@@ -44,8 +43,8 @@ export function useClassmates(): UserInfo[] {
   return classmates
 }
 
-export function useClassContent(typeOf: 'exams' | 'homework'): ClassContentInfo[] {
-  const [ contents, setContents ] = useState(new Array<ClassContentInfo>())
+export function useClassContent(typeOf) {
+  const [ contents, setContents ] = useState([])
 
   useEffect(() => {
     FirebaseHandler.getClientInfo((result) => {
@@ -64,7 +63,7 @@ export function useClassContent(typeOf: 'exams' | 'homework'): ClassContentInfo[
   return contents
 }
 
-export function useUserInfo(uid: string, onError: (err: any) => void) {
+export function useUserInfo(uid, onError) {
   const [ userInfo, setUserInfo ] = useState(null)
 
   FirebaseHandler.callFunction('getUserInfo', { uid: uid }).then(({ data }) => {

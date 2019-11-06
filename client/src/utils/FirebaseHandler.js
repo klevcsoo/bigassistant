@@ -58,24 +58,24 @@ class FirebaseHandler {
     return func(data);
   }
   
-  static async getUserClaims(handler: (claims: any) => void) {
+  static async getUserClaims(handler) {
     app.auth().onAuthStateChanged(async (user) => {
       if (user) {
         handler((await user.getIdTokenResult(true)).claims);
       }
     });
   }
-  static async getClientInfo(handler: (clientInfo: ClientInfo) =>  void) {
+  static async getClientInfo(handler) {
     app.auth().onAuthStateChanged(async (user) => {
       if (user) {
         await this.getUserClaims(async (claims) => {
           handler({
-            name: user.displayName!,
+            name: user.displayName,
             photo: `${user.photoURL}?height=500`,
             classId: claims.class,
             className: claims.className,
             classRank: claims.classAdmin ? 'admin' : 'tag',
-            facebookId: user.providerData[0]!.providerId === 'facebook.com' ? user.providerData[0]!.uid : undefined,
+            facebookId: user.providerData[0].providerId === 'facebook.com' ? user.providerData[0].uid : undefined,
             joined: LocalizationHandler.formatDate((await app.database().ref(`/user/${user.uid}/joined`).once('value')).val())
           });
         })
@@ -83,14 +83,14 @@ class FirebaseHandler {
     });
   }
   
-  static readData(path: string, handler: (snapshot: app.database.DataSnapshot) => void) {
+  static readData(path, handler) {
     app.auth().onAuthStateChanged((user) => {
       if (user) {
         app.database().ref(path).once('value', (snapshot) => { handler(snapshot) });
       } else console.warn('Cannot read from database, user is not logged in');
     });
   }
-  static readDataContinuously(path: string, handler: (snapshot: app.database.DataSnapshot) => void) {
+  static readDataContinuously(path, handler) {
     app.auth().onAuthStateChanged((user) => {
       if (user) {
         app.database().ref(path).on('value', (snapshot) => { handler(snapshot) })
@@ -100,7 +100,7 @@ class FirebaseHandler {
   static removeDataListener(path) {
     app.database().ref(path).off('value');
   }
-  static writeData(path: string, data: any, handler: (err: Error | null) => void) {
+  static writeData(path, data, handler) {
     app.auth().onAuthStateChanged((user) => {
       if (user) {
         app.database().ref(path).set(data, (err) => { if (handler) handler(err) });
