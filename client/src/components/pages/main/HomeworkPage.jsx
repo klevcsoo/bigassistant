@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Routes from '../../../constants/routes'
 import { Spring } from 'react-spring/renderprops'
 import { useHomeworkList } from '../../../utils/AppHooks'
