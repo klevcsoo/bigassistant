@@ -15,7 +15,7 @@ const HomePage = ({ history }) => {
   return (
     <MainPageLayout pageTitle="Áttekintés" pageActive="home" history={history}>
       <AppTitle text="BIGAssistant" />
-      <AppSubtitle text={`Beta.${version}`} />
+      <AppSubtitle text={`Beta ${version}`} />
       <AppButton text="Mi is ez az alkalmazás?" type="highlight" onClick={() => {history.push(Routes.ABOUT)}} />
       <AppCard>
         <p style={{
@@ -32,10 +32,9 @@ const HomePage = ({ history }) => {
           <br/><br/>
           Rengeteg funkció érkezik még az alkalmazásba, ezek közé tartozik:
           <li>osztályképek jelentösége,</li>
-          <li>osztályból kilépés, adminként az osztály törlése,</li>
           <li>telefonos értesítések,</li>
           <li>oldalak gyorsabb betöltése,</li>
-          <li>és az én személyes kedvencem: a sötét mód.</li>
+          <li>és az én személyes kedvencem: órarend.</li>
           <br/>
           Ha úgy gondolod, hogy szeretnél csatlakozni a projekthez fejlesztöként, értesz a Google
           Firebase-hez, React-hoz, az alap dolgokhoz mint pl. Git, illetve szeretsz csapatban dolgozni,
