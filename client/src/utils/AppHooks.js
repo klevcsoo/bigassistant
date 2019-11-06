@@ -41,12 +41,14 @@ export function useExamsList() {
     FirebaseHandler.getClassId((classId) => {
       FirebaseHandler.readDataContinuously(`/classes/${classId}/exams`, (snapshot) => {
         if (!snapshot.exists()) { setExams(null); return }
+        let examArray = []
         snapshot.forEach((examSnapshot) => {
           let exam = examSnapshot.val()
           exam.id = examSnapshot.key
-          setExams([ ...exams, exam ])
+          examArray.push(exam)
         })
-      })      
+        setExams(examArray)
+      })
     })
   }, [])
 
@@ -59,12 +61,14 @@ export function useHomeworkList() {
   useEffect(() => {
     FirebaseHandler.getClassId((classId) => {
       FirebaseHandler.readDataContinuously(`/classes/${classId}/homework`, (snapshot) => {
-        setHomework(null)
+        if (!snapshot.exists()) { setHomework(null); return }
+        let hwArray = []
         snapshot.forEach((homeworkSnapshot) => {
           let hw = homeworkSnapshot.val()
           hw.id = homeworkSnapshot.key
-          setHomework([ ...homework, hw ])
+          hwArray.push(hw)
         })
+        setHomework(hwArray)
       })      
     })
   }, [])

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Routes from '../../../constants/routes'
 import { Spring } from 'react-spring/renderprops'
 import { useHomeworkList } from '../../../utils/AppHooks'
@@ -11,7 +11,7 @@ import AppCardClassContent from '../../AppCard/AppCardClassContent'
 import LoadingSpinner from '../../LoadingSpinner'
 
 const HomeworkPage = ({ history }) => {
-  const homework = useHomeworkList('homework')
+  const homework = useHomeworkList()
 
   return (
     <MainPageLayout pageTitle="Házi feladat" pageActive="homework" history={history}>
@@ -21,6 +21,7 @@ const HomeworkPage = ({ history }) => {
         <div>
           {homework.length === 0 ? <LoadingSpinner /> : null}
           {homework.map((hw) => {
+            console.log('Inside JSX:', hw)
             if (hw) return (
               <Spring from={{ opacity: 0 }} to={{ opacity: 1 }} key={hw.id}>
                 {(props) => (
@@ -37,10 +38,10 @@ const HomeworkPage = ({ history }) => {
       ) : (
         <div>
           <p style={{
-              textAlign: 'center',
-              fontSize: 20,
-              fontWeight: 300
-            }}>Nincsen házi feladat<span role="img" aria-label="emoji">🙏</span></p>
+            textAlign: 'center',
+            fontSize: 20,
+            fontWeight: 300
+          }}>Nincsen házi feladat<span role="img" aria-label="emoji">🙏</span></p>
         </div>
       )}
     </MainPageLayout>
