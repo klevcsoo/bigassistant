@@ -1,7 +1,7 @@
 import React from 'react'
 import Routes from '../../../constants/routes'
-import { version } from '../../../constants/appInfo'
-import AppColours from '../../../constants/appColors'
+import { version } from '../../../constants/AppInfo'
+import AppColours from '../../../constants/AppColours'
 
 // Components
 import MainPageLayout from '../../layout/MainPageLayout'
