@@ -23,7 +23,7 @@ const InspectHomeworkPage = ({ history, match }) => {
   const deleteHomework = () => {
     setDeleteLoading(true)
     FirebaseHandler.callFunction('removeContentFromClass', { type: 'homework', id: homeworkId }).then(() => {
-      history.push(Routes.HOMEWORK)
+      history.goBack()
     }).catch((err) => {
       console.log(err)
       setDeleteLoading(false)

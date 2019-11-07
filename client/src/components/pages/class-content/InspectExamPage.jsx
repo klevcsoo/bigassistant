@@ -23,7 +23,7 @@ const InspectExamPage = ({ history, match }) => {
   const deleteExam = () => {
     setDeleteLoading(true)
     FirebaseHandler.callFunction('removeContentFromClass', { type: 'exams', id: examId }).then(() => {
-      history.push(Routes.EXAMS)
+      history.goBack()
     }).catch((err) => {
       console.log(err)
       setDeleteLoading(false)
