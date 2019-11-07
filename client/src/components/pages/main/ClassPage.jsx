@@ -52,8 +52,7 @@ const ClassPage = ({ history }) => {
         </div>
       ) : (
         <div>
-          <ParallaxHeaderImage src={classPhoto} />
-          <div style={{ height: '100vw' }}></div>
+          <ParallaxHeaderImage src={classPhoto} header />
 
           <div>
             <h3 style={{

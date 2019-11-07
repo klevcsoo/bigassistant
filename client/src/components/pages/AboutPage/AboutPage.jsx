@@ -16,8 +16,7 @@ const AboutPage = ({ history }) => {
       <React.Fragment>
         <PageTitle title="Információ" history={history} />
         <div>
-          <ParallaxHeaderImage src="https://graph.facebook.com/172915553841122/picture?height=500" />
-          <div style={{ height: '80vw' }}></div>
+          <ParallaxHeaderImage src="https://graph.facebook.com/172915553841122/picture?height=500" header />
           <div>
             <h1 style={{
               margin: '10px auto',

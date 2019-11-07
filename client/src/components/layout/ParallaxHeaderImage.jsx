@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const ParallaxHeaderImage = ({ src }) => {
+const ParallaxHeaderImage = ({ src, header }) => {
   const [ scrollPos, setScrollPos ] = useState(0)
 
   const updateScroll = () => {
@@ -15,17 +15,26 @@ const ParallaxHeaderImage = ({ src }) => {
   }, [])
   
   return (
-    <div className="parallax-bg" style={{
-      width: '100vw', height: '100vw',
-      position: 'absolute', top: 0, left: 0,
-      backgroundImage: `url("${src}")`,
-      backgroundPositionX: 'center',
-      backgroundPositionY: `${scrollPos}px`,
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      borderRadius: '20px',
-      transition: '0ms all'
-    }}></div>
+    <React.Fragment>
+      <div style={{
+        borderRadius: 20,
+        overflow: 'hidden',
+        position: header ? 'absolute' : 'static',
+        top: 0, left: 0
+      }}>
+        <div className="parallax-bg" style={{
+          width: '100vw', height: '100vw',
+          backgroundImage: `url('${src}')`,
+          backgroundAttachment: 'fixed',
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          borderRadius: 20,
+          filter: `blur(${scrollPos / 10}px)`,
+          transition: '200ms all'
+        }}></div>
+      </div>
+      {header ? <div style={{ height: 'calc(100vw - 60px)' }}></div> : null}
+    </React.Fragment>
   )
 }
 
