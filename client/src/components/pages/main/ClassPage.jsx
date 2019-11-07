@@ -11,12 +11,14 @@ import AppButton from '../../AppButton/AppButton'
 import AppUserButton from '../../AppButton/AppUserButton'
 import MainPageLayout from '../../layout/MainPageLayout'
 import AppSubtitle from '../../AppSubtitle'
+import ParallaxHeaderImage from '../../layout/ParallaxHeaderImage'
 
 const ClassPage = ({ history }) => {
   const clientInfo = useClientInfo()
   const classmates = useClassmates()
   const [ inviteCode, setInviteCode ] = useState(null)
   const [ leavingClass, setLeavingClass ] = useState(false)
+  const [ classPhoto, setClassPhoto ] = useState(null)
 
   const leaveClass = () => {
     setLeavingClass(true)
@@ -27,8 +29,9 @@ const ClassPage = ({ history }) => {
 
   useEffect(() => {
     if (clientInfo) {
-      FirebaseHandler.readData(`/classes/${clientInfo.classId}/metadata/inviteCode`, (snapshot) => {
-        setInviteCode(snapshot.val())
+      FirebaseHandler.readData(`/classes/${clientInfo.classId}/metadata`, (snapshot) => {
+        setInviteCode(snapshot.child('inviteCode').val())
+        setClassPhoto(snapshot.child('pictureUrl').val())
       })
     }
   }, [clientInfo])
@@ -49,6 +52,9 @@ const ClassPage = ({ history }) => {
         </div>
       ) : (
         <div>
+          <ParallaxHeaderImage src={classPhoto} />
+          <div style={{ height: '100vw' }}></div>
+
           <div>
             <h3 style={{
               margin: 0, padding: 0,
