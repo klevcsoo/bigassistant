@@ -17,7 +17,7 @@ const ParallaxHeaderImage = ({ src, header }) => {
   return (
     <React.Fragment>
       <div style={{
-        borderRadius: 20,
+        borderRadius: 10,
         overflow: 'hidden',
         position: header ? 'absolute' : 'static',
         top: 0, left: 0
@@ -28,7 +28,7 @@ const ParallaxHeaderImage = ({ src, header }) => {
           backgroundAttachment: 'fixed',
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
-          borderRadius: 20,
+          borderRadius: 10,
           filter: `blur(${scrollPos / 10}px)`,
           transition: '200ms all'
         }}></div>

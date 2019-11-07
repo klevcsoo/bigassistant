@@ -8,7 +8,7 @@
   color: var(--colour-app-text);
   background: var(--colour-app-light);
   border: none;
-  border-radius: 20px;
+  border-radius: 10px;
 
   cursor: pointer;
 }
@@ -73,7 +73,7 @@
 }
 .app-button-classmate > div > img {
   width: auto; height: 40px;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 .app-button-facebook {
@@ -98,5 +98,5 @@
 }
 .app-button-classmate > div > img {
   width: auto; height: 40px;
-  border-radius: 20px;
+  border-radius: 10px;
 }

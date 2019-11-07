@@ -11,7 +11,7 @@ const AppDropDown = ({ onSelected, children }) => {
         color: 'white',
         background: AppColours.LIGHT,
         border: 'none',
-        borderRadius: 20,
+        borderRadius: 10,
         fontFamily: '"Roboto", sans-serif',
         fontSize: 20,
         fontWeight: 300

@@ -24,7 +24,7 @@
 
   background: var(--colour-app-background);
   border: none;
-  border-radius: 20px;
+  border-radius: 10px;
   box-shadow: 3px 3px 6px var(--colour-app-shadow);
 }
 
