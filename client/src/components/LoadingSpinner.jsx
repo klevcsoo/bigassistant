@@ -6,6 +6,7 @@ export function LoadingSpinner() {
   return (
     <div style={{
       width: 'fit-content',
+      height: 40,
       display: 'block',
       margin: 'auto',
       color: AppColours.TEXT
