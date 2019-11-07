@@ -7,10 +7,9 @@ import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
 import AppColours from '../../../constants/AppColours';
 
 const PageTitle = ({ type, title, noBackButton, history }) => {
-  let bgColour = AppColours.getDarkModeEnabled() ? AppColours.LIGHT
-    : type === 'homework' ? AppColours.HOMEWORK
-    : type === 'exam' ? AppColours.EXAM
-    : AppColours.MAIN
+  let bgColour = type === 'homework' ? AppColours.HOMEWORK
+               : type === 'exam' ? AppColours.EXAM
+               : AppColours.BACKGROUND
 
   return (
     <React.Fragment>

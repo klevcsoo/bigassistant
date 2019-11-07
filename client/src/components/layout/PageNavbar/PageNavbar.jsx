@@ -17,9 +17,7 @@ const PageNavbar = ({ history, active }) => {
   }
 
   return (
-    <div className="page-navbar-container" style={{
-      backgroundColor: AppColours.getDarkModeEnabled() ? AppColours.LIGHT : AppColours.BACKGROUND
-    }}>
+    <div className="page-navbar-container">
       <button className="icon" onClick={loadPage.bind(this, Routes.CLASS)}>
         <ClassIcon style={{ fill: active === 'class' ? AppColours.MAIN : AppColours.TEXT }} />
       </button>

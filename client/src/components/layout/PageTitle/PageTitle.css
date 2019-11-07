@@ -9,10 +9,8 @@
   top: 0; left: 0;
   z-index: 100;
 
-  background: var(--colour-app-main);
-  box-shadow: 0px 3px 6px var(--colour-app-shadow);
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  background: var(--colour-app-background);
+  border-bottom: 1px solid var(--colour-app-light);
 }
 .page-title-container h1 {
   grid-column: 2 / span 1;
