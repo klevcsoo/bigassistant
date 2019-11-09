@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 // Components
 import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
 import AppColours from '../../../constants/AppColours';
+import AppBackButton from '../../AppButton/AppBackButton';
 
 const PageTitle = ({ type, title, noBackButton, history }) => {
   let bgColour = type === 'homework' ? AppColours.HOMEWORK
@@ -19,9 +20,7 @@ const PageTitle = ({ type, title, noBackButton, history }) => {
         </Helmet>
         <div className="page-title-container" style={{ background: bgColour }}>
           {!noBackButton ? (
-            <button onClick={() => { if (history) history.goBack() }}>
-              <ArrowBackRoundedIcon style={{ fill: AppColours.TEXT }} />
-            </button>
+            <AppBackButton history={history} />
           ) : null}
           <h1 className="noselect">{title || "BIGAssistant"}</h1>
         </div>
