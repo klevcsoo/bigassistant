@@ -1,41 +1,34 @@
 class AppColours {
-  static LIGHT = '#EBEBEB'
-  static DARK = '#616161'
-  static SHADOW = '#00000029'
+  static LIGHT = 'var(--colour-app-light)'
+  static DARK = 'var(--colour-app-dark)'
+  static SHADOW = 'var(--colour-app-shadow)'
 
-  static BACKGROUND = '#FFFFFF'
-  static TEXT = '#000000'
+  static BACKGROUND = 'var(--colour-app-background)'
+  static TEXT = 'var(--colour-app-text)'
   
-  static MAIN = 'linear-gradient(135deg, #1482FF, #16F393)'
-  static HOMEWORK = '#7F52FF'
-  static EXAM = '#FC4B95'
+  static MAIN = 'var(--colour-app-main)'
+  static HOMEWORK = 'var(--colour-app-homework)'
+  static EXAM = 'var(--colour-app-exam)'
 
-  static FACEBOOK = '#1778F2'
-  static FACEBOOK_DARK = '#0c3b75'
+  static FACEBOOK = 'var(--colour-app-facebook)'
+  static FACEBOOK_DARK = 'var(--colour-app-facebook-dark)'
 
-  static WARNING = '#f44336'
-  static WARNING_DARK = '#b71c1c'
-  static POSITIVE_FEEDBACK = '#76ff03'
+  static WARNING = 'var(--colour-app-warning)'
+  static WARNING_DARK = 'var(--colour-app-warning-dark)'
 
   static getDarkModeEnabled = () => {
     let state = localStorage.getItem(darkModeKey) === 'true' ? true : false
     return state
   }
 
-  static setDarkModeEnabled = (isEnabled, noReload) => {
-    this.LIGHT = isEnabled ? darkColours.LIGHT : lightColours.LIGHT
-    this.DARK = isEnabled ? darkColours.DARK : lightColours.DARK
-    this.BACKGROUND = isEnabled ? darkColours.BACKGROUND : lightColours.BACKGROUND
-    this.TEXT = isEnabled ? darkColours.TEXT : lightColours.TEXT
-
+  static setDarkModeEnabled = (isEnabled) => {
     let root = document.documentElement
-    root.style.setProperty('--colour-app-light', this.LIGHT)
-    root.style.setProperty('--colour-app-dark', this.DARK)
-    root.style.setProperty('--colour-app-background', this.BACKGROUND)
-    root.style.setProperty('--colour-app-text', this.TEXT)
+    root.style.setProperty('--colour-app-light', isEnabled ? darkColours.LIGHT : lightColours.LIGHT)
+    root.style.setProperty('--colour-app-dark', isEnabled ? darkColours.DARK : lightColours.DARK)
+    root.style.setProperty('--colour-app-background', isEnabled ? darkColours.BACKGROUND : lightColours.BACKGROUND)
+    root.style.setProperty('--colour-app-text', isEnabled ? darkColours.TEXT : lightColours.TEXT)
 
     localStorage.setItem(darkModeKey, String(isEnabled))
-    if (!noReload) window.location.reload(false)
   }
 }
 

@@ -12,7 +12,7 @@ import AppColours from './constants/AppColours';
 FirebaseHandler.initializeFirebase();
 
 // Set dark mode at launch, according to key in local storage.
-AppColours.setDarkModeEnabled(AppColours.getDarkModeEnabled(), true);
+AppColours.setDarkModeEnabled(AppColours.getDarkModeEnabled());
 
 ReactDOM.render(<App />,document.getElementById('root'));
 
