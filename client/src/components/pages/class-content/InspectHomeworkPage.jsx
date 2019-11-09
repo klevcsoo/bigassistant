@@ -63,7 +63,7 @@ const InspectHomeworkPage = ({ history, match }) => {
       borderBottom: `5px solid ${AppColours.HOMEWORK}`
     }}>
       <Helmet>
-        <meta name="theme-color" content={AppColours.BACKGROUND} />
+        <meta name="theme-color" content={AppColours.makeStatusbarColour()} />
       </Helmet>
       <AppBackButton history={history} />
       <div style={{

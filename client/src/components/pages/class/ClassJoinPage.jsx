@@ -45,7 +45,7 @@ const ClassJoinPage = ({ history }) => {
   return (
     <React.Fragment>
       <Helmet>
-        <meta name="theme-color" content={AppColours.BACKGROUND} />
+        <meta name="theme-color" content={AppColours.makeStatusbarColour()} />
       </Helmet>
       <AppBackButton history={history} />
       <div style={{

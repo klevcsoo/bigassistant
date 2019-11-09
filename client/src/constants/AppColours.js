@@ -31,14 +31,12 @@ class AppColours {
     localStorage.setItem(darkModeKey, String(isEnabled))
   }
 
-  static convertToStatusbarColour = (colour) => {
+  static makeStatusbarColour = (colour) => {
     switch (colour) {
       case 'var(--colour-app-homework)': return '#7F52FF'
       case 'var(--colour-app-exam)': return '#FC4B95'
-      case 'var(--colour-app-background)': {
-        if (this.getDarkModeEnabled()) return '#000000'
-        else return '#FFFFFF'
-      }
+      case 'var(--colour-app-background)': return this.getDarkModeEnabled() ? '#000000' : '#FFFFFF'
+      default: return this.getDarkModeEnabled() ? '#000000' : '#FFFFFF'
     }
   }
 }

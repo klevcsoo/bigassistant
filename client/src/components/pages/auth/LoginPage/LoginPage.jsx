@@ -45,7 +45,7 @@ const LoginPage = ({ history }) => {
   return (
     <React.Fragment>
       <Helmet>
-        <meta name="theme-color" content={AppColours.BACKGROUND} />
+        <meta name="theme-color" content={AppColours.makeStatusbarColour()} />
       </Helmet>
       <div className="login-main-container" style={{ backgroundColor: AppColours.BACKGROUND }}>
         <div>{createBackground()}</div>
