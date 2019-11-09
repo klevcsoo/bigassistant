@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import './PageTitle.css'
 import { Helmet } from 'react-helmet';
 
@@ -8,17 +8,21 @@ import AppColours from '../../../constants/AppColours';
 import AppBackButton from '../../AppButton/AppBackButton';
 
 const PageTitle = ({ type, title, noBackButton, history }) => {
+  const backgroundRef = useRef(null)
+
   let bgColour = type === 'homework' ? AppColours.HOMEWORK
-               : type === 'exam' ? AppColours.EXAM
-               : AppColours.BACKGROUND
+  : type === 'exam' ? AppColours.EXAM
+  : AppColours.BACKGROUND
+
+  let statusbarColour = AppColours.convertToStatusbarColour(bgColour)
 
   return (
     <React.Fragment>
         <Helmet>
-          <meta name="theme-color" content={bgColour} />
+          <meta name="theme-color" content={statusbarColour} />
           <title>{title}</title>
         </Helmet>
-        <div className="page-title-container" style={{ background: bgColour }}>
+        <div className="page-title-container" style={{ background: bgColour }} ref={backgroundRef}>
           {!noBackButton ? (
             <AppBackButton history={history} />
           ) : null}
