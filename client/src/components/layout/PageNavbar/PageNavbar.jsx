@@ -16,25 +16,26 @@ const PageNavbar = ({ history, active }) => {
     setTimeout(() => { history.push(link) }, 200)
   }
 
+  const activeColour = AppColours.LIGHT
+
   return (
     <div className="page-navbar-container">
       <button className="icon" onClick={loadPage.bind(this, Routes.CLASS)}>
-        <ClassIcon style={{ fill: active === 'class' ? AppColours.MAIN : AppColours.TEXT }} />
+        <ClassIcon style={{ fill: active === 'class' ? activeColour : AppColours.TEXT }} />
       </button>
       <button className="icon" onClick={loadPage.bind(this, Routes.HOMEWORK)}>
-        <HomeworkIcon style={{ fill: active === 'homework' ? AppColours.MAIN : AppColours.TEXT }} />
+        <HomeworkIcon style={{ fill: active === 'homework' ? activeColour : AppColours.TEXT }} />
       </button>
       <button className="icon" onClick={loadPage.bind(this, Routes.HOME)}>
-        <HomeIcon style={{ fill: active === 'home' ? AppColours.MAIN : AppColours.TEXT }} />
+        <HomeIcon style={{ fill: active === 'home' ? activeColour : AppColours.TEXT }} />
       </button>
       <button className="icon" onClick={loadPage.bind(this, Routes.EXAMS)}>
-        <ExamsIcon style={{ fill: active === 'exams' ? AppColours.MAIN : AppColours.TEXT }} />
+        <ExamsIcon style={{ fill: active === 'exams' ? activeColour : AppColours.TEXT }} />
       </button>
       <button className="icon" onClick={loadPage.bind(this, Routes.USER)}>
-        <UserIcon style={{ fill: active === 'user' ? AppColours.MAIN : AppColours.TEXT }} />
+        <UserIcon style={{ fill: active === 'user' ? activeColour : AppColours.TEXT }} />
       </button>
     </div>
   )
 }
-
 export default PageNavbar

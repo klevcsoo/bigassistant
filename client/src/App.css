@@ -6,9 +6,9 @@
   --colour-app-background: #ffffff;
   --colour-app-text: #000000;
 
-  --colour-app-main: #32A5FC;
-  --colour-app-homework: #1EE26C;
-  --colour-app-exam: #FD514C;
+  --colour-app-main: linear-gradient(135deg, #1482FF, #16F393);
+  --colour-app-homework: #7F52FF;
+  --colour-app-exam: #FC4B95;
 
   --colour-facebook: #1778F2;
   --colour-facebook-dark: #0c3b75;

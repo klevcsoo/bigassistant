@@ -6,9 +6,9 @@ class AppColours {
   static BACKGROUND = '#FFFFFF'
   static TEXT = '#000000'
   
-  static MAIN = '#32A5FC'
-  static HOMEWORK = '#1EE26C'
-  static EXAM = '#FD514C'
+  static MAIN = 'linear-gradient(135deg, #1482FF, #16F393)'
+  static HOMEWORK = '#7F52FF'
+  static EXAM = '#FC4B95'
 
   static FACEBOOK = '#1778F2'
   static FACEBOOK_DARK = '#0c3b75'
