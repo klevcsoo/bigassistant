@@ -3,7 +3,6 @@ import './PageTitle.css'
 import { Helmet } from 'react-helmet';
 
 // Components
-import ArrowBackRoundedIcon from '@material-ui/icons/ArrowBackRounded';
 import AppColours from '../../../constants/AppColours';
 import AppBackButton from '../../AppButton/AppBackButton';
 
