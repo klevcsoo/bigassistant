@@ -51,16 +51,31 @@
 }
 
 .app-button-highlight {
+  background: var(--colour-app-main);
+  box-shadow: 5px 5px 6px var(--colour-app-main-shadow);
+}
+.app-button-highlight h2 {
   color: #ffffff;
-  background: var(--colour-app-main) !important;
+  font-weight: 500;
 }
 
 .app-button-exam {
-  background: var(--colour-app-exam) !important;
+  background: var(--colour-app-exam);
+  box-shadow: 5px 5px 6px var(--colour-app-exam-shadow);
+}
+.app-button-exam h2 {
+  color: #ffffff;
+  font-weight: 500;
 }
 
 .app-button-homework {
-  background: var(--colour-app-homework) !important;
+  background: var(--colour-app-homework);
+  box-shadow: 5px 5px 6px var(--colour-app-homework-shadow);
+
+}
+.app-button-homework h2 {
+  color: #ffffff;
+  font-weight: 500;
 }
 
 .app-button-classmate {
