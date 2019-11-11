@@ -83,7 +83,7 @@ exports.joinClass = functions.https.onCall(async (data, context) => {
         })
     }
 
-    admin.database().ref(`/users/${user}/class`).set(classId).catch((err) => {
+    admin.database().ref(`/users/${user.uid}/class`).set(classId).catch((err) => {
         throw new functions.https.HttpsError('unknown', err)
     })
 
@@ -117,33 +117,35 @@ exports.leaveClass = functions.https.onCall(async (data, context) => {
         if (userToRemove) {
             console.log(`Removing ${userToRemove} from their class`)
 
-            admin.auth().setCustomUserClaims(userToRemove.uid, {
+            admin.auth().setCustomUserClaims(userToRemove, {
                 classAdmin: null
             }).catch((error) => {
                 throw new functions.https.HttpsError('unknown', error)
             })
+
+            admin.database().ref(`/users/${userToRemove}/class`).remove().catch((error) => {
+                throw new functions.https.HttpsError('unknown', error)
+            })
     
-            classSnapshot.child('members/').ref.once('value').then((snapshot) => {
-                snapshot.forEach((child) => {
-                    if (child.val() === userToRemove.uid) {
-                        child.ref.remove().catch((error) => {
-                            throw new functions.https.HttpsError('unknown', error)
-                        })
-                    }
+            classSnapshot.child(`members/${userToRemove}`).ref.remove().catch((error) => {
+                throw new functions.https.HttpsError('unknown', error)
+            })
+        } else {
+            classSnapshot.child('members').forEach((member) => {
+                admin.database().ref(`/users/${member}/class`).remove().catch((error) => {
+                    throw new functions.https.HttpsError('unknown', error)
                 })
-            }).catch((error) => {
+            })
+
+            classSnapshot.ref.remove().catch((error) => {
+                throw new functions.https.HttpsError('unknown', error)
+            })
+
+            const inviteCode = classSnapshot.child('/metadata/inviteCode')
+            admin.database().ref(`/classInvites/${inviteCode.val()}`).remove().catch((error) => {
                 throw new functions.https.HttpsError('unknown', error)
             })
         }
-
-        classSnapshot.ref.remove().catch((error) => {
-            throw new functions.https.HttpsError('unknown', error)
-        })
-
-        const inviteCode = classSnapshot.child('/metadata/inviteCode')
-        admin.database().ref(`/classInvites/${inviteCode.val()}`).remove().catch((error) => {
-            throw new functions.https.HttpsError('unknown', error)
-        })
     } else {
         admin.auth().setCustomUserClaims(user.uid, {
             classAdmin: null
@@ -151,15 +153,7 @@ exports.leaveClass = functions.https.onCall(async (data, context) => {
             throw new functions.https.HttpsError('unknown', error)
         })
 
-        classSnapshot.child('members/').ref.once('value').then((snapshot) => {
-            snapshot.forEach((child) => {
-                if (child.val() === user.uid) {
-                    child.ref.remove().catch((error) => {
-                        throw new functions.https.HttpsError('unknown', error)
-                    })
-                }
-            })
-        }).catch((error) => {
+        classSnapshot.child(`members/${user.uid}`).ref.remove().catch((error) => {
             throw new functions.https.HttpsError('unknown', error)
         })
     }
