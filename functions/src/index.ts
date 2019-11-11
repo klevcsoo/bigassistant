@@ -98,7 +98,7 @@ exports.leaveClass = functions.https.onCall(async (data, context) => {
     const user = await admin.auth().getUser(context.auth.uid).catch((error) => {
         throw new functions.https.HttpsError('unknown', error)
     })
-    const isAdmin = (<any>user.customClaims).classAdmin
+    const isAdmin = user.customClaims ? (<any>user.customClaims).classAdmin : false
     const classId = (await admin.database().ref(`/users/${user.uid}/class`).once('value')).val()
     if (classId === undefined) {
         throw new functions.https.HttpsError('failed-precondition', 'User has no class')
