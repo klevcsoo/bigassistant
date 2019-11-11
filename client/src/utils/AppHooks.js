@@ -20,11 +20,14 @@ export function useClassmates() {
     FirebaseHandler.getClassId((classId) => {
       FirebaseHandler.readDataContinuously(`/classes/${classId}/members`, (snapshot) => {
         if (snapshot.numChildren() === 0) { setClassmates(null); return }
+        let memberCount = snapshot.numChildren()
+        let members = []
         snapshot.forEach((memberSnapshot) => {
           let uid = memberSnapshot.val()
           FirebaseHandler.callFunction('getUserInfo', { uid: uid }).then(({ data }) => {
             data.uid = uid
-            setClassmates([...classmates, data])
+            members.push(data)
+            if (members.length === memberCount) setClassmates(members)
           })
         })
       })
