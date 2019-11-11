@@ -127,7 +127,15 @@ exports.leaveClass = functions.https.onCall(async (data, context) => {
                 throw new functions.https.HttpsError('unknown', error)
             })
     
-            classSnapshot.child(`members/${userToRemove}`).ref.remove().catch((error) => {
+            classSnapshot.child('members/').ref.once('value').then((snapshot) => {
+                snapshot.forEach((child) => {
+                    if (child.val() === userToRemove.uid) {
+                        child.ref.remove().catch((error) => {
+                            throw new functions.https.HttpsError('unknown', error)
+                        })
+                    }
+                })
+            }).catch((error) => {
                 throw new functions.https.HttpsError('unknown', error)
             })
         } else {
@@ -153,7 +161,19 @@ exports.leaveClass = functions.https.onCall(async (data, context) => {
             throw new functions.https.HttpsError('unknown', error)
         })
 
-        classSnapshot.child(`members/${user.uid}`).ref.remove().catch((error) => {
+        classSnapshot.child('members/').ref.once('value').then((snapshot) => {
+            snapshot.forEach((child) => {
+                if (child.val() === user.uid) {
+                    child.ref.remove().catch((error) => {
+                        throw new functions.https.HttpsError('unknown', error)
+                    })
+                }
+            })
+        }).catch((error) => {
+            throw new functions.https.HttpsError('unknown', error)
+        })
+
+        admin.database().ref(`/users/${user.uid}/class`).remove().catch((error) => {
             throw new functions.https.HttpsError('unknown', error)
         })
     }
