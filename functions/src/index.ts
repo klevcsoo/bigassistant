@@ -132,7 +132,7 @@ exports.leaveClass = functions.https.onCall(async (data, context) => {
             })
         } else {
             classSnapshot.child('members').forEach((member) => {
-                admin.database().ref(`/users/${member}/class`).remove().catch((error) => {
+                admin.database().ref(`/users/${member.val()}/class`).remove().catch((error) => {
                     throw new functions.https.HttpsError('unknown', error)
                 })
             })
