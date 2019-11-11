@@ -13,7 +13,7 @@ import UserIcon from '@material-ui/icons/PersonRounded'
 const PageNavbar = ({ history, active }) => {
   const loadPage = (link) => {
     if (link === history.location.pathname) return
-    setTimeout(() => { history.push(link) }, 200)
+    setTimeout(() => { history.replace(link) }, 200)
   }
 
   const activeColour = AppColours.LIGHT

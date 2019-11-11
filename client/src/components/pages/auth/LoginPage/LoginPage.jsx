@@ -52,10 +52,12 @@ const LoginPage = ({ history }) => {
         <div className="login-methods-container">
             <AppTitle text="BIGAssistant" />
             {loading ? <LoadingSpinner static /> : clientInfo ? (
-              <AppUserButton {...clientInfo} onClick={() => { history.push(Routes.HOME) }} />
+              <AppUserButton {...clientInfo} onClick={() => { history.replace(Routes.HOME) }} />
             ) : (
-              <><AppButton text="Bejelentkezés Facebook-al" onClick={() => { FirebaseHandler.loginWithFacebook() }} facebook />
-              <AppButton text="Bejelentkezés Google-el" onClick={() => { FirebaseHandler.loginWithGoogle() }} /></>
+              <><AppButton text="Bejelentkezés Facebook-al"
+              onClick={() => { FirebaseHandler.loginWithFacebook() }} facebook />
+              <AppButton text="Bejelentkezés Google-el"
+              onClick={() => { FirebaseHandler.loginWithGoogle() }} /></>
             )}
         </div>
     </div>
