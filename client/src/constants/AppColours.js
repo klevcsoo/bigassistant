@@ -7,6 +7,7 @@ class AppColours {
   static TEXT = 'var(--colour-app-text)'
   
   static MAIN = 'var(--colour-app-main)'
+  static MAIN_MONO = 'var(--colour-app-main-shadow)'
   static HOMEWORK = 'var(--colour-app-homework)'
   static EXAM = 'var(--colour-app-exam)'
 
