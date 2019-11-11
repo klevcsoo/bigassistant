@@ -39,9 +39,9 @@ h1.app-card-group-title {
   width: 290px;
   padding: 0 !important;
   display: grid;
-  grid-template-columns: 5px auto;
+  grid-template-columns: 10px auto;
   background: var(--colour-app-background);
-  box-shadow: 5px 5px 6px var(--colour-app-shadow)
+  box-shadow: 5px 5px 6px var(--colour-app-shadow);
 }
 .app-card-class-content > div.accent {
   width: auto; height: 100%;
