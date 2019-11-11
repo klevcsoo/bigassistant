@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
 import LocalizationHandler from '../../../utils/LocalizationHandler'
 import { Helmet } from 'react-helmet'
-import Routes from '../../../constants/routes'
 
 // Components
 import AppBackButton from '../../AppButton/AppBackButton'
@@ -41,7 +40,7 @@ const InspectExamPage = ({ history, match }) => {
         }
       })
     })
-  } , [ match ])
+  } , [ examId ])
 
   useEffect(() => {
     if (examInfo) {
@@ -54,7 +53,7 @@ const InspectExamPage = ({ history, match }) => {
         setCreatorInfo({})
       })
     }
-  }, [examInfo])
+  }, [ examInfo ])
 
   return (
     <div style={{

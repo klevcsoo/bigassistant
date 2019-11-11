@@ -29,6 +29,7 @@ export function useClassmates() {
         })
       })
     })
+    // eslint-disable-next-line
   }, [])
 
   return classmates

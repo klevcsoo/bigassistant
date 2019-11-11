@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
 import LocalizationHandler from '../../../utils/LocalizationHandler'
 import { Helmet } from 'react-helmet'
-import Routes from '../../../constants/routes'
 
 // Components
 import AppBackButton from '../../AppButton/AppBackButton'
@@ -41,7 +40,7 @@ const InspectHomeworkPage = ({ history, match }) => {
         }
       })
     })
-  } , [ match ])
+  } , [ homeworkId ])
 
   useEffect(() => {
     if (homeworkInfo) {
@@ -54,7 +53,7 @@ const InspectHomeworkPage = ({ history, match }) => {
         setCreatorInfo({})
       })
     }
-  }, [homeworkInfo])
+  }, [ homeworkInfo ])
 
   return (
     <div style={{
