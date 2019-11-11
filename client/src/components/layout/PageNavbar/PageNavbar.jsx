@@ -16,23 +16,29 @@ const PageNavbar = ({ history, active }) => {
     setTimeout(() => { history.replace(link) }, 200)
   }
 
-  const activeColour = AppColours.LIGHT
+  const activeColour = AppColours.MAIN_MONO
+  const activeBorder = `3px solid ${activeColour}`
 
   return (
     <div className="page-navbar-container">
-      <button className="icon" onClick={loadPage.bind(this, Routes.CLASS)}>
+      <button className="icon" onClick={loadPage.bind(this, Routes.CLASS)}
+      style={{ borderTop: active === 'class' ? activeBorder : 'none' }}>
         <ClassIcon style={{ fill: active === 'class' ? activeColour : AppColours.TEXT }} />
       </button>
-      <button className="icon" onClick={loadPage.bind(this, Routes.HOMEWORK)}>
+      <button className="icon" onClick={loadPage.bind(this, Routes.HOMEWORK)}
+      style={{ borderTop: active === 'homework' ? activeBorder : 'none' }}>
         <HomeworkIcon style={{ fill: active === 'homework' ? activeColour : AppColours.TEXT }} />
       </button>
-      <button className="icon" onClick={loadPage.bind(this, Routes.HOME)}>
+      <button className="icon" onClick={loadPage.bind(this, Routes.HOME)}
+      style={{ borderTop: active === 'home' ? activeBorder : 'none' }}>
         <HomeIcon style={{ fill: active === 'home' ? activeColour : AppColours.TEXT }} />
       </button>
-      <button className="icon" onClick={loadPage.bind(this, Routes.EXAMS)}>
+      <button className="icon" onClick={loadPage.bind(this, Routes.EXAMS)}
+      style={{ borderTop: active === 'exams' ? activeBorder : 'none' }}>
         <ExamsIcon style={{ fill: active === 'exams' ? activeColour : AppColours.TEXT }} />
       </button>
-      <button className="icon" onClick={loadPage.bind(this, Routes.USER)}>
+      <button className="icon" onClick={loadPage.bind(this, Routes.USER)}
+      style={{ borderTop: active === 'user' ? activeBorder : 'none' }}>
         <UserIcon style={{ fill: active === 'user' ? activeColour : AppColours.TEXT }} />
       </button>
     </div>
