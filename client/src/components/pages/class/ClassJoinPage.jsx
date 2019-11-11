@@ -21,7 +21,7 @@ const ClassJoinPage = ({ history }) => {
 
   const getPreview = () => {
     setGettingsClass(true)
-    FirebaseHandler.callFunction('getClasssPreview', { inviteCode: inviteCode }).then(({ data }) => {
+    FirebaseHandler.callFunction('getClassPreview', { inviteCode: inviteCode }).then(({ data }) => {
       setClassPreview(data)
       setGettingsClass(false)
     }).catch((err) => {

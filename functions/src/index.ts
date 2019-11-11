@@ -14,12 +14,12 @@ admin.initializeApp({
 
 // ---------- CLOUD FUNCTION CALLABLES ----------
 exports.joinClass = functions.https.onCall(async (data, context) => {
-    if (context.auth === undefined) {
+    if (!context.auth) {
         throw new functions.https.HttpsError('unauthenticated', 'User is not authenticated')
     }
 
     const user = await admin.auth().getUser(context.auth.uid).catch((err) => {
-        throw new functions.https.HttpsError('internal', err)
+        throw new functions.https.HttpsError('internal', 'asdasdasasd')
     })
 
     if ((await admin.database().ref(`/users/${user.uid}/class`).once('value')).exists()) {
@@ -29,7 +29,7 @@ exports.joinClass = functions.https.onCall(async (data, context) => {
     // If the user is trying to join an existing class, the inviteCode contains a value,
     // but if the user is trying to create a class, the className holds a value.
     //! One of them is always undefined.
-    let className: string = data.name
+    let className: string = data ? data.name : null
     let inviteCode: string = utils.makeDatabasePath(data.inviteCode)
 
     // These are only defined, if the class is just to be created.
@@ -91,7 +91,7 @@ exports.joinClass = functions.https.onCall(async (data, context) => {
 })
 
 exports.leaveClass = functions.https.onCall(async (data, context) => {
-    if (context.auth === undefined) {
+    if (!context.auth) {
         throw new functions.https.HttpsError('unauthenticated', 'User is not authenticated')
     }
 
@@ -105,7 +105,7 @@ exports.leaveClass = functions.https.onCall(async (data, context) => {
     }
 
     // If present, the user with data.uid will be removed of the invoking user is an admin
-    const userToRemove = data.uid
+    const userToRemove = data ? data.uid : null
 
     console.log(`Leaving class with id ${classId}`)
 
@@ -140,7 +140,8 @@ exports.leaveClass = functions.https.onCall(async (data, context) => {
             throw new functions.https.HttpsError('unknown', error)
         })
 
-        admin.database().ref(`/classInvites`).orderByValue().equalTo(classId).ref.remove().catch((error) => {
+        const inviteCode = classSnapshot.child('/metadata/inviteCode')
+        admin.database().ref(`/classInvites/${inviteCode.val()}`).remove().catch((error) => {
             throw new functions.https.HttpsError('unknown', error)
         })
     } else {
@@ -346,12 +347,18 @@ exports.getClassPreview = functions.https.onCall(async (data, context) => {
     const classId = await admin.database().ref(`/classInvites/${code}`).once('value').catch((err) => {
         throw new functions.https.HttpsError('internal', err)
     })
+    console.log(classId)
     if (!classId) {
         throw new functions.https.HttpsError('invalid-argument', 'Invite code is not attached to any class')
     }
 
     const classSnapshot = await admin.database().ref(`/classes/${classId.val()}/metadata`).once('value').catch((err) => {
         throw new functions.https.HttpsError('internal', err)
+    })
+
+    console.log({
+        name: classSnapshot.child('name').val(),
+        photo: classSnapshot.child('pictureUrl').val()
     })
 
     return {

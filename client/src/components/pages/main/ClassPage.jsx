@@ -16,9 +16,8 @@ import ParallaxHeaderImage from '../../layout/ParallaxHeaderImage'
 const ClassPage = ({ history }) => {
   const clientInfo = useClientInfo()
   const classmates = useClassmates()
-  const [ inviteCode, setInviteCode ] = useState(null)
+  const [ classInfo, setClassInfo ] = useState(null)
   const [ leavingClass, setLeavingClass ] = useState(false)
-  const [ classPhoto, setClassPhoto ] = useState(null)
 
   const leaveClass = () => {
     setLeavingClass(true)
@@ -28,17 +27,20 @@ const ClassPage = ({ history }) => {
   }
 
   useEffect(() => {
-    if (clientInfo) {
-      FirebaseHandler.readData(`/classes/${clientInfo.classId}/metadata`, (snapshot) => {
-        setInviteCode(snapshot.child('inviteCode').val())
-        setClassPhoto(snapshot.child('pictureUrl').val())
+    FirebaseHandler.getClassId((classId) => {
+      FirebaseHandler.readData(`/classes/${classId}/metadata`, (snapshot) => {
+        if (!snapshot.exists()) return
+        setClassInfo({
+          inviteCode: snapshot.child('inviteCode').val(),
+          classPhoto: snapshot.child('pictureUrl').val()
+        })
       })
-    }
-  }, [clientInfo])
+    })
+  }, [])
 
   return (
     <MainPageLayout pageTitle="Osztály" pageActive="class" history={history}>
-      {!clientInfo ? <LoadingSpinner /> : !clientInfo.classId ? (
+      {!clientInfo ? <LoadingSpinner /> : !classInfo ? (
         <div style={{
           position: 'absolute',
           top: '50%', left: '50%',
@@ -52,14 +54,14 @@ const ClassPage = ({ history }) => {
         </div>
       ) : (
         <div>
-          <ParallaxHeaderImage src={classPhoto} header />
+          <ParallaxHeaderImage src={classInfo.classPhoto} header />
 
           <div>
             <h3 style={{
               margin: 0, padding: 0,
               textAlign: 'center',
               fontWeight: 300, fontSize: '20px'
-            }}>Meghívó kód: <span style={{ fontWeight: 400 }}>{inviteCode}</span></h3>
+            }}>Meghívó kód: <span style={{ fontWeight: 400 }}>{classInfo.inviteCode}</span></h3>
           </div>
           <AppDivider/>
           <AppButton type="highlight" text="Órarend" />
@@ -70,7 +72,7 @@ const ClassPage = ({ history }) => {
           )}
           <AppDivider />
           <AppSubtitle text="Osztály tagjai:" />
-          {classmates.length === 0 ? <LoadingSpinner/> : (
+          {!classmates || classmates.length === 0 ? <LoadingSpinner/> : (
             <div>
               {classmates.map((classmate) => (
                 <Spring from={{ opacity: 0 }} to={{ opacity: 1 }} key={classmate.uid}>
