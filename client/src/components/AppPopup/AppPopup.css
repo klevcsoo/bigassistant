@@ -2,7 +2,7 @@
   width: auto; height: auto;
   margin: 0; padding: 0;
 
-  display: block; z-index: 90;
+  display: block; z-index: 91;
   position: fixed;
   top: 0; left: 0; bottom: 0; right: 0;
 
@@ -10,30 +10,29 @@
 }
 
 .app-popup > div {
-  width: min-content; height: auto;
-  max-width: 300px;
+  width: 100vw; height: auto;
   margin: 0; padding: 0;
   overflow: hidden;
 
   display: grid;
   grid-template-rows: min-content min-content;
 
-  position: relative;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
+  position: absolute;
+  bottom: 0; left: 0;
 
-  background: var(--colour-app-background);
+  background: var(--colour-app-light);
   border: none;
-  border-radius: 10px;
-  box-shadow: 3px 3px 6px var(--colour-app-shadow);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .app-popup > div > p {
-  margin: 10px 5px; padding: 0;
+  margin: 15px 5px 10px 5px; padding: 0;
   font-weight: 300;
   text-align: center;
+  word-break: normal;
 }
 
 .app-popup > div > button {
-  margin: 5px !important;
+  width: calc(100vw - 10px) !important;
 }

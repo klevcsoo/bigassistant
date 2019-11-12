@@ -10,32 +10,20 @@ import AppDivider from '../../AppDivider'
 import AppInput from '../../AppInput/AppInput'
 import AppSwitch from '../../AppSwitch/AppSwitch'
 import LoadingSpinner from '../../LoadingSpinner'
-import AppPopup from '../../AppPopup/AppPopup'
 
-const ClassCreatePage = ({ history }) => {
+const ClassCreatePage = ({ history, displayPopup }) => {
   const [ classInfo, setClassInfo ] = useState({ name: 'Osztály', photo: defaultClassPhoto, closed: false })
-  const [ popup, setPopup ] = useState({ visible: false, message: '' })
   const [ addingClass, setAddingClass ] = useState(false)
-  const [ addedClass, setAddedClass ] = useState(false)
-
-  const displayPopup = (message) => {
-    setPopup({ visible: true, message: message })
-  }
-  const closePopup = () => {
-    if (addedClass) history.goBack()
-    else {
-      setPopup({ visible: false, message: '' })
-      setAddedClass(false)
-    }
-  }
 
   const createClass = () => {
     setAddingClass(true)
     FirebaseHandler.callFunction('joinClass', classInfo).then(() => {
-      setAddedClass(true)
-      displayPopup('Osztály létrehozva!')
+      displayPopup('Osztály létrehozva!', () => {
+        history.goBack()
+      })
     }).catch((err) => {
       console.log(err);
+      setAddingClass(false)
       displayPopup(`Sikertelen létrehozás! Hibaüzenet: ${err}`)
     })
   }
@@ -55,7 +43,6 @@ const ClassCreatePage = ({ history }) => {
           transform: 'translate(-50%, -50%)'
         }}><LoadingSpinner /></div></div>
       )}
-      {popup.visible ? <AppPopup message={popup.message} onClose={closePopup} /> : null}
       <UserProfileHeader {...classInfo} />
       <AppDivider />
       <AppInput placeholder="Osztály neve" text={classInfo.name} onTextChanged={(text) => {

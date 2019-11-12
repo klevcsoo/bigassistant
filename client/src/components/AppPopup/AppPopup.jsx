@@ -1,15 +1,20 @@
 import React from 'react'
 import './AppPopup.css'
 import AppButton from '../AppButton/AppButton'
+import { Slide, Fade } from '@material-ui/core'
 
-const AppPopup = ({ message, onClose }) => {
+const AppPopup = ({ visible, message, onClose }) => {
   return (
-    <div className="app-popup">
-      <div>
-        <p>{message}</p>
-        <AppButton type="highlight" text="OK" onClick={onClose} />
+    <Fade in={visible}>
+      <div className="app-popup">
+        <Slide direction="up" in={visible}>
+          <div>
+            <p>{message}</p>
+            <AppButton type="highlight" text="OK" onClick={onClose} />
+          </div>
+        </Slide>
       </div>
-    </div>
+    </Fade>
   )
 }
 

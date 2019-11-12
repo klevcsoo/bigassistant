@@ -10,31 +10,17 @@ import AppSubtitle from '../../AppSubtitle'
 import AppCardClassContent from '../../AppCard/AppCardClassContent'
 import AppInput from '../../AppInput/AppInput'
 import LoadingSpinner from '../../LoadingSpinner'
-import AppPopup from '../../AppPopup/AppPopup'
 import AppClassSubjectsDropDown from '../../AppDropDown/AppClassSubjectsDropDown'
 import AppDivider from '../../AppDivider'
 
-const AddExamPage = ({ history }) => {
+const AddExamPage = ({ history, displayPopup }) => {
   const [ currentExam, setCurrentExam ] = useState({
     title: '',
     date: new Date().getTime(),
     subject: null,
     notes: ''
   })
-  const [ popup, setPopup ] = useState({ visible: false, message: '' })
   const [ addingExam, setAddingExam ] = useState(false)
-  const [ addedExam, setAddedExam ] = useState(false)
-
-  const displayPopup = (message) => {
-    setPopup({ visible: true, message: message })
-  }
-  const closePopup = () => {
-    if (addedExam) history.goBack()
-    else {
-      setPopup({ visible: false, message: '' })
-      setAddingExam(false)
-    }
-  }
 
   const saveExam = () => {
     setAddingExam(true)
@@ -42,10 +28,12 @@ const AddExamPage = ({ history }) => {
       typeOf: 'exams',
       content: currentExam
     }).then(() => {
-      setAddedExam(true)
-      displayPopup('Dolgozat hozzáadva!')
+      displayPopup('Dolgozat hozzáadva!', () => {
+        history.goBack()
+      })
     }).catch((err) => {
       console.log(err)
+      setAddingExam(false)
       displayPopup(`Sikertelen hozzáadás! Hibaüzenet: ${err}`)
     })
   }
@@ -66,7 +54,6 @@ const AddExamPage = ({ history }) => {
       )}
       <SaveablePageLayout onSave={saveExam} pageTitle="Dolgozat" pageType="exam"
       history={history} buttonText="Hozzáadás">
-        {popup.visible ? <AppPopup message={popup.message} onClose={closePopup} /> : null}
         <AppSubtitle text="Előnézet:" />
         <AppCardClassContent type="exam" {...currentExam} />
         <AppSubtitle text="Beállítások:" />

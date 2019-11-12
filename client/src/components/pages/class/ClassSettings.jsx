@@ -12,29 +12,15 @@ import AppInput from '../../AppInput/AppInput'
 import AppColours from '../../../constants/AppColours'
 import SaveablePageLayout from '../../layout/SaveablePageLayout'
 import AppButton from '../../AppButton/AppButton'
-import AppPopup from '../../AppPopup/AppPopup'
 import Routes from '../../../constants/routes'
 
-const ClassSettings = ({ history }) => {
+const ClassSettings = ({ history, displayPopup }) => {
   const clientInfo = useClientInfo()
   const [ classInfo, setClassInfo ] = useState(null)
-  const [ popup, setPopup ] = useState({ visible: false, message: '' })
   const [ currentSubject, setCurrentSubject ] = useState('')
   const [ classSaving, setClassSaving ] = useState(false)
-  const [ classSaved, setClassSaved ] = useState(false)
 
   const currentSubjectInput = useRef(null)
-
-  const displayPopup = (message) => {
-    setPopup({ visible: true, message: message })
-  }
-  const closePopup = () => {
-    if (classSaved) history.goBack()
-    else {
-      setPopup({ visible: false, message: '' })
-      setClassSaving(false)
-    }
-  }
 
   const addSubject = () => {
     if (currentSubject.length === 0 || currentSubject === ' ') return
@@ -54,10 +40,12 @@ const ClassSettings = ({ history }) => {
   }
 
   const deleteClass = () => {
+    setClassSaving(true)
     FirebaseHandler.callFunction('leaveClass').then(() => {
       history.push(Routes.HOME)
     }).catch((err) => {
       console.log(err)
+      setClassSaving(false)
       displayPopup(`Sikertelen törlés! Hibaüzenet: ${err}`)
     })
   }
@@ -65,11 +53,14 @@ const ClassSettings = ({ history }) => {
   const updateClassSettings = () => {
     setClassSaving(true)
     FirebaseHandler.callFunction('updateClass', classInfo).then(() => {
-      setClassSaved(true)
-      displayPopup('Osztálybeállítások elmentve!')
+      displayPopup('Osztálybeállítások elmentve!', () => {
+        history.goBack()
+      })
     }).catch((err) => {
       console.log(err)
-      displayPopup(`Sikertelen mentés! Hibaüzenet: ${err}`)
+      displayPopup(`Sikertelen mentés! Hibaüzenet: ${err}`, () => {
+        setClassSaving(false)
+      })
     })
   }
 
@@ -93,7 +84,6 @@ const ClassSettings = ({ history }) => {
           transform: 'translate(-50%, -50%)'
         }}><LoadingSpinner /></div></div>
       )}
-      {popup.visible ? <AppPopup message={popup.message} onClose={closePopup} /> : null}
       {!classInfo || !clientInfo ? <LoadingSpinner /> : (
         <React.Fragment>
           {clientInfo.classRank !== 'admin' ? <UnauthorizedPage /> : (

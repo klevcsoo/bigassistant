@@ -10,31 +10,17 @@ import AppSubtitle from '../../AppSubtitle'
 import AppCardClassContent from '../../AppCard/AppCardClassContent'
 import AppInput from '../../AppInput/AppInput'
 import LoadingSpinner from '../../LoadingSpinner'
-import AppPopup from '../../AppPopup/AppPopup'
 import AppClassSubjectsDropDown from '../../AppDropDown/AppClassSubjectsDropDown'
 import AppDivider from '../../AppDivider';
 
-const AddHomeworkPage = ({ history }) => {
+const AddHomeworkPage = ({ history, displayPopup }) => {
   const [ currentHomework, setCurrentHomework ] = useState({
     title: '',
     date: new Date().getTime(),
     subject: null,
     notes: ''
   })
-  const [ popup, setPopup ] = useState({ visible: false, message: '' })
   const [ addingHomework, setAddingHomework ] = useState(false)
-  const [ addedHomework, setAddedHomework ] = useState(false)
-
-  const displayPopup = (message) => {
-    setPopup({ visible: true, message: message })
-  }
-  const closePopup = () => {
-    if (addedHomework) history.goBack()
-    else {
-      setPopup({ visible: false, message: '' })
-      setAddingHomework(false)
-    }
-  }
 
   const saveHomework = () => {
     setAddingHomework(true)
@@ -42,10 +28,12 @@ const AddHomeworkPage = ({ history }) => {
       typeOf: 'homework',
       content: currentHomework
     }).then(() => {
-      setAddedHomework(true)
-      displayPopup('Házi feladat hozzáadva!')
+      displayPopup('Házi feladat hozzáadva!', () => {
+        history.goBack()
+      })
     }).catch((err) => {
       console.log(err)
+      setAddingHomework(false)
       displayPopup(`Sikertelen hozzáadás! Hibaüzenet: ${err}`)
     })
   }
@@ -66,7 +54,6 @@ const AddHomeworkPage = ({ history }) => {
       )}
       <SaveablePageLayout onSave={saveHomework} pageTitle="Dolgozat" pageType="homework"
       history={history} buttonText="Hozzáadás">
-        {popup.visible ? <AppPopup message={popup.message} onClose={closePopup} /> : null}
         <AppSubtitle text="Előnézet:" />
         <AppCardClassContent type="homework" {...currentHomework} />
         <AppSubtitle text="Beállítások:" />
