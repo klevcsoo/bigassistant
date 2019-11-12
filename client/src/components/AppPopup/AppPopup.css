@@ -34,5 +34,14 @@
 }
 
 .app-popup > div > button {
-  width: calc(100vw - 10px) !important;
+  width: calc(100% - 10px) !important;
+}
+
+.app-popup > div > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.app-popup > div > div > button {
+  width: calc(100% - 10px) !important;
 }

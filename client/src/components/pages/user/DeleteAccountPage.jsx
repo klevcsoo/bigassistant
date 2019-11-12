@@ -8,7 +8,7 @@ import AppTitle from '../../AppTitle'
 import AppButton from '../../AppButton/AppButton'
 import AppBackButton from '../../AppButton/AppBackButton'
 
-const DeleteAccountPage = ({ history }) => {
+const DeleteAccountPage = ({ history, displayConfirm }) => {
   const deleteAccount = () => {
     FirebaseHandler.getApp().auth().onAuthStateChanged((user) => {
       if (user) {
@@ -54,7 +54,11 @@ const DeleteAccountPage = ({ history }) => {
           <br/><br/>
           Ha ezeket elfogadod, nyomj az alábbi gombra a fiókod törléséhez.
         </p>
-        <AppButton text="Fiók törlése" type="warning" onClick={deleteAccount} />
+        <AppButton text="Fiók törlése" type="warning" onClick={() => {
+          displayConfirm('Biztos szeretnéd törölni a fiókodat?', () => {
+            deleteAccount()
+          })
+        }} />
       </div>
     </React.Fragment>
   )

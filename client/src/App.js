@@ -28,6 +28,8 @@ import AppConfirm from './components/AppPopup/AppConfirm'
 const App = () => {
   const [ popupVisible, setPopupVisible ] = useState(false)
   const [ popupMessage, setPopupMessage ] = useState('')
+  const [ confirmVisible, setConfirmVisible ] = useState(false)
+  const [ confirmMessage, setConfirmMessage ] = useState('')
 
   const displayPopup = (message, onClose) => {
     popupCloser = onClose
@@ -36,37 +38,51 @@ const App = () => {
     setPopupVisible(true)
   }
 
+  const displayConfirm = (message, onAccept, onReject) => {
+    confirmAccepter = onAccept
+    confirmRejecter = onReject
+
+    setConfirmMessage(message)
+    setConfirmVisible(true)
+  }
+
   return (
     <div className="App">
       <AppPopup message={popupMessage} visible={popupVisible} onClose={() => {
         setPopupVisible(false)
-        if (popupCloser) {popupCloser()}
+        if (popupCloser) popupCloser()
       }} />
-      <AppConfirm />
+      <AppConfirm message={confirmMessage} visible={confirmVisible} onAccept={() => {
+        setConfirmVisible(false)
+        if (confirmAccepter) confirmAccepter()
+      }} onReject={() => {
+        setConfirmVisible(false)
+        if (confirmRejecter) confirmRejecter()
+      }} />
       <Router>
         <Switch>
-          <Route exact path={Routes.HOME} render={(props) => <HomePage {...props} displayPopup={displayPopup} />} />
+          <Route exact path={Routes.HOME} render={(props) => <HomePage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
 
-          <Route exact path={Routes.LOGIN} render={(props) => <LoginPage {...props} displayPopup={displayPopup} />} />
-          <Route exact path={Routes.ABOUT} render={(props) => <AboutPage {...props} displayPopup={displayPopup} />} />
+          <Route exact path={Routes.LOGIN} render={(props) => <LoginPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
+          <Route exact path={Routes.ABOUT} render={(props) => <AboutPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
 
-          <Route exact path={Routes.CLASS} render={(props) => <ClassPage {...props} displayPopup={displayPopup} />} />
-          <Route path={Routes.CLASS_CREATE} render={(props) => <ClassCreatePage {...props} displayPopup={displayPopup} />} />
-          <Route path={Routes.CLASS_JOIN} render={(props) => <ClassJoinPage {...props} displayPopup={displayPopup} />} />
-          <Route path={Routes.CLASS_SETTINGS} render={(props) => <ClassSettings {...props} displayPopup={displayPopup} />} />
+          <Route exact path={Routes.CLASS} render={(props) => <ClassPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
+          <Route path={Routes.CLASS_CREATE} render={(props) => <ClassCreatePage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
+          <Route path={Routes.CLASS_JOIN} render={(props) => <ClassJoinPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
+          <Route path={Routes.CLASS_SETTINGS} render={(props) => <ClassSettings {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
 
-          <Route exact path={Routes.HOMEWORK} render={(props) => <HomeworkPage {...props} displayPopup={displayPopup} />} />
-          <Route path={Routes.HOMEWORK_ADD} render={(props) => <AddHomeworkPage {...props} displayPopup={displayPopup} />} />
-          <Route path={Routes.HOMEWORK_INSPECT} render={(props) => <InspectHomeworkPage {...props} displayPopup={displayPopup} />} />
+          <Route exact path={Routes.HOMEWORK} render={(props) => <HomeworkPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
+          <Route path={Routes.HOMEWORK_ADD} render={(props) => <AddHomeworkPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
+          <Route path={Routes.HOMEWORK_INSPECT} render={(props) => <InspectHomeworkPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
 
-          <Route exact path={Routes.EXAMS} render={(props) => <ExamsPage {...props} displayPopup={displayPopup} />} />
-          <Route path={Routes.EXAMS_ADD} render={(props) => <AddExamPage {...props} displayPopup={displayPopup} />} />
-          <Route path={Routes.EXAMS_INSPECT} render={(props) => <InspectExamPage {...props} displayPopup={displayPopup} />} />
+          <Route exact path={Routes.EXAMS} render={(props) => <ExamsPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
+          <Route path={Routes.EXAMS_ADD} render={(props) => <AddExamPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
+          <Route path={Routes.EXAMS_INSPECT} render={(props) => <InspectExamPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
 
-          <Route exact path={Routes.USER} render={(props) => <UserPage {...props} displayPopup={displayPopup} />} />
-          <Route exact path={Routes.LOGIN_OPTIONS} render={(props) => <LoginOptionsPage {...props} displayPopup={displayPopup} />} />
-          <Route exact path={Routes.DELETE_ACCOUNT} render={(props) => <DeleteAccountPage {...props} displayPopup={displayPopup} />} />
-          <Route path={Routes.USER_PROFILE} render={(props) => <UserProfilePage {...props} displayPopup={displayPopup} />} />
+          <Route exact path={Routes.USER} render={(props) => <UserPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
+          <Route exact path={Routes.LOGIN_OPTIONS} render={(props) => <LoginOptionsPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
+          <Route exact path={Routes.DELETE_ACCOUNT} render={(props) => <DeleteAccountPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
+          <Route path={Routes.USER_PROFILE} render={(props) => <UserProfilePage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
 
           <Route path="*" component={NotFoundPage} />
         </Switch>
@@ -76,5 +92,7 @@ const App = () => {
 }
 
 var popupCloser = null
+var confirmAccepter = null
+var confirmRejecter = null
 
 export default App

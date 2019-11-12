@@ -14,7 +14,7 @@ import SaveablePageLayout from '../../layout/SaveablePageLayout'
 import AppButton from '../../AppButton/AppButton'
 import Routes from '../../../constants/routes'
 
-const ClassSettings = ({ history, displayPopup }) => {
+const ClassSettings = ({ history, displayPopup, displayConfirm }) => {
   const clientInfo = useClientInfo()
   const [ classInfo, setClassInfo ] = useState(null)
   const [ currentSubject, setCurrentSubject ] = useState('')
@@ -138,7 +138,11 @@ const ClassSettings = ({ history, displayPopup }) => {
                 ))}
               </div>
               <AppDivider />
-              <AppButton type="warning" text="Osztály törlése" onClick={deleteClass} />
+              <AppButton type="warning" text="Osztály törlése" onClick={() => {
+                displayConfirm('Biztos szeretnéd törölni az osztályt?', () => {
+                  deleteClass()
+                })
+              }} />
             </div>
           )}
         </React.Fragment>

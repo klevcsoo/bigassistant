@@ -11,7 +11,7 @@ import AppCard from '../../AppCard/AppCard'
 import AppTitle from '../../AppTitle'
 import AppSubtitle from '../../AppSubtitle'
 
-const HomePage = ({ history, displayPopup }) => {
+const HomePage = ({ history, displayPopup, displayConfirm }) => {
   return (
     <MainPageLayout pageTitle="Áttekintés" pageActive="home" history={history}>
       <AppTitle text="BIGAssistant" />
@@ -56,6 +56,11 @@ const HomePage = ({ history, displayPopup }) => {
       <AppButton text="Join class" onClick={() => {history.push(Routes.CLASS_JOIN)}} />
       <AppButton text="Create class" onClick={() => {history.push(Routes.CLASS_CREATE)}} />
       <AppButton text="Display popup v2" onClick={() => {displayPopup('Opened popup', () => {console.log('Closing')})}} />
+      <AppButton text="Display confirmation" onClick={() => {displayConfirm('Opened confirm', () => {
+        console.log('Accepted')
+      }, () => {
+        console.log('Rejected')
+      })}} />
       {/* ----------DEBUG---------- */}
     </MainPageLayout>
   )

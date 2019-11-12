@@ -15,7 +15,7 @@ import AppCardUserClass from '../../AppCard/AppCardUserClass'
 import MainPageLayout from '../../layout/MainPageLayout'
 import AppSwitch from '../../AppSwitch/AppSwitch'
 
-const UserPage = ({ history }) => {
+const UserPage = ({ history, displayConfirm }) => {
   const clientInfo = useClientInfo()
 
   return (
@@ -24,8 +24,10 @@ const UserPage = ({ history }) => {
         <div>
           <UserProfileHeader photo={clientInfo.photo} name={clientInfo.name} />
           <AppButton type="warning" text="Kijelentkezés" onClick={() => {
-            FirebaseHandler.logout()
-            history.push(Routes.LOGIN)
+            displayConfirm('Biztos ki szeretnél jelentkezni?', () => {
+              FirebaseHandler.logout()
+              history.push(Routes.LOGIN)
+            })
           }} />
           <AppDivider/>
           <AppSwitch text="Sötét mód" onCheckedChanged={(checked) => {AppColours.setDarkModeEnabled(checked)}}
