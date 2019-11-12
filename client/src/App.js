@@ -23,8 +23,9 @@ import ClassCreatePage from './components/pages/class/ClassCreatePage'
 import InspectExamPage from './components/pages/class-content/InspectExamPage'
 import InspectHomeworkPage from './components/pages/class-content/InspectHomeworkPage'
 import AppPopup from './components/AppPopup/AppPopup'
+import AppConfirm from './components/AppPopup/AppConfirm'
 
-export const App = () => {
+const App = () => {
   const [ popupVisible, setPopupVisible ] = useState(false)
   const [ popupMessage, setPopupMessage ] = useState('')
 
@@ -41,6 +42,7 @@ export const App = () => {
         setPopupVisible(false)
         if (popupCloser) {popupCloser()}
       }} />
+      <AppConfirm />
       <Router>
         <Switch>
           <Route exact path={Routes.HOME} render={(props) => <HomePage {...props} displayPopup={displayPopup} />} />
@@ -74,3 +76,5 @@ export const App = () => {
 }
 
 var popupCloser = null
+
+export default App
