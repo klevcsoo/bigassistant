@@ -16,7 +16,7 @@ const PageTitle = ({ type, title, noBackButton, history }) => {
   return (
     <React.Fragment>
         <Helmet>
-          <meta name="theme-color" content={AppColours.makeStatusbarColour()} />
+          <meta name="theme-color" content={AppColours.makeStatusbarColour(bgColour)} />
           <title>{title}</title>
         </Helmet>
         <div className="page-title-container" style={{ background: bgColour }} ref={backgroundRef}>
