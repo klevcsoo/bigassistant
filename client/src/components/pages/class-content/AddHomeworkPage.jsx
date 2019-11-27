@@ -28,6 +28,7 @@ const AddHomeworkPage = ({ history, displayPopup }) => {
       typeOf: 'homework',
       content: currentHomework
     }).then(() => {
+      setAddingHomework(false)
       displayPopup('Házi feladat hozzáadva!', () => {
         history.goBack()
       })
@@ -52,13 +53,13 @@ const AddHomeworkPage = ({ history, displayPopup }) => {
           transform: 'translate(-50%, -50%)'
         }}><LoadingSpinner /></div></div>
       )}
-      <SaveablePageLayout onSave={saveHomework} pageTitle="Dolgozat" pageType="homework"
+      <SaveablePageLayout onSave={saveHomework} pageTitle="Házi feladat" pageType="homework"
       history={history} buttonText="Hozzáadás">
         <AppSubtitle text="Előnézet:" />
         <AppCardClassContent type="homework" {...currentHomework} />
         <AppSubtitle text="Beállítások:" />
         <div>
-          <AppInput placeholder="Dolgozat címe" text={currentHomework.title}
+          <AppInput placeholder="Házi feladat címe" text={currentHomework.title}
           onTextChanged={(text) => {
             setCurrentHomework((prevHomework) => { return { ...prevHomework, title: text } })
           }} />

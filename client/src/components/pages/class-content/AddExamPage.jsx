@@ -28,6 +28,7 @@ const AddExamPage = ({ history, displayPopup }) => {
       typeOf: 'exams',
       content: currentExam
     }).then(() => {
+      setAddingExam(false)
       displayPopup('Dolgozat hozzáadva!', () => {
         history.goBack()
       })
