@@ -6,7 +6,10 @@ import { appColours } from '../../Constants'
 const AppCardClassContent = ({ type, onOpen, title, subject, date }) => {
   return (
     <div className={`app-card app-card-class-content`}
-    onClick={() => {setTimeout(() => { if (onOpen) onOpen(); }, 200)}}>
+    onClick={() => {setTimeout(() => { if (onOpen) onOpen(); }, 200)}}
+    style={{
+      background: appColours.getDarkModeEnabled() ? appColours.LIGHT : appColours.BACKGROUND
+    }}>
       <div className="accent" style={{
         background: type === 'exam' ? appColours.EXAM : type === 'homework' ? appColours.HOMEWORK : appColours.MAIN
       }}></div>
