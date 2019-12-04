@@ -8,7 +8,6 @@ import LoginPage from './components/pages/auth/LoginPage/LoginPage'
 import UserProfilePage from './components/pages/user/UserProfilePage'
 import UserPage from './components/pages/main/UserPage'
 import HomePage from './components/pages/main/HomePage'
-import AboutPage from './components/pages/AboutPage/AboutPage'
 import ClassPage from './components/pages/main/ClassPage'
 import NotFoundPage from './components/pages/NotFoundPage'
 import HomeworkPage from './components/pages/main/HomeworkPage'
@@ -64,7 +63,7 @@ const App = () => {
           <Route exact path={routes.HOME} render={(props) => <HomePage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
 
           <Route exact path={routes.LOGIN} render={(props) => <LoginPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
-          <Route exact path={routes.ABOUT} render={(props) => <AboutPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
+          {/* <Route exact path={routes.ABOUT} render={(props) => <AboutPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} /> */}
 
           <Route exact path={routes.CLASS} render={(props) => <ClassPage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
           <Route path={routes.CLASS_CREATE} render={(props) => <ClassCreatePage {...props} displayPopup={displayPopup} displayConfirm={displayConfirm} />} />
