@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
-import AppColours from '../../../constants/AppColours'
+import { appColours } from '../../../Constants'
 import { Helmet } from 'react-helmet'
 // Components
 import AppTitle from '../../AppTitle'
@@ -22,7 +22,7 @@ const LoginOptionsPage = ({ history }) => {
   return (
     <React.Fragment>
       <Helmet>
-        <meta name="theme-color" content={AppColours.makeStatusbarColour()} />
+        <meta name="theme-color" content={appColours.makeStatusbarColour()} />
       </Helmet>
       <div style={{
         position: 'fixed',
@@ -41,11 +41,11 @@ const LoginOptionsPage = ({ history }) => {
           {!loggedInWith ? <LoadingSpinner /> :
             loggedInWith === 'facebook.com' ? (
               <div>
-                <a href="https://www.facebook.com" style={{ color: AppColours.FACEBOOK }}><AppTitle text="Facebook" /></a>
+                <a href="https://www.facebook.com" style={{ color: appColours.FACEBOOK }}><AppTitle text="Facebook" /></a>
               </div>
             ) : (
               <div>
-                <a href="https://www.google.com" style={{ color: AppColours.TEXT }}><AppTitle text="Google" /></a>
+                <a href="https://www.google.com" style={{ color: appColours.TEXT }}><AppTitle text="Google" /></a>
               </div>
             )
           }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
-import Routes from '../../../constants/routes'
+import { routes } from '../../../Constants'
 import { Spring } from 'react-spring/renderprops'
 import { useClientInfo, useClassmates } from '../../../utils/AppHooks'
 
@@ -22,7 +22,7 @@ const ClassPage = ({ history }) => {
   const leaveClass = () => {
     setLeavingClass(true)
     FirebaseHandler.callFunction('leaveClass', {}).then(() => {
-      history.push(Routes.HOME)
+      history.push(routes.HOME)
     })
   }
 
@@ -66,7 +66,7 @@ const ClassPage = ({ history }) => {
           <AppDivider/>
           <AppButton type="highlight" text="Órarend" />
           {clientInfo.classRank === 'admin' ? (
-            <AppButton text="Osztály beállítások" onClick={() => {history.push(Routes.CLASS_SETTINGS)}} />
+            <AppButton text="Osztály beállítások" onClick={() => {history.push(routes.CLASS_SETTINGS)}} />
           ) : leavingClass ? <LoadingSpinner /> : (
             <AppButton type="warning" text="Kilépés az osztályból" onClick={leaveClass} />
           )}
@@ -79,7 +79,7 @@ const ClassPage = ({ history }) => {
                   {(props) => (
                     <div style={props}>
                       <AppUserButton {...classmate} onClick={() => {
-                        history.push(`${Routes.USER}/${classmate.uid}`)
+                        history.push(`${routes.USER}/${classmate.uid}`)
                       }} />
                     </div>
                   )}

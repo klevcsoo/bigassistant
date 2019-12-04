@@ -2,7 +2,7 @@ import React from 'react'
 import AppTitle from '../AppTitle'
 import AppSubtitle from '../AppSubtitle'
 import AppButton from '../AppButton/AppButton'
-import Routes from '../../constants/routes';
+import { routes } from '../../Constants';
 import AppBackButton from '../AppButton/AppBackButton';
 
 const NotFoundPage = ({ history }) => {
@@ -21,7 +21,7 @@ const NotFoundPage = ({ history }) => {
         }}><span role="img" aria-label="monkey">🙈</span></p>
         <AppTitle text="Oldal nem található!" />
         <AppSubtitle text="Az adott link nem vezet semmilyen oldalhoz." />
-        <AppButton type="highlight" text="Vissza a kezdőlapra" onClick={() => {history.push(Routes.HOME)}} />
+        <AppButton type="highlight" text="Vissza a kezdőlapra" onClick={() => {history.push(routes.HOME)}} />
       </div>
     </React.Fragment>
   )

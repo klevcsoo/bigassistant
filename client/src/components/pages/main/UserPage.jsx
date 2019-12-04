@@ -1,8 +1,8 @@
 import React from 'react'
 import { useClientInfo } from '../../../utils/AppHooks'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
-import Routes from '../../../constants/routes'
-import AppColours from '../../../constants/AppColours'
+import { routes } from '../../../Constants'
+import { appColours } from '../../../Constants'
 
 // Components
 import LoadingSpinner from '../../LoadingSpinner'
@@ -26,19 +26,19 @@ const UserPage = ({ history, displayConfirm }) => {
           <AppButton type="warning" text="Kijelentkezés" onClick={() => {
             displayConfirm('Biztos ki szeretnél jelentkezni?', () => {
               FirebaseHandler.logout()
-              history.push(Routes.LOGIN)
+              history.push(routes.LOGIN)
             })
           }} />
           <AppDivider/>
-          <AppSwitch text="Sötét mód" onCheckedChanged={(checked) => {AppColours.setDarkModeEnabled(checked)}}
-          checked={AppColours.getDarkModeEnabled()} />
+          <AppSwitch text="Sötét mód" onCheckedChanged={(checked) => {appColours.setDarkModeEnabled(checked)}}
+          checked={appColours.getDarkModeEnabled()} />
           <AppDivider/>
           <AppCardButtonContainer>
-            <AppMenuButton text="Bejelentkezési adatok" onClick={() => {history.push(Routes.LOGIN_OPTIONS)}} />
+            <AppMenuButton text="Bejelentkezési adatok" onClick={() => {history.push(routes.LOGIN_OPTIONS)}} />
             <AppMenuButton text="Értesítések" />
           </AppCardButtonContainer>
           <AppCardUserClass className={clientInfo.className} classRank={clientInfo.classRank} />
-          <AppMenuButton text="Fiók törlése" onClick={() => {history.push(Routes.DELETE_ACCOUNT)}} />
+          <AppMenuButton text="Fiók törlése" onClick={() => {history.push(routes.DELETE_ACCOUNT)}} />
           <div>
             <AppDivider/>
             <h1 style={{
@@ -47,7 +47,7 @@ const UserPage = ({ history, displayConfirm }) => {
               fontFamily: '"Rubik", sans-serif',
               fontSize: 25,
               fontWeight: 400,
-            }} onClick={() => {history.push(Routes.ABOUT)}}>Információ</h1>
+            }} onClick={() => {history.push(routes.ABOUT)}}>Információ</h1>
           </div>
         </div>
       )}

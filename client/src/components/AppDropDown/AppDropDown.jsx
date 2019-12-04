@@ -1,5 +1,5 @@
 import React from 'react'
-import AppColours from './../../constants/AppColours'
+import { appColours } from './../../Constants'
 
 const AppDropDown = ({ onSelected, children }) => {
   return (
@@ -9,7 +9,7 @@ const AppDropDown = ({ onSelected, children }) => {
         height: 40,
         padding: '0 15px',
         color: 'white',
-        background: AppColours.LIGHT,
+        background: appColours.LIGHT,
         border: 'none',
         borderRadius: 10,
         fontFamily: '"Roboto", sans-serif',

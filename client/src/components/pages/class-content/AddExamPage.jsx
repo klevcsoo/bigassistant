@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
-import AppColours from '../../../constants/AppColours'
+import { appColours } from '../../../Constants'
 import 'date-fns'; import DateFnsUtils from '@date-io/date-fns'
 import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers'
 
@@ -46,7 +46,7 @@ const AddExamPage = ({ history, displayPopup }) => {
           position: 'fixed',
           top: 0, left: 0, bottom: 0, right: 0,
           zIndex: 90,
-          background: AppColours.SHADOW
+          background: appColours.SHADOW
         }}><div style={{
           position: 'fixed',
           top: '50%', left: '50%',
@@ -69,7 +69,7 @@ const AddExamPage = ({ history, displayPopup }) => {
           <div style={{
             width: 'fit-content',
             margin: '5px auto',
-            filter: `invert(${AppColours.getDarkModeEnabled() ? '1' : '0'})`
+            filter: `invert(${appColours.getDarkModeEnabled() ? '1' : '0'})`
           }}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <DatePicker margin="normal" label="Dolgozat dátuma" format="yyyy. MMMM dd."

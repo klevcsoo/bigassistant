@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import './LoginPage.css'
 import FirebaseHandler from '../../../../utils/FirebaseHandler'
-import Routes from '../../../../constants/routes'
+import { routes } from '../../../../Constants'
 
 // Components
 import AppTitle from '../../../AppTitle'
 import AppButton from '../../../AppButton/AppButton'
 import LoadingSpinner from '../../../LoadingSpinner'
-import AppColours from '../../../../constants/AppColours'
+import { appColours } from '../../../../Constants'
 import { Helmet } from 'react-helmet';
 import AppUserButton from '../../../AppButton/AppUserButton'
 
@@ -45,14 +45,14 @@ const LoginPage = ({ history }) => {
   return (
     <React.Fragment>
       <Helmet>
-        <meta name="theme-color" content={AppColours.makeStatusbarColour()} />
+        <meta name="theme-color" content={appColours.makeStatusbarColour()} />
       </Helmet>
-      <div className="login-main-container" style={{ backgroundColor: AppColours.BACKGROUND }}>
+      <div className="login-main-container" style={{ backgroundColor: appColours.BACKGROUND }}>
         <div>{createBackground()}</div>
         <div className="login-methods-container">
             <AppTitle text="BIGAssistant" />
             {loading ? <LoadingSpinner static /> : clientInfo ? (
-              <AppUserButton {...clientInfo} onClick={() => { history.replace(Routes.HOME) }} />
+              <AppUserButton {...clientInfo} onClick={() => { history.replace(routes.HOME) }} />
             ) : (
               <><AppButton text="Bejelentkezés Facebook-al"
               onClick={() => { FirebaseHandler.loginWithFacebook() }} facebook />

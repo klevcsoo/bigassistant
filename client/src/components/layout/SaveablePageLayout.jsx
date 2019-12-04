@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import FirebaseHandler from '../../utils/FirebaseHandler'
-import Routes from '../../constants/routes'
+import { routes } from '../../Constants'
 
 // Components
 import PageTitle from './PageTitle/PageTitle'
@@ -9,7 +9,7 @@ import PageNavbarSaveable from './PageNavbar/PageNavbarSaveable'
 const SaveablePageLayout = ({ pageTitle, pageType, buttonText, onSave, history, children }) => {
   useEffect(() => {
     FirebaseHandler.getApp().auth().onAuthStateChanged((user) => {
-      if (!user) history.push(Routes.LOGIN)
+      if (!user) history.push(routes.LOGIN)
     })
   }, [ history ])
 

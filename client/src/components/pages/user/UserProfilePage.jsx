@@ -1,7 +1,7 @@
 import React from 'react'
-import Routes from '../../../constants/routes'
+import { routes } from '../../../Constants'
 import { Helmet } from 'react-helmet'
-import AppColours from '../../../constants/AppColours'
+import { appColours } from '../../../Constants'
 import { useUserInfo } from '../../../utils/AppHooks'
 
 // Components
@@ -14,13 +14,13 @@ import AppBackButton from '../../AppButton/AppBackButton'
 
 const UserProfilePage = ({ history, match }) => {
   const userInfo = useUserInfo(match.params.uid, () => {
-    history.push(Routes.USER)
+    history.push(routes.USER)
   })
 
   return (
     <React.Fragment>
       <Helmet>
-        <meta name="theme-color" content={AppColours.makeStatusbarColour()} />
+        <meta name="theme-color" content={appColours.makeStatusbarColour()} />
       </Helmet>
       <AppBackButton history={history} />
       <div style={{ height: 20 }}></div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
-import Routes from '../../../constants/routes'
-import AppColours from '../../../constants/AppColours'
+import { routes } from '../../../Constants'
+import { appColours } from '../../../Constants'
 import { Helmet } from 'react-helmet'
 
 // Components
@@ -34,7 +34,7 @@ const ClassJoinPage = ({ history }) => {
   const joinClass = () => {
     setJoining(true)
     FirebaseHandler.callFunction('joinClass', { inviteCode: inviteCode }).then(() => {
-      history.push(Routes.HOME)
+      history.push(routes.HOME)
     }).catch((err) => {
       console.log(err)
       setCodeInvalid(true)
@@ -45,7 +45,7 @@ const ClassJoinPage = ({ history }) => {
   return (
     <React.Fragment>
       <Helmet>
-        <meta name="theme-color" content={AppColours.makeStatusbarColour()} />
+        <meta name="theme-color" content={appColours.makeStatusbarColour()} />
       </Helmet>
       <AppBackButton history={history} />
       <div style={{
@@ -65,13 +65,13 @@ const ClassJoinPage = ({ history }) => {
             <AppInput placeholder="Meghívókód" text={inviteCode}
             onTextChanged={(text) => { setInviteCode(text); setCodeInvalid(false) }}
             style={{
-              border: `2px solid ${codeInvalid ? AppColours.WARNING : 'transparent'}`
+              border: `2px solid ${codeInvalid ? appColours.WARNING : 'transparent'}`
             }} />
             {!codeInvalid ? null : (
               <p style={{
                 margin: 5,
                 textAlign: 'center',
-                color: AppColours.WARNING,
+                color: appColours.WARNING,
                 fontSize: 16
               }}>Érvénytelen kód!</p>
             )}

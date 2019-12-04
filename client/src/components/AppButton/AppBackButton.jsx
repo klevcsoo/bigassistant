@@ -1,5 +1,5 @@
 import React from 'react'
-import AppColours from './../../constants/AppColours'
+import { appColours } from './../../Constants'
 import ArrowBackIosRoundedIcon from '@material-ui/icons/ArrowBackIosRounded'
 
 
@@ -11,10 +11,10 @@ const AppBackButton = ({ history }) => {
       border: 'none',
       zIndex: 200,
       '&:active': {
-        background: AppColours.LIGHT
+        background: appColours.LIGHT
       }
     }} onClick={() => {setTimeout(() => {history.goBack()}, 200)}}>
-      <ArrowBackIosRoundedIcon style={{ fill: AppColours.TEXT }} />
+      <ArrowBackIosRoundedIcon style={{ fill: appColours.TEXT }} />
     </button>
   )
 }

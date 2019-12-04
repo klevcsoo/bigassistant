@@ -1,7 +1,7 @@
 import React from 'react'
 import './PageNavbar.css'
-import Routes from '../../../constants/routes'
-import AppColours from '../../../constants/AppColours'
+import { routes } from '../../../Constants'
+import { appColours } from '../../../Constants'
 
 // Icons
 import ClassIcon from '@material-ui/icons/PeopleRounded'
@@ -16,30 +16,30 @@ const PageNavbar = ({ history, active }) => {
     setTimeout(() => { history.replace(link) }, 200)
   }
 
-  const activeColour = AppColours.MAIN_MONO
+  const activeColour = appColours.MAIN_MONO
   const activeBorder = `3px solid ${activeColour}`
 
   return (
     <div className="page-navbar-container">
-      <button className="icon" onClick={loadPage.bind(this, Routes.CLASS)}
+      <button className="icon" onClick={loadPage.bind(this, routes.CLASS)}
       style={{ borderTop: active === 'class' ? activeBorder : 'none' }}>
-        <ClassIcon style={{ fill: active === 'class' ? activeColour : AppColours.TEXT }} />
+        <ClassIcon style={{ fill: active === 'class' ? activeColour : appColours.TEXT }} />
       </button>
-      <button className="icon" onClick={loadPage.bind(this, Routes.HOMEWORK)}
+      <button className="icon" onClick={loadPage.bind(this, routes.HOMEWORK)}
       style={{ borderTop: active === 'homework' ? activeBorder : 'none' }}>
-        <HomeworkIcon style={{ fill: active === 'homework' ? activeColour : AppColours.TEXT }} />
+        <HomeworkIcon style={{ fill: active === 'homework' ? activeColour : appColours.TEXT }} />
       </button>
-      <button className="icon" onClick={loadPage.bind(this, Routes.HOME)}
+      <button className="icon" onClick={loadPage.bind(this, routes.HOME)}
       style={{ borderTop: active === 'home' ? activeBorder : 'none' }}>
-        <HomeIcon style={{ fill: active === 'home' ? activeColour : AppColours.TEXT }} />
+        <HomeIcon style={{ fill: active === 'home' ? activeColour : appColours.TEXT }} />
       </button>
-      <button className="icon" onClick={loadPage.bind(this, Routes.EXAMS)}
+      <button className="icon" onClick={loadPage.bind(this, routes.EXAMS)}
       style={{ borderTop: active === 'exams' ? activeBorder : 'none' }}>
-        <ExamsIcon style={{ fill: active === 'exams' ? activeColour : AppColours.TEXT }} />
+        <ExamsIcon style={{ fill: active === 'exams' ? activeColour : appColours.TEXT }} />
       </button>
-      <button className="icon" onClick={loadPage.bind(this, Routes.USER)}
+      <button className="icon" onClick={loadPage.bind(this, routes.USER)}
       style={{ borderTop: active === 'user' ? activeBorder : 'none' }}>
-        <UserIcon style={{ fill: active === 'user' ? activeColour : AppColours.TEXT }} />
+        <UserIcon style={{ fill: active === 'user' ? activeColour : appColours.TEXT }} />
       </button>
     </div>
   )

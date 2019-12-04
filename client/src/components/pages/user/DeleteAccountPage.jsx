@@ -1,5 +1,5 @@
 import React from 'react'
-import AppColours from '../../../constants/AppColours'
+import { appColours } from '../../../Constants'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
 import { Helmet } from 'react-helmet'
 
@@ -26,7 +26,7 @@ const DeleteAccountPage = ({ history, displayConfirm }) => {
   return (
     <React.Fragment>
       <Helmet>
-        <meta name="theme-color" content={AppColours.makeStatusbarColour()} />
+        <meta name="theme-color" content={appColours.makeStatusbarColour()} />
       </Helmet>
       <AppBackButton history={history} />
       <div style={{
@@ -37,7 +37,7 @@ const DeleteAccountPage = ({ history, displayConfirm }) => {
         left: 0,
         transform: 'translateY(-50%)'
       }}>
-        <span style={{ color: AppColours.WARNING }}><AppTitle text="Biztos törölni akarod a fiókod?" /></span>
+        <span style={{ color: appColours.WARNING }}><AppTitle text="Biztos törölni akarod a fiókod?" /></span>
         <p style={{
           margin: 10,
           textAlign: 'center',

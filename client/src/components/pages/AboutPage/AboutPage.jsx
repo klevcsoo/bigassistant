@@ -1,7 +1,7 @@
 import React from 'react'
 import './AboutPage.css'
-import AppColours from '../../../constants/AppColours'
-import { version } from '../../../constants/AppInfo'
+import { appColours } from '../../../Constants'
+import { appInfo } from '../../../Constants'
 
 // Components
 import PageTitle from '../../layout/PageTitle/PageTitle'
@@ -40,11 +40,11 @@ const AboutPage = ({ history }) => {
           <AppMenuButton text="Szuper titkos konzol" />
           <AppDivider/>
           <p style={{
-            color: AppColours.appColorDark,
+            color: appColours.appColorDark,
             textAlign: 'center',
             fontSize: '16px',
             fontWeight: 300
-          }}>BIGAssistant {version}</p>
+          }}>BIGAssistant {appInfo.version}</p>
         </div>
       </React.Fragment>
     </div>

@@ -1,7 +1,6 @@
 import React from 'react'
-import Routes from '../../../constants/routes'
-import { version } from '../../../constants/AppInfo'
-import AppColours from '../../../constants/AppColours'
+import { routes } from '../../../Constants'
+import { appColours, appInfo } from '../../../Constants'
 
 // Components
 import MainPageLayout from '../../layout/MainPageLayout'
@@ -15,8 +14,8 @@ const HomePage = ({ history, displayPopup, displayConfirm }) => {
   return (
     <MainPageLayout pageTitle="Áttekintés" pageActive="home" history={history}>
       <AppTitle text="BIGAssistant" />
-      <AppSubtitle text={`Beta ${version}`} />
-      <AppButton text="Mi is ez az alkalmazás?" type="highlight" onClick={() => {history.push(Routes.ABOUT)}} />
+      <AppSubtitle text={`Beta ${appInfo.version}`} />
+      <AppButton text="Mi is ez az alkalmazás?" type="highlight" onClick={() => {history.push(routes.ABOUT)}} />
       <AppCard>
         <p style={{
           margin: 5,
@@ -48,13 +47,13 @@ const HomePage = ({ history, displayPopup, displayConfirm }) => {
         textAlign: 'center',
         fontSize: 16,
         fontWeight: 400,
-        color: AppColours.WARNING_DARK
+        color: appColours.WARNING_DARK
       }}>
         The functions below are experimental, and are under testing. They may not work
         as you would expect them to. Use them at your own risk!
       </p>
-      <AppButton text="Join class" onClick={() => {history.push(Routes.CLASS_JOIN)}} />
-      <AppButton text="Create class" onClick={() => {history.push(Routes.CLASS_CREATE)}} />
+      <AppButton text="Join class" onClick={() => {history.push(routes.CLASS_JOIN)}} />
+      <AppButton text="Create class" onClick={() => {history.push(routes.CLASS_CREATE)}} />
       <AppButton text="Display popup v2" onClick={() => {displayPopup('Opened popup', () => {console.log('Closing')})}} />
       <AppButton text="Display confirmation" onClick={() => {displayConfirm('Opened confirm', () => {
         console.log('Accepted')

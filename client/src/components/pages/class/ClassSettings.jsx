@@ -9,10 +9,10 @@ import UnauthorizedPage from '../UnauthorizedPage'
 import UserProfileHeader from '../../layout/UserProfileHeader'
 import AppDivider from '../../AppDivider'
 import AppInput from '../../AppInput/AppInput'
-import AppColours from '../../../constants/AppColours'
+import { appColours } from '../../../Constants'
 import SaveablePageLayout from '../../layout/SaveablePageLayout'
 import AppButton from '../../AppButton/AppButton'
-import Routes from '../../../constants/routes'
+import { routes } from '../../../Constants'
 
 const ClassSettings = ({ history, displayPopup, displayConfirm }) => {
   const clientInfo = useClientInfo()
@@ -42,7 +42,7 @@ const ClassSettings = ({ history, displayPopup, displayConfirm }) => {
   const deleteClass = () => {
     setClassSaving(true)
     FirebaseHandler.callFunction('leaveClass').then(() => {
-      history.push(Routes.HOME)
+      history.push(routes.HOME)
     }).catch((err) => {
       console.log(err)
       setClassSaving(false)
@@ -77,7 +77,7 @@ const ClassSettings = ({ history, displayPopup, displayConfirm }) => {
           position: 'fixed',
           top: 0, left: 0, bottom: 0, right: 0,
           zIndex: 90,
-          background: AppColours.SHADOW
+          background: appColours.SHADOW
         }}><div style={{
           position: 'fixed',
           top: '50%', left: '50%',
@@ -115,7 +115,7 @@ const ClassSettings = ({ history, displayPopup, displayConfirm }) => {
                 <button style={{
                   width: 42,
                   height: 42,
-                  background: AppColours.LIGHT,
+                  background: appColours.LIGHT,
                   border: 'none',
                   borderRadius: '100%'
                 }} onClick={addSubject}><AddRoundedIcon /></button>
@@ -132,7 +132,7 @@ const ClassSettings = ({ history, displayPopup, displayConfirm }) => {
                       margin: 5, textAlign: 'left', fontSize: 18, fontWeight: 300
                     }}>{subject}</h1>
                     <h1 style={{
-                      margin: 5, textAlign: 'right', fontSize: 18, fontWeight: 300, color: AppColours.WARNING
+                      margin: 5, textAlign: 'right', fontSize: 18, fontWeight: 300, color: appColours.WARNING
                     }} onClick={removeSubject.bind(this, subject)}>Eltávolítás</h1>
                   </div>
                 ))}

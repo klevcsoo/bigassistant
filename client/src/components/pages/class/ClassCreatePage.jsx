@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import AppColours from '../../../constants/AppColours'
+import { appColours, appInfo } from '../../../Constants'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
-import { defaultClassPhoto } from '../../../constants/AppInfo'
 
 // Components
 import SaveablePageLayout from '../../layout/SaveablePageLayout'
@@ -12,7 +11,7 @@ import AppSwitch from '../../AppSwitch/AppSwitch'
 import LoadingSpinner from '../../LoadingSpinner'
 
 const ClassCreatePage = ({ history, displayPopup }) => {
-  const [ classInfo, setClassInfo ] = useState({ name: 'Osztály', photo: defaultClassPhoto, closed: false })
+  const [ classInfo, setClassInfo ] = useState({ name: 'Osztály', photo: appInfo.defaultClassPhoto, closed: false })
   const [ addingClass, setAddingClass ] = useState(false)
 
   const createClass = () => {
@@ -36,7 +35,7 @@ const ClassCreatePage = ({ history, displayPopup }) => {
           position: 'fixed',
           top: 0, left: 0, bottom: 0, right: 0,
           zIndex: 90,
-          background: AppColours.SHADOW
+          background: appColours.SHADOW
         }}><div style={{
           position: 'fixed',
           top: '50%', left: '50%',

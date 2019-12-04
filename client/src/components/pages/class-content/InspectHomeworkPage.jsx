@@ -9,7 +9,7 @@ import LoadingSpinner from '../../LoadingSpinner'
 import AppTitle from '../../AppTitle'
 import AppDivider from '../../AppDivider'
 import AppUserButton from '../../AppButton/AppUserButton'
-import AppColours from '../../../constants/AppColours'
+import { appColours } from '../../../Constants'
 import AppButton from '../../AppButton/AppButton'
 
 const InspectHomeworkPage = ({ history, match }) => {
@@ -59,10 +59,10 @@ const InspectHomeworkPage = ({ history, match }) => {
     <div style={{
       width: '100vw', height: '100vh',
       boxSizing: 'border-box',
-      borderBottom: `5px solid ${AppColours.HOMEWORK}`
+      borderBottom: `5px solid ${appColours.HOMEWORK}`
     }}>
       <Helmet>
-        <meta name="theme-color" content={AppColours.makeStatusbarColour()} />
+        <meta name="theme-color" content={appColours.makeStatusbarColour()} />
       </Helmet>
       <AppBackButton history={history} />
       <div style={{

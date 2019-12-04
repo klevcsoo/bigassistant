@@ -1,5 +1,5 @@
 import React from 'react'
-import Routes from '../../../constants/routes'
+import { routes } from '../../../Constants'
 import { Spring } from 'react-spring/renderprops'
 import { useExamsList } from '../../../utils/AppHooks'
 
@@ -15,7 +15,7 @@ const ExamsPage = ({ history }) => {
 
   return (
     <MainPageLayout pageTitle="Dolgozatok" pageActive="exams" history={history}>
-      <AppButton text="Hozzáadás" onClick={() => {history.push(Routes.EXAMS_ADD)}} />
+      <AppButton text="Hozzáadás" onClick={() => {history.push(routes.EXAMS_ADD)}} />
       <AppDivider />
       {exams ? (
         <div>
@@ -26,7 +26,7 @@ const ExamsPage = ({ history }) => {
                 {(props) => (
                   <div style={props}>
                     <AppCardClassContent type="exam" {...exam} onOpen={() => {
-                      history.push(`${Routes.EXAMS}/${exam.id}`)
+                      history.push(`${routes.EXAMS}/${exam.id}`)
                     }} />
                   </div>
                 )}

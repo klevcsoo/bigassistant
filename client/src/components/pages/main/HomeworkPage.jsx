@@ -1,5 +1,5 @@
 import React from 'react'
-import Routes from '../../../constants/routes'
+import { routes } from '../../../Constants'
 import { Spring } from 'react-spring/renderprops'
 import { useHomeworkList } from '../../../utils/AppHooks'
 
@@ -15,7 +15,7 @@ const HomeworkPage = ({ history }) => {
 
   return (
     <MainPageLayout pageTitle="Házi feladat" pageActive="homework" history={history}>
-      <AppButton text="Hozzáadás" onClick={() => {history.push(Routes.HOMEWORK_ADD)}} />
+      <AppButton text="Hozzáadás" onClick={() => {history.push(routes.HOMEWORK_ADD)}} />
       <AppDivider />
       {homework ? (
         <div>
@@ -26,7 +26,7 @@ const HomeworkPage = ({ history }) => {
                 {(props) => (
                   <div style={props}>
                     <AppCardClassContent type="homework" {...hw} onOpen={() => {
-                      history.push(`${Routes.HOMEWORK}/${hw.id}`)
+                      history.push(`${routes.HOMEWORK}/${hw.id}`)
                     }} />
                   </div>
                 )}
