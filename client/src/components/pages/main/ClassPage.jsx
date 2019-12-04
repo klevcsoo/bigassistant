@@ -78,9 +78,7 @@ const ClassPage = ({ history }) => {
                 <Spring from={{ opacity: 0 }} to={{ opacity: 1 }} key={classmate.uid}>
                   {(props) => (
                     <div style={props}>
-                      <AppUserButton {...classmate} onClick={() => {
-                        history.push(`${routes.USER}/${classmate.uid}`)
-                      }} />
+                      <AppUserButton {...classmate} />
                     </div>
                   )}
                 </Spring>
