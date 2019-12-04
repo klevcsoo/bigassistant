@@ -57,7 +57,7 @@ export const appColours = {
 }
 
 export const appInfo = {
-  version: Math.sqrt((+new Date())).toString(36).slice(-8),
+  version: '19.1204.1',
   defaultClassPhoto: 'https://firebasestorage.googleapis.com/v0/b/bigassistant.appspot.com/o/default-class-photo.png?alt=media&token=afd84e32-c0f6-4563-be8b-b326d3099972'
 }
 
