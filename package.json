@@ -7,10 +7,7 @@
     "build": "cd .\\client && npm run build",
     "dev": "cd .\\client && npm start",
     "serve": "cd .\\functions && npm run build && cd ..\\client && npm run build && cd .. && firebase serve -o 0.0.0.0",
-    "deploy": "cd .\\functions && npm run build && cd .. && firebase deploy",
-    "patch": "cd .\\client\\src\\constants && npm version patch && cd ..\\..\\..\\",
-    "minor": "cd .\\client\\src\\constants && npm version minor && cd ..\\..\\..\\",
-    "major": "cd .\\client\\src\\constants && npm version major && cd ..\\..\\..\\"
+    "deploy": "cd .\\functions && npm run build && cd .. && firebase deploy"
   },
   "author": "",
   "license": "ISC"
