@@ -395,7 +395,7 @@ exports.whenUserDeleted = functions.auth.user().onDelete(async (user, context) =
 
 exports.whenExamAdded = functions.database.ref('/classes/{classId}/exams/{examId}')
     .onCreate((snapshot, context) => {
-        const deleteTime = 30/*days*/ * (24 * 3600 * 1000)
+        const deleteTime = 7/*days*/ * (24 * 3600 * 1000)
 
         snapshot.ref.parent!.once('value').then((examsSnapshot) => {
             examsSnapshot.forEach((examSnapshot) => {
@@ -416,7 +416,7 @@ exports.whenExamAdded = functions.database.ref('/classes/{classId}/exams/{examId
 
 exports.whenHomeworkAdded = functions.database.ref('/classes/{classId}/homework/{homeworkId}')
     .onCreate((snapshot, context) => {
-        const deleteTime = 30/*days*/ * (24 * 3600 * 1000)
+        const deleteTime = 7/*days*/ * (24 * 3600 * 1000)
 
         snapshot.ref.parent!.once('value').then((homeworkSnapshot) => {
             homeworkSnapshot.forEach((hwSnapshot) => {
