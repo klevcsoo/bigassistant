@@ -25,8 +25,8 @@ const ParallaxHeaderImage = ({ src, header }) => {
         <div className="parallax-bg" style={{
           width: '100vw', height: '100vw',
           backgroundImage: `url('${src}')`,
-          backgroundAttachment: 'fixed',
-          backgroundSize: 'contain',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
           backgroundRepeat: 'no-repeat',
           borderRadius: 10,
           filter: `blur(${scrollPos / 10}px)`,
