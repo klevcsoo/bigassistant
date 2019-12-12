@@ -8,7 +8,7 @@ const AppSubtitle = ({ text }) => {
       textAlign: 'center',
     
       color: 'var(--colour-app-dark)',
-      fontFamily: '"Roboto", sans-serif',
+      fontFamily: 'sans-serif',
       fontWeight: 500,
       fontSize: 22,
     }}>{text}</h1>
