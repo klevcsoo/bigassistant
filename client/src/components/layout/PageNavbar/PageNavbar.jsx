@@ -21,26 +21,31 @@ const PageNavbar = ({ history, active }) => {
 
   return (
     <div className="page-navbar-container">
-      <button className="icon" onClick={loadPage.bind(this, routes.CLASS)}
+      <div className="icon" onClick={loadPage.bind(this, routes.CLASS)}
       style={{ borderTop: active === 'class' ? activeBorder : 'none' }}>
         <ClassIcon style={{ fill: active === 'class' ? activeColour : appColours.TEXT }} />
-      </button>
-      <button className="icon" onClick={loadPage.bind(this, routes.HOMEWORK)}
+        <p>Osztály</p>
+      </div>
+      <div className="icon" onClick={loadPage.bind(this, routes.HOMEWORK)}
       style={{ borderTop: active === 'homework' ? activeBorder : 'none' }}>
         <HomeworkIcon style={{ fill: active === 'homework' ? activeColour : appColours.TEXT }} />
-      </button>
-      <button className="icon" onClick={loadPage.bind(this, routes.HOME)}
+        <p>Házi</p>
+      </div>
+      <div className="icon" onClick={loadPage.bind(this, routes.HOME)}
       style={{ borderTop: active === 'home' ? activeBorder : 'none' }}>
         <HomeIcon style={{ fill: active === 'home' ? activeColour : appColours.TEXT }} />
-      </button>
-      <button className="icon" onClick={loadPage.bind(this, routes.EXAMS)}
+        <p>Attekintes</p>
+      </div>
+      <div className="icon" onClick={loadPage.bind(this, routes.EXAMS)}
       style={{ borderTop: active === 'exams' ? activeBorder : 'none' }}>
         <ExamsIcon style={{ fill: active === 'exams' ? activeColour : appColours.TEXT }} />
-      </button>
-      <button className="icon" onClick={loadPage.bind(this, routes.USER)}
+        <p>Dolgozatok</p>
+      </div>
+      <div className="icon" onClick={loadPage.bind(this, routes.USER)}
       style={{ borderTop: active === 'user' ? activeBorder : 'none' }}>
         <UserIcon style={{ fill: active === 'user' ? activeColour : appColours.TEXT }} />
-      </button>
+        <p>Profil</p>
+      </div>
     </div>
   )
 }

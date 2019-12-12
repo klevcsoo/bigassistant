@@ -1,5 +1,6 @@
 .page-navbar-container {
-  width: 100vw; height: 50px;
+  width: 100vw; height: auto;
+  min-height: 50px;
   margin: 0; padding: 0;
   overflow: hidden;
 
@@ -13,17 +14,29 @@
   background: var(--colour-app-background);
   border-top: 1px solid var(--colour-app-light);
 }
-.page-navbar-container button.icon{
+.page-navbar-container .icon{
+  height: 70px;
   grid-column: auto;
   position: relative;
   background: transparent;
   border: none;
+
+  display: grid;
+  grid-template-rows: auto min-content;
 }
-.page-navbar-container button.icon:active{
+.page-navbar-container .icon:active{
   background: var(--colour-app-dark);
 }
+.page-navbar-container p {
+  grid-row: 2 / span 1;
+  margin: 0; padding: 0 0 5px 0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+}
 .page-navbar-container svg {
-  width: auto; height: 70%;
+  grid-row: 1 / span 1;
+  width: auto; height: 90%;
 
   display: block;
   position: absolute;
@@ -38,6 +51,15 @@
 .page-navbar-container svg.active {
   fill: var(--colour-app-main)
 }
-.page-navbar-container button {
+
+.page-navbar-container button:not(.icon) {
   grid-column: 1 / span 5;
 }
+
+/* SAFARI OVERRIDE */
+@media not all and (min-resolution:.001dpcm)
+{ @supports (-webkit-appearance:none) and (stroke-color:transparent) {
+  .page-navbar-container {
+    padding: 0 0 15px 0;
+  }
+}}
