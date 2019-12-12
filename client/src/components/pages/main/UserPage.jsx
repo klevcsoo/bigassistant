@@ -39,16 +39,8 @@ const UserPage = ({ history, displayConfirm }) => {
           </AppCardButtonContainer>
           <AppCardUserClass className={clientInfo.className} classRank={clientInfo.classRank} />
           <AppMenuButton text="Fiók törlése" onClick={() => {history.push(routes.DELETE_ACCOUNT)}} />
-          <div>
-            <AppDivider/>
-            <h1 style={{
-              margin: 20,
-              textAlign: 'center',
-              fontFamily: '"Rubik", sans-serif',
-              fontSize: 25,
-              fontWeight: 400,
-            }} onClick={() => {history.push(routes.ABOUT)}}>Információ</h1>
-          </div>
+          <AppDivider />
+          <AppButton text="Az alkalmazásról" onClick={() => {history.push(routes.ABOUT)}} />
         </div>
       )}
     </MainPageLayout>
