@@ -62,7 +62,7 @@ const AddHomeworkPage = ({ history, displayPopup }) => {
           <AppInput placeholder="Házi feladat címe" text={currentHomework.title}
           onTextChanged={(text) => {
             setCurrentHomework((prevHomework) => { return { ...prevHomework, title: text } })
-          }} />
+          }} maxLength={30} />
           <AppClassSubjectsDropDown onSubjectChoosen={(subject) => {
             setCurrentHomework((prevHomework) => { return { ...prevHomework, subject: subject } })
           }} />

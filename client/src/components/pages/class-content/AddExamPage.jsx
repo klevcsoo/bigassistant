@@ -62,7 +62,7 @@ const AddExamPage = ({ history, displayPopup }) => {
           <AppInput placeholder="Dolgozat címe" text={currentExam.title}
           onTextChanged={(text) => {
             setCurrentExam((prevExam) => { return { ...prevExam, title: text } })
-          }} />
+          }} maxLength={30} />
           <AppClassSubjectsDropDown onSubjectChoosen={(subject) => {
             setCurrentExam((prevExam) => { return { ...prevExam, subject: subject } })
           }} />
