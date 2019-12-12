@@ -36,10 +36,10 @@
 
 .app-button-warning {
   background: transparent !important;
-  border: 1px solid var(--colour-warning-light) !important;
+  border: 1px solid var(--colour-warning) !important;
 }
 .app-button-warning h2 {
-  color: var(--colour-warning-light);
+  color: var(--colour-warning);
   font-weight: 500;
 }
 .app-button-warning:hover {
@@ -47,12 +47,12 @@
 }
 .app-button-warning:active {
   color: var(--colour-app-background);
-  background: var(--colour-warning-light);
+  background: var(--colour-warning);
 }
 
 .app-button-highlight {
   background: var(--colour-app-main);
-  box-shadow: 5px 5px 6px var(--colour-app-main-shadow);
+  box-shadow: 5px 5px 10px var(--colour-app-main-shadow);
 }
 .app-button-highlight h2 {
   color: #ffffff;
@@ -61,7 +61,7 @@
 
 .app-button-exam {
   background: var(--colour-app-exam);
-  box-shadow: 5px 5px 6px var(--colour-app-exam-shadow);
+  box-shadow: 5px 5px 10px var(--colour-app-exam-shadow);
 }
 .app-button-exam h2 {
   color: #ffffff;
@@ -70,7 +70,7 @@
 
 .app-button-homework {
   background: var(--colour-app-homework);
-  box-shadow: 5px 5px 6px var(--colour-app-homework-shadow);
+  box-shadow: 5px 5px 10px var(--colour-app-homework-shadow);
 
 }
 .app-button-homework h2 {
@@ -98,9 +98,6 @@
 .app-button-facebook {
   background-color: var(--colour-facebook);
   color: #ffffff;
-}
-.app-button-facebook:active {
-  background-color: var(--colour-facebook-dark);
 }
 
 .app-button-classmate {

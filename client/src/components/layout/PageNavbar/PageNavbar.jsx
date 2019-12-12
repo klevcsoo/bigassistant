@@ -16,7 +16,7 @@ const PageNavbar = ({ history, active }) => {
     setTimeout(() => { history.replace(link) }, 200)
   }
 
-  const activeColour = appColours.MAIN_MONO
+  const activeColour = appColours.MAIN
   const activeBorder = `3px solid ${activeColour}`
 
   return (

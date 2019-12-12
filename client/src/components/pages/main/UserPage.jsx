@@ -30,9 +30,6 @@ const UserPage = ({ history, displayConfirm }) => {
             })
           }} />
           <AppDivider/>
-          <AppSwitch text="Sötét mód" onCheckedChanged={(checked) => {appColours.setDarkModeEnabled(checked)}}
-          checked={appColours.getDarkModeEnabled()} />
-          <AppDivider/>
           <AppCardButtonContainer>
             <AppMenuButton text="Bejelentkezési adatok" onClick={() => {history.push(routes.LOGIN_OPTIONS)}} />
             <AppMenuButton text="Értesítések" />

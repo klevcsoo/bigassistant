@@ -6,13 +6,10 @@ import * as serviceWorker from './serviceWorker';
 
 import App from './App';
 import FirebaseHandler from './utils/FirebaseHandler';
-import { appColours } from './Constants';
 
 // Firebase app needs to be initalized before the virtual DOM is built.
 FirebaseHandler.initializeFirebase();
 
-// Set dark mode at launch, according to key in local storage.
-appColours.setDarkModeEnabled(appColours.getDarkModeEnabled());
 
 ReactDOM.render(<App />,document.getElementById('root'));
 

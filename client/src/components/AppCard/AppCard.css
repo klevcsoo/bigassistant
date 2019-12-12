@@ -41,7 +41,7 @@ h1.app-card-group-title {
   display: grid;
   grid-template-columns: 10px auto;
   background: var(--colour-app-background);
-  box-shadow: 5px 5px 6px var(--colour-app-shadow);
+  box-shadow: 5px 5px 10px var(--colour-app-shadow);
 }
 .app-card-class-content > div.accent {
   width: auto; height: 100%;
@@ -74,4 +74,10 @@ h1.app-card-group-title {
 .app-card-class-content > div > p > span {
   color: var(--colour-app-text);
   font-weight: 400;
+}
+
+@media (prefers-color-scheme: dark) {
+  .app-card-class-content {
+    background: var(--colour-app-light);
+  }
 }

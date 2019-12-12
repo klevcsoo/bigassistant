@@ -69,7 +69,6 @@ const AddExamPage = ({ history, displayPopup }) => {
           <div style={{
             width: 'fit-content',
             margin: '5px auto',
-            filter: `invert(${appColours.getDarkModeEnabled() ? '1' : '0'})`
           }}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <DatePicker margin="normal" label="Dolgozat dátuma" format="yyyy. MMMM dd."
