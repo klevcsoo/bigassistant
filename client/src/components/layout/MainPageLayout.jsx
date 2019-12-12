@@ -18,7 +18,7 @@ const MainPageLayout = ({ pageTitle, pageActive, history, children }) => {
       <PageTitle title={pageTitle} history={history} noBackButton />
       <PageNavbar active={pageActive} history={history} />
       {children}
-      <div style={{ height: 80 }}></div>
+      <div style={{ height: 100 }}></div>
     </React.Fragment>
   )
 }
