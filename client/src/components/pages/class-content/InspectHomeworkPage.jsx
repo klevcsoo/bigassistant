@@ -107,7 +107,7 @@ const InspectHomeworkPage = ({ history, match }) => {
               Létrehozva: {LocalizationHandler.formatDate(homeworkInfo.createdAt)}
             </p>
             {!creatorInfo ? <LoadingSpinner /> : (
-              <AppUserButton {...creatorInfo} />
+              <AppUserButton {...creatorInfo} uid={homeworkInfo.creator} />
             )}
             <AppDivider />
             {deleteLoading ? <LoadingSpinner /> : (
