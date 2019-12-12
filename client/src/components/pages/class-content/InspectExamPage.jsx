@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
 import LocalizationHandler from '../../../utils/LocalizationHandler'
-import { Helmet } from 'react-helmet'
 
 // Components
 import AppBackButton from '../../AppButton/AppBackButton'
@@ -61,9 +60,6 @@ const InspectExamPage = ({ history, match }) => {
       boxSizing: 'border-box',
       borderBottom: `5px solid ${appColours.EXAM}`
     }}>
-      <Helmet>
-        <meta name="theme-color" content={appColours.makeStatusbarColour()} />
-      </Helmet>
       <AppBackButton history={history} />
       <div style={{
         position: 'absolute',

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
 import { appColours } from '../../../Constants'
-import { Helmet } from 'react-helmet'
 // Components
 import AppTitle from '../../AppTitle'
 import AppSubtitle from '../../AppSubtitle'
@@ -21,9 +20,6 @@ const LoginOptionsPage = ({ history }) => {
 
   return (
     <React.Fragment>
-      <Helmet>
-        <meta name="theme-color" content={appColours.makeStatusbarColour()} />
-      </Helmet>
       <div style={{
         position: 'fixed',
         top: 0, left: 0,

@@ -8,7 +8,6 @@ import AppTitle from '../../../AppTitle'
 import AppButton from '../../../AppButton/AppButton'
 import LoadingSpinner from '../../../LoadingSpinner'
 import { appColours } from '../../../../Constants'
-import { Helmet } from 'react-helmet';
 import AppUserButton from '../../../AppButton/AppUserButton'
 
 const LoginPage = ({ history }) => {
@@ -44,9 +43,6 @@ const LoginPage = ({ history }) => {
 
   return (
     <React.Fragment>
-      <Helmet>
-        <meta name="theme-color" content={appColours.makeStatusbarColour()} />
-      </Helmet>
       <div className="login-main-container" style={{ backgroundColor: appColours.BACKGROUND }}>
         <div>{createBackground()}</div>
         <div className="login-methods-container">

@@ -2,7 +2,6 @@ import React from 'react'
 import { useClientInfo } from '../../../utils/AppHooks'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
 import { routes } from '../../../Constants'
-import { appColours } from '../../../Constants'
 
 // Components
 import LoadingSpinner from '../../LoadingSpinner'
@@ -13,7 +12,6 @@ import AppCardButtonContainer from '../../AppCard/AppCardButtonContainer'
 import AppMenuButton from '../../AppButton/AppMenuButton'
 import AppCardUserClass from '../../AppCard/AppCardUserClass'
 import MainPageLayout from '../../layout/MainPageLayout'
-import AppSwitch from '../../AppSwitch/AppSwitch'
 
 const UserPage = ({ history, displayConfirm }) => {
   const clientInfo = useClientInfo()

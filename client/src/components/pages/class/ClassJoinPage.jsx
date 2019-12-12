@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
 import { routes } from '../../../Constants'
 import { appColours } from '../../../Constants'
-import { Helmet } from 'react-helmet'
 
 // Components
 import AppTitle from '../../AppTitle'
@@ -44,9 +43,6 @@ const ClassJoinPage = ({ history }) => {
 
   return (
     <React.Fragment>
-      <Helmet>
-        <meta name="theme-color" content={appColours.makeStatusbarColour()} />
-      </Helmet>
       <AppBackButton history={history} />
       <div style={{
         width: '100vw',

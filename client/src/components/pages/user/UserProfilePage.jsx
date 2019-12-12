@@ -1,7 +1,5 @@
 import React from 'react'
 import { routes } from '../../../Constants'
-import { Helmet } from 'react-helmet'
-import { appColours } from '../../../Constants'
 import { useUserInfo } from '../../../utils/AppHooks'
 
 // Components
@@ -19,9 +17,6 @@ const UserProfilePage = ({ history, match }) => {
 
   return (
     <React.Fragment>
-      <Helmet>
-        <meta name="theme-color" content={appColours.makeStatusbarColour()} />
-      </Helmet>
       <AppBackButton history={history} />
       <div style={{ height: 20 }}></div>
       {!userInfo ? <LoadingSpinner/> : (

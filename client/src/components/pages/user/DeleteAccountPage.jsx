@@ -1,7 +1,6 @@
 import React from 'react'
 import { appColours } from '../../../Constants'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
-import { Helmet } from 'react-helmet'
 
 // Components
 import AppTitle from '../../AppTitle'
@@ -25,9 +24,6 @@ const DeleteAccountPage = ({ history, displayConfirm }) => {
 
   return (
     <React.Fragment>
-      <Helmet>
-        <meta name="theme-color" content={appColours.makeStatusbarColour()} />
-      </Helmet>
       <AppBackButton history={history} />
       <div style={{
         display: 'block',
