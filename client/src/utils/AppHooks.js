@@ -83,12 +83,18 @@ export function useHomeworkList() {
 export function useUserInfo(uid, onError) {
   const [ userInfo, setUserInfo ] = useState(null)
 
-  FirebaseHandler.callFunction('getUserInfo', { uid: uid }).then(({ data }) => {
-    setUserInfo(data)
-  }).catch((err) => {
-    console.error(err)
-    if (onError) onError(err)
-  })
+  useEffect(() => {
+    if (uid) {
+      FirebaseHandler.callFunction('getUserInfo', { uid: uid }).then(({ data }) => {
+        setUserInfo(data)
+        console.log(data)
+      }).catch((err) => {
+        console.error(err)
+        if (onError) onError(err)
+      })
+    }
+    // eslint-disable-next-line
+  }, [])
 
   return userInfo
 }
