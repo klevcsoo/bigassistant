@@ -12,7 +12,7 @@ import AppBackButton from '../../AppButton/AppBackButton'
 
 const UserProfilePage = ({ history, match }) => {
   const userInfo = useUserInfo(match.params.uid, () => {
-    history.push(routes.USER)
+    history.replace(routes.USER)
   })
 
   return (
