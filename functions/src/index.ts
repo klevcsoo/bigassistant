@@ -344,7 +344,7 @@ exports.getUserInfo = functions.https.onCall(async (data, context) => {
         className: (await admin.database().ref(`/classes/${userSnapshot.child('class').val()}/metadata/name`).once('value')).val(),
         classRank: (user.customClaims && (<any>user.customClaims).classAdmin) ? 'admin': 'tag',
         facebookId: user.providerData[0].providerId === 'facebook.com' ? user.providerData[0].uid : undefined,
-        joinedAt: utils.formatDate(userSnapshot.child('joinedAt').val())
+        joinedAt: utils.formatDate(userSnapshot.child('joined').val())
     }
 })
 
