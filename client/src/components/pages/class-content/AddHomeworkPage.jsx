@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import FirebaseHandler from '../../../utils/FirebaseHandler'
 import { appColours } from '../../../Constants'
-import 'date-fns'; import DateFnsUtils from '@date-io/date-fns'
-import { MuiPickersUtilsProvider, DatePicker } from '@material-ui/pickers'
 
 // Components
 import SaveablePageLayout from '../../layout/SaveablePageLayout'
@@ -12,6 +10,7 @@ import AppInput from '../../AppInput/AppInput'
 import LoadingSpinner from '../../LoadingSpinner'
 import AppClassSubjectsDropDown from '../../AppDropDown/AppClassSubjectsDropDown'
 import AppDivider from '../../AppDivider';
+import AppDateSelector from '../../AppDateSelector/AppDateSelector';
 
 const AddHomeworkPage = ({ history, displayPopup }) => {
   const [ currentHomework, setCurrentHomework ] = useState({
@@ -66,18 +65,9 @@ const AddHomeworkPage = ({ history, displayPopup }) => {
           <AppClassSubjectsDropDown onSubjectChoosen={(subject) => {
             setCurrentHomework((prevHomework) => { return { ...prevHomework, subject: subject } })
           }} />
-          <div style={{
-            width: 'fit-content',
-            margin: '5px auto',
-          }}>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <DatePicker margin="normal" label="Házi feladat dátuma" format="yyyy. MMMM dd."
-              value={currentHomework.date} onChange={(date) => {
-                setCurrentHomework((prevHomework) => { return { ...prevHomework, date: new Date(date).getTime() } })
-              }} inputVariant="outlined"
-              style={{ width: 290 }} />
-            </MuiPickersUtilsProvider>
-          </div>
+          <AppDateSelector label="Házi feladat dátuma" defaultDate={currentHomework.date} onDateChanged={(date) => {
+            setCurrentHomework((prevHomework) => { return { ...prevHomework, date: new Date(date).getTime() } })
+          }} />
           <AppDivider />
           <AppInput placeholder="Megjegyzés (nem szükséges)" text={currentHomework.notes}
           onTextChanged={(text) => {

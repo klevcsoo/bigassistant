@@ -12,6 +12,7 @@ import AppInput from '../../AppInput/AppInput'
 import LoadingSpinner from '../../LoadingSpinner'
 import AppClassSubjectsDropDown from '../../AppDropDown/AppClassSubjectsDropDown'
 import AppDivider from '../../AppDivider'
+import AppDateSelector from '../../AppDateSelector/AppDateSelector';
 
 const AddExamPage = ({ history, displayPopup }) => {
   const [ currentExam, setCurrentExam ] = useState({
@@ -66,18 +67,9 @@ const AddExamPage = ({ history, displayPopup }) => {
           <AppClassSubjectsDropDown onSubjectChoosen={(subject) => {
             setCurrentExam((prevExam) => { return { ...prevExam, subject: subject } })
           }} />
-          <div style={{
-            width: 'fit-content',
-            margin: '5px auto',
-          }}>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <DatePicker margin="normal" label="Dolgozat dátuma" format="yyyy. MMMM dd."
-              value={currentExam.date} onChange={(date) => {
-                setCurrentExam((prevExam) => { return { ...prevExam, date: new Date(date).getTime() } })
-              }} inputVariant="outlined"
-              style={{ width: 290 }} />
-            </MuiPickersUtilsProvider>
-          </div>
+          <AppDateSelector label="Dolgozat dátuma" defaultDate={currentExam.date} onDateChanged={(date) => {
+            setCurrentExam((prevExam) => { return { ...prevExam, date: new Date(date).getTime() } })
+          }} />
           <AppDivider />
           <AppInput placeholder="Megjegyzés (nem szükséges)" text={currentExam.notes}
           onTextChanged={(text) => {
