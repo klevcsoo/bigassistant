@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CircularProgress from '@material-ui/core/CircularProgress/CircularProgress'
 import { appColours } from '../Constants'
+import { Fade, Zoom } from '@material-ui/core'
 
 export function LoadingSpinner() {
+  const [ visible, setVisible ] = useState(false)
+
+  setTimeout(() => setVisible(true), 500);
+
   return (
     <div style={{
       width: 'fit-content',
@@ -11,7 +16,11 @@ export function LoadingSpinner() {
       margin: 'auto',
       color: appColours.TEXT
     }}>
-      <CircularProgress color="inherit" variant="indeterminate" />
+      {!visible ? null : (
+        <Zoom in={visible}>
+          <CircularProgress color="inherit" variant="indeterminate" />
+        </Zoom>
+      )}
     </div>
   )
 }
