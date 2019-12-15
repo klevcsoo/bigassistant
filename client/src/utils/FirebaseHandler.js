@@ -1,6 +1,7 @@
 import app from 'firebase/app'
 import 'firebase/auth'; import 'firebase/database'; import 'firebase/functions'
 import LocalizationHandler from './LocalizationHandler'
+import { initializeCache } from './CacheManager';
 
 const config = {
   apiKey: "AIzaSyA3nyWdbq3VdnfTpaBEKR4vspv5tX1zc_M",
@@ -22,6 +23,7 @@ class FirebaseHandler {
         user.getIdToken(true).then((token) => {
           document.cookie = `__session=${token}max-age=3600path=/`
         })
+        initializeCache()
       }
     })
   }

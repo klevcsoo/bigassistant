@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import FirebaseHandler from './FirebaseHandler'
+import { onClassmates, onUserInfo } from './CacheManager'
 
 export function useClientInfo() {
   const [ clientInfo, setClientInfo ] = useState(null)
@@ -17,21 +18,7 @@ export function useClassmates() {
   const [ classmates, setClassmates ] = useState([])
 
   useEffect(() => {
-    FirebaseHandler.getClassId((classId) => {
-      FirebaseHandler.readDataContinuously(`/classes/${classId}/members`, (snapshot) => {
-        if (snapshot.numChildren() === 0) { setClassmates(null); return }
-        let memberCount = snapshot.numChildren()
-        let members = []
-        snapshot.forEach((memberSnapshot) => {
-          let uid = memberSnapshot.val()
-          FirebaseHandler.callFunction('getUserInfo', { uid: uid }).then(({ data }) => {
-            data.uid = uid
-            members.push(data)
-            if (members.length === memberCount) setClassmates(members)
-          })
-        })
-      })
-    })
+    onClassmates((data) => setClassmates(data))
     // eslint-disable-next-line
   }, [])
 
@@ -85,13 +72,9 @@ export function useUserInfo(uid, onError) {
 
   useEffect(() => {
     if (uid) {
-      FirebaseHandler.callFunction('getUserInfo', { uid: uid }).then(({ data }) => {
+      onUserInfo(uid, (data) => {
         setUserInfo(data)
-        console.log(data)
-      }).catch((err) => {
-        console.error(err)
-        if (onError) onError(err)
-      })
+      }, onError)
     }
     // eslint-disable-next-line
   }, [])
