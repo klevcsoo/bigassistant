@@ -2,6 +2,7 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
 import utils = require('./utils')
+import errors from './errors'
 // ---------- IMPORTS ----------
 
 // ---------- ADMIN FUNCTIONALITY SETUP ----------
@@ -14,16 +15,14 @@ admin.initializeApp({
 
 // ---------- CLOUD FUNCTION CALLABLES ----------
 exports.joinClass = functions.https.onCall(async (data, context) => {
-    if (!context.auth) {
-        throw new functions.https.HttpsError('unauthenticated', 'User is not authenticated')
-    }
+    if (!context.auth) throw errors.unauthenticated()
 
     const user = await admin.auth().getUser(context.auth.uid).catch((err) => {
-        throw new functions.https.HttpsError('internal', 'asdasdasasd')
+        throw errors.internal(err)
     })
 
     if ((await admin.database().ref(`/users/${user.uid}/class`).once('value')).exists()) {
-        throw new functions.https.HttpsError('already-exists', 'User is already in a class')
+        throw errors.alreadyInClass()
     }
 
     // If the user is trying to join an existing class, the inviteCode contains a value,
@@ -37,12 +36,12 @@ exports.joinClass = functions.https.onCall(async (data, context) => {
     const classClosed: boolean = data.closed
 
     if (className === undefined && inviteCode === undefined) {
-        throw new functions.https.HttpsError('invalid-argument', 'No classname or invite code given')
+        throw errors.noClassNameOrCode()
     }
 
     let classId: string = (await admin.database().ref(`/classInvites/${inviteCode}`).once('value')).val()
     const classSnapshot = await admin.database().ref(`/classes/${classId}`).once('value').catch((err) => {
-        throw new functions.https.HttpsError('internal', err)
+        throw errors.internal(err)
     })
 
     if (!classSnapshot.exists()) {
@@ -62,55 +61,49 @@ exports.joinClass = functions.https.onCall(async (data, context) => {
             },
             members: [context.auth.uid]
         }).catch((err) => {
-            throw new functions.https.HttpsError('unknown', err)
+            throw errors.internal(err)
         })
 
         admin.database().ref(`/classInvites/${inviteCode}`).set(classId).catch((err) => {
-            throw new functions.https.HttpsError('unknown', err)
+            throw errors.internal(err)
         })
 
         admin.auth().setCustomUserClaims(context.auth.uid, {
             classAdmin: true
-        }).catch((err) => {
-            throw new functions.https.HttpsError('unknown', err)
-        })
+        }).catch((err) => { throw errors.internal(err) })
     } else {
         className = classSnapshot.child('metadata/name').val()
 
         const memberIndex = classSnapshot.child('members').numChildren()
         admin.database().ref(classSnapshot.child(`members/${memberIndex}`).ref).set(context.auth.uid).catch((err) => {
-            throw new functions.https.HttpsError('unknown', err)
+            throw errors.internal(err)
         })
     }
 
     admin.database().ref(`/users/${user.uid}/class`).set(classId).catch((err) => {
-        throw new functions.https.HttpsError('unknown', err)
+        throw errors.internal(err)
     })
 
     return {classId: classId}
 })
 
 exports.leaveClass = functions.https.onCall(async (data, context) => {
-    if (!context.auth) {
-        throw new functions.https.HttpsError('unauthenticated', 'User is not authenticated')
-    }
+    if (!context.auth) throw errors.unauthenticated()
 
-    const user = await admin.auth().getUser(context.auth.uid).catch((error) => {
-        throw new functions.https.HttpsError('unknown', error)
+    const user = await admin.auth().getUser(context.auth.uid).catch((err) => {
+        throw errors.internal(err)
     })
     const isAdmin = user.customClaims ? (<any>user.customClaims).classAdmin : false
     const classId = (await admin.database().ref(`/users/${user.uid}/class`).once('value')).val()
-    if (classId === undefined) {
-        throw new functions.https.HttpsError('failed-precondition', 'User has no class')
-    }
+    if (classId === undefined) throw errors.classNotFound()
 
     // If present, the user with data.uid will be removed of the invoking user is an admin
     const userToRemove = data ? data.uid : null
 
     console.log(`Leaving class with id ${classId}`)
 
-    const classSnapshot = await admin.database().ref(`/classes/${classId}`).once('value').catch((error) => {
-        throw new functions.https.HttpsError('unknown', error)
+    const classSnapshot = await admin.database().ref(`/classes/${classId}`).once('value').catch((err) => {
+        throw errors.internal(err)
     })
 
     if (isAdmin) {
@@ -119,62 +112,50 @@ exports.leaveClass = functions.https.onCall(async (data, context) => {
 
             admin.auth().setCustomUserClaims(userToRemove, {
                 classAdmin: null
-            }).catch((error) => {
-                throw new functions.https.HttpsError('unknown', error)
-            })
+            }).catch((err) => { throw errors.internal(err) })
 
-            admin.database().ref(`/users/${userToRemove}/class`).remove().catch((error) => {
-                throw new functions.https.HttpsError('unknown', error)
+            admin.database().ref(`/users/${userToRemove}/class`).remove().catch((err) => {
+                throw errors.internal(err)
             })
     
             classSnapshot.child('members/').ref.once('value').then((snapshot) => {
                 snapshot.forEach((child) => {
                     if (child.val() === userToRemove.uid) {
-                        child.ref.remove().catch((error) => {
-                            throw new functions.https.HttpsError('unknown', error)
+                        child.ref.remove().catch((err) => {
+                            throw errors.internal(err)
                         })
                     }
                 })
-            }).catch((error) => {
-                throw new functions.https.HttpsError('unknown', error)
-            })
+            }).catch((err) => { throw errors.internal(err) })
         } else {
             classSnapshot.child('members').forEach((member) => {
-                admin.database().ref(`/users/${member.val()}/class`).remove().catch((error) => {
-                    throw new functions.https.HttpsError('unknown', error)
+                admin.database().ref(`/users/${member.val()}/class`).remove().catch((err) => {
+                    throw errors.internal(err)
                 })
             })
 
-            classSnapshot.ref.remove().catch((error) => {
-                throw new functions.https.HttpsError('unknown', error)
-            })
+            classSnapshot.ref.remove().catch((err) => { throw errors.internal(err) })
 
             const inviteCode = classSnapshot.child('/metadata/inviteCode')
-            admin.database().ref(`/classInvites/${inviteCode.val()}`).remove().catch((error) => {
-                throw new functions.https.HttpsError('unknown', error)
+            admin.database().ref(`/classInvites/${inviteCode.val()}`).remove().catch((err) => {
+                throw errors.internal(err)
             })
         }
     } else {
         admin.auth().setCustomUserClaims(user.uid, {
             classAdmin: null
-        }).catch((error) => {
-            throw new functions.https.HttpsError('unknown', error)
-        })
+        }).catch((err) => { throw errors.internal(err) })
 
         classSnapshot.child('members/').ref.once('value').then((snapshot) => {
             snapshot.forEach((child) => {
                 if (child.val() === user.uid) {
-                    child.ref.remove().catch((error) => {
-                        throw new functions.https.HttpsError('unknown', error)
-                    })
+                    child.ref.remove().catch((err) => { throw errors.internal(err) })
                 }
             })
-        }).catch((error) => {
-            throw new functions.https.HttpsError('unknown', error)
-        })
+        }).catch((err) => { throw errors.internal(err) })
 
-        admin.database().ref(`/users/${user.uid}/class`).remove().catch((error) => {
-            throw new functions.https.HttpsError('unknown', error)
+        admin.database().ref(`/users/${user.uid}/class`).remove().catch((err) => {
+            throw errors.internal(err)
         })
     }
 
@@ -182,101 +163,71 @@ exports.leaveClass = functions.https.onCall(async (data, context) => {
 })
 
 exports.addSubjectToClass = functions.https.onCall(async (data, context) => {
-    if (context.auth === undefined) {
-        throw new functions.https.HttpsError('unauthenticated', 'User is not authenticated')
-    }
-    const user = await admin.auth().getUser(context.auth.uid).catch((error) => {
-        throw new functions.https.HttpsError('unknown', error)
+    if (context.auth === undefined) throw errors.unauthenticated()
+    const user = await admin.auth().getUser(context.auth.uid).catch((err) => {
+        throw errors.internal(err)
     })
     const classIdSnapshot = await admin.database().ref(`/users/${user.uid}/class`).once('value')
-    if (!classIdSnapshot.exists()) {
-        throw new functions.https.HttpsError('not-found', 'No user class found')
-    }
-    if (!(<any>user.customClaims).classAdmin) {
-        throw new functions.https.HttpsError('permission-denied', 'User cannot add subjects to this class')
-    }
+    if (!classIdSnapshot.exists()) throw errors.classNotFound()
+    if (!(<any>user.customClaims).classAdmin) throw errors.permissionDenied()
 
     const subjectName: string = data.name
-    if (!subjectName) {
-        throw new functions.https.HttpsError('invalid-argument', 'No subject name given')
-    }
+    if (!subjectName) throw errors.noSubject()
 
-    await admin.database().ref(`/classes/${classIdSnapshot.val()}/metadata/subjects`).push(subjectName).catch((error) => {
-        throw new functions.https.HttpsError('unknown', error)
+    await admin.database().ref(`/classes/${classIdSnapshot.val()}/metadata/subjects`).push(subjectName).catch((err) => {
+        throw errors.internal(err)
     })
 })
 
 exports.addContentToClass = functions.https.onCall(async (data, context) => {
-    if (context.auth === undefined) {
-        throw new functions.https.HttpsError('unauthenticated', 'User is not authenticated')
-    }
-    const user = await admin.auth().getUser(context.auth.uid).catch((error) => {
-        throw new functions.https.HttpsError('unknown', error)
+    if (context.auth === undefined) throw errors.unauthenticated()
+    const user = await admin.auth().getUser(context.auth.uid).catch((err) => {
+        throw errors.internal(err)
     })
     const classIdSnapshot = await admin.database().ref(`/users/${user.uid}/class`).once('value')
-    if (!classIdSnapshot.exists()) {
-        throw new functions.https.HttpsError('not-found', 'No user class found')
-    }
+    if (!classIdSnapshot.exists()) throw errors.classNotFound()
 
     const type = data.typeOf
     const content = data.content
-    if (!type || !content) {
-        throw new functions.https.HttpsError('invalid-argument', 'No content or content type was given')
-    }
-    if (type !== 'homework' && type !== 'exams') {
-        throw new functions.https.HttpsError('invalid-argument', 'Invalid content type given')
-    }
-    if (!(content.title) || !(content.subject) || !(content.date)) {
-        throw new functions.https.HttpsError('invalid-argument', 'Missing parts of content')
-    }
+    if (!type || !content) throw errors.noContent()
+    if (type !== 'homework' && type !== 'exams') throw errors.invalidContentType()
+    if (!(content.title) || !(content.subject) || !(content.date)) throw errors.noContent()
 
     content.createdAt = new Date().getTime()
     content.creator = user.uid
 
     console.log(content)
 
-    await admin.database().ref(`/classes/${classIdSnapshot.val()}/${type}`).push(content).catch((error) => {
-        throw new functions.https.HttpsError('unknown', error)
+    await admin.database().ref(`/classes/${classIdSnapshot.val()}/${type}`).push(content).catch((err) => {
+        throw errors.internal(err)
     })
 })
 
 exports.removeContentFromClass = functions.https.onCall(async (data, context) => {
-    if (context.auth === undefined) {
-        throw new functions.https.HttpsError('unauthenticated', 'User is not authenticated')
-    }
-    const user = await admin.auth().getUser(context.auth.uid).catch((error) => {
-        throw new functions.https.HttpsError('unknown', error)
+    if (context.auth === undefined) throw errors.unauthenticated()
+    const user = await admin.auth().getUser(context.auth.uid).catch((err) => {
+        throw errors.internal(err)
     })
     const classIdSnapshot = await admin.database().ref(`/users/${user.uid}/class`).once('value')
-    if (!classIdSnapshot.exists()) {
-        throw new functions.https.HttpsError('not-found', 'No user class found')
-    }
+    if (!classIdSnapshot.exists()) throw errors.classNotFound()
 
     const type = data.type
     const id = data.id
-    if (!type || !id) {
-        throw new functions.https.HttpsError('invalid-argument', 'No content or content type was given')
-    }
+    if (!type || !id) throw errors.noContent()
 
-    await admin.database().ref(`/classes/${classIdSnapshot.val()}/${type}/${id}`).remove().catch((error) => {
-        throw new functions.https.HttpsError('unknown', error)
+    await admin.database().ref(`/classes/${classIdSnapshot.val()}/${type}/${id}`).remove().catch((err) => {
+        throw errors.internal(err)
     })
 })
 
 exports.updateClass = functions.https.onCall(async (data, context) => {
-    if (context.auth === undefined) {
-        throw new functions.https.HttpsError('unauthenticated', 'User is not authenticated')
-    }
-    const user = await admin.auth().getUser(context.auth.uid).catch((error) => {
-        throw new functions.https.HttpsError('unknown', error)
+    if (context.auth === undefined) throw errors.unauthenticated() 
+    const user = await admin.auth().getUser(context.auth.uid).catch((err) => {
+        throw errors.internal(err)
     })
     const classIdSnapshot = await admin.database().ref(`/users/${user.uid}/class`).once('value')
-    if (!classIdSnapshot.exists()) {
-        throw new functions.https.HttpsError('not-found', 'No user class found')
-    }
-    if (!(<any>user.customClaims).classAdmin) {
-        throw new functions.https.HttpsError('permission-denied', 'User cannot add subjects to this class')
-    }
+    if (!classIdSnapshot.exists()) throw errors.classNotFound()
+    if (!(<any>user.customClaims).classAdmin) throw errors.permissionDenied()
 
     const name = data.name
     const isClosed = data.isClosed
@@ -288,54 +239,38 @@ exports.updateClass = functions.https.onCall(async (data, context) => {
 
     if (name) classRef.child('name').set(name).then(() => {
         console.log('Class name updated!')
-    }).catch((error) => {
-        throw new functions.https.HttpsError('unknown', error)
-    })
+    }).catch((err) => { throw errors.internal(err) })
 
     if (isClosed) classRef.child('closed').set(isClosed).then(() => {
         console.log('Closed state updated!')
-    }).catch((error) => {
-        throw new functions.https.HttpsError('unknown', error)
-    })
+    }).catch((err) => { throw errors.internal(err) })
 
     if (pictureUrl) classRef.child('pictureUrl').set(pictureUrl).then(() => {
         console.log('Picture updated!')
-    }).catch((error) => {
-        throw new functions.https.HttpsError('unknown', error)
-    })
+    }).catch((err) => {  throw errors.internal(err) })
 
     if (isInviteVisible) classRef.child('inviteVisible').set(isInviteVisible).then(() => {
         console.log('Invite visibility updated!')
-    }).catch((error) => {
-        throw new functions.https.HttpsError('unknown', error)
-    })
+    }).catch((err) => { throw errors.internal(err) })
 
     if (subjects) classRef.child('subjects').set(subjects).then(() => {
         console.log('Updated subjects!')
-    }).catch((error) => {
-        throw new functions.https.HttpsError('unknown', error)
-    })
+    }).catch((err) => { throw errors.internal(err) })
 })
 
 exports.getUserInfo = functions.https.onCall(async (data, context) => {
-    if (context.auth === undefined) {
-        throw new functions.https.HttpsError('unauthenticated', 'User is not authenticated')
-    }
+    if (context.auth === undefined) throw errors.unauthenticated()
 
     const uid = data.uid
-    if (!uid) {
-        throw new functions.https.HttpsError('invalid-argument', 'No user id was provided')
-    }
+    if (!uid) throw errors.noUserId()
 
-    const user = await admin.auth().getUser(uid).catch((error) => {
-        throw new functions.https.HttpsError('unknown', error)
+    const user = await admin.auth().getUser(uid).catch((err) => {
+        throw errors.internal(err)
     })
-    if (!user) {
-        throw new functions.https.HttpsError('not-found', 'No user found with given id')
-    }
+    if (!user) throw errors.userNotFound()
 
     const userSnapshot = await admin.database().ref(`/users/${user.uid}`).once('value').catch((err) => {
-        throw new functions.https.HttpsError('internal', err)
+        throw errors.internal(err)
     })
 
     return {
@@ -349,25 +284,19 @@ exports.getUserInfo = functions.https.onCall(async (data, context) => {
 })
 
 exports.getClassPreview = functions.https.onCall(async (data, context) => {
-    if (context.auth === undefined) {
-        throw new functions.https.HttpsError('unauthenticated', 'User is not authenticated')
-    }
+    if (context.auth === undefined) throw errors.unauthenticated()
 
     const code = data.inviteCode
-    if (!code) {
-        throw new functions.https.HttpsError('invalid-argument', 'No invite code provided')
-    }
+    if (!code) throw errors.noClassNameOrCode()
 
     const classId = await admin.database().ref(`/classInvites/${code}`).once('value').catch((err) => {
-        throw new functions.https.HttpsError('internal', err)
+        throw errors.internal(err)
     })
     console.log(classId)
-    if (!classId) {
-        throw new functions.https.HttpsError('invalid-argument', 'Invite code is not attached to any class')
-    }
+    if (!classId) throw errors.invalidInviteCode()
 
     const classSnapshot = await admin.database().ref(`/classes/${classId.val()}/metadata`).once('value').catch((err) => {
-        throw new functions.https.HttpsError('internal', err)
+        throw errors.internal(err)
     })
 
     console.log({
