@@ -7,10 +7,10 @@
   --colour-app-background: #ffffff;
   --colour-app-text: #000000;
 
-  --colour-app-main: #007aff;
-  --colour-app-main-shadow: #007aff33;
-  --colour-app-homework: #34c759;
-  --colour-app-homework-shadow: #34c75933;
+  --colour-app-main: #34c759;
+  --colour-app-main-shadow: #34c75933;
+  --colour-app-homework: #007aff;
+  --colour-app-homework-shadow: #007aff33;
   --colour-app-exam: #ff2d55;
   --colour-app-exam-shadow: #ff2d5533;
 
@@ -29,15 +29,9 @@
     --colour-app-background: #151515;
     --colour-app-text: #ffffff;
   
-    --colour-app-main: #0a84ff;
     --colour-app-main-shadow: transparent;
-    --colour-app-homework: #30d158;
     --colour-app-homework-shadow: transparent;
-    --colour-app-exam: #ff375f;
     --colour-app-exam-shadow: transparent;
-  
-    --colour-facebook: #1778F2;
-    --colour-warning: #ff453a;
   }
 }
 /* DARK MODE */
